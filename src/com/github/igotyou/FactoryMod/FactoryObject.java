@@ -1,11 +1,13 @@
 package com.github.igotyou.FactoryMod;
 
+
 import org.bukkit.Location;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Furnace;
 import org.bukkit.inventory.Inventory;
 
 import com.github.igotyou.FactoryMod.interfaces.Properties;
+import java.util.Date;
 
 //original file:
 /**
@@ -18,7 +20,7 @@ import com.github.igotyou.FactoryMod.interfaces.Properties;
 //edited version:
 /**
  * FactoryObject.java	 
- * Purpose basic object base for factorys to extend
+ * Purpose basic object base for factories to extend
  * @author igotyou
  *
  */
@@ -27,7 +29,8 @@ public class FactoryObject
 	//the diffrent factory types, NOTE: these are not the sub-factory types, these are the main types.
 	public enum FactoryType
 	{
-		PRODUCTION, POWER
+		PRODUCTION,
+		PRINTING_PRESS
 	}
 	
 	
@@ -40,7 +43,6 @@ public class FactoryObject
 	protected FactoryType factoryType; // The type this factory is
 	protected String subFactoryType;//the SUBfactory type(the ones loaded from the config file)
 	protected Properties factoryProperties; // The properties of this factory type and tier
-	
 	protected boolean upgraded; // Whether the tier has recently upgraded
 	
 	/**
@@ -56,7 +58,10 @@ public class FactoryObject
 		this.factoryType = factoryType;
 		this.subFactoryType = subFactoryType;
 		this.upgraded = false;
-		initializeInventory();
+		if (this.isWhole())
+		{
+			initializeInventory();
+		}
 		updateProperties();
 	}
 
@@ -73,7 +78,10 @@ public class FactoryObject
 		this.factoryType = factoryType;
 		this.subFactoryType = subFactoryType;
 		this.upgraded = false;
-		initializeInventory();
+		if (this.isWhole())
+		{
+			initializeInventory();
+		}
 		updateProperties();
 	}
 	
@@ -97,6 +105,10 @@ public class FactoryObject
 	/**
 	 * Initializes the inventory for this factory
 	 */
+	//Due to non-destructable factories this will not have been called on reconstructed factories
+	//however I am unable to find a use for this method in the current code, so it doesn't
+	//seem to be an issue right now, maybe  the calls in the constructor should be gotten rid of
+	//all methods that get the inventory reinitialize the contents.
 	public void initializeInventory()
 	{
 		switch(factoryType)
@@ -139,15 +151,9 @@ public class FactoryObject
 	 */
 	public Inventory getInventory()
 	{
-		switch (factoryType)
-		{
-		case PRODUCTION:
-			Chest chestBlock = (Chest)factoryInventoryLocation.getBlock().getState();
-			factoryInventory = chestBlock.getInventory();
-			return factoryInventory;
-		default:
-			return factoryInventory;
-		}
+		Chest chestBlock = (Chest)factoryInventoryLocation.getBlock().getState();
+		factoryInventory = chestBlock.getInventory();
+		return factoryInventory;
 	}
 
 	/**
@@ -155,17 +161,9 @@ public class FactoryObject
 	 */
 	public Inventory getPowerSourceInventory()
 	{
-		switch (factoryType)
-		{
-		case PRODUCTION:
-			Furnace furnaceBlock = (Furnace)factoryPowerSourceLocation.getBlock().getState();
-			factoryPowerInventory = furnaceBlock.getInventory();
-			return factoryPowerInventory;
-		default:
-			return factoryPowerInventory;
-		}
-		
-	
+		Furnace furnaceBlock = (Furnace)factoryPowerSourceLocation.getBlock().getState();
+		factoryPowerInventory = furnaceBlock.getInventory();
+		return factoryPowerInventory;
 	}
 	
 	/**
@@ -183,5 +181,26 @@ public class FactoryObject
 	public boolean getActive()
 	{
 		return active;
+	}
+	
+	/**
+	 * returns true if all factory blocks are occupied with the correct blocks
+	 */
+	public boolean isWhole()
+	{
+	//Check if power source exists
+	if(factoryPowerSourceLocation.getBlock().getType().getId()== 61 || factoryPowerSourceLocation.getBlock().getType().getId()== 62)
+	{
+		//Check inventory location
+		if(factoryInventoryLocation.getBlock().getType().getId()== 54) 	
+		{
+			//Check Interaction block location
+			if(factoryLocation.getBlock().getType().getId()==FactoryModPlugin.CENTRAL_BLOCK_MATERIAL.getId())
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 	}
 }

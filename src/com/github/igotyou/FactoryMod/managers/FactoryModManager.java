@@ -11,7 +11,10 @@ import org.bukkit.Location;
 import org.bukkit.event.Listener;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
+import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.interfaces.Manager;
+import com.github.igotyou.FactoryMod.utility.InteractionResponse;
+import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
 //original file:
 /**
  * MachinesManager.java
@@ -47,7 +50,6 @@ public class FactoryModManager
 		
 		initializeManagers();
 		loadManagers();
-		
 		periodicSaving();
 	}
 	
@@ -62,6 +64,7 @@ public class FactoryModManager
 		//if (FactoryModPlugin.PRODUCTION_ENEABLED)
 		//{
 			initializeProductionManager();
+			initializePrintingPressManager();
 		//}
 	}
 	
@@ -74,6 +77,15 @@ public class FactoryModManager
 		ProductionManager productionnMan = new ProductionManager(plugin);
 		
 		managers.add(productionnMan);
+	}
+	/**
+	 * Initializes the Printing Press Manager
+	 */
+	private void initializePrintingPressManager()
+	{
+		PrintingPressManager printingMan = new PrintingPressManager(plugin);
+		
+		managers.add(printingMan);
 	}
 	
 	/**
@@ -185,22 +197,23 @@ public class FactoryModManager
 	}
 	
 	/**
-	 * Save OreGins to file every SAVE_CYCLE minutes.
+	 * Save Factories to file every SAVE_CYCLE minutes.
 	 */
 	private void periodicSaving()
 	{
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-		    @Override  
-		    public void run() {
-		    	FactoryModPlugin.sendConsoleMessage("Saving Factory data...");
-		    	saveManagers();
-		    }
-		}, (FactoryModPlugin.SAVE_CYCLE * FactoryModPlugin.TICKS_PER_SECOND * 60), 
-		FactoryModPlugin.SAVE_CYCLE * FactoryModPlugin.TICKS_PER_SECOND * 60);
+			@Override  
+			public void run()
+			{
+				FactoryModPlugin.sendConsoleMessage("Saving Factory data...");
+				saveManagers();
+			}
+		}, (FactoryModPlugin.SAVE_CYCLE), 
+		FactoryModPlugin.SAVE_CYCLE);
 	}
 	
 	/**
-	 * Returns the OreGin Saves file
+	 * Returns the Factory Saves file
 	 */
 	public File getSavesFile(String fileName)
 	{
@@ -222,6 +235,22 @@ public class FactoryModManager
 		return false;
 	}
 
+	/**
+	 * Returns whether a factory is whole at given location in any manager
+	 */
+	public boolean factoryWholeAt(Location location)
+	{
+		for (Manager manager : managers)
+		{
+			if (manager.factoryWholeAt(location))
+			{
+				return true;
+			}
+		}	
+		return false;
+	}	
+	
+
 	public ProductionManager getProductionManager() 
 	{
 		for (Manager manager : managers)
@@ -233,5 +262,54 @@ public class FactoryModManager
 		}
 		
 		return null;
+	}
+	
+	public PrintingPressManager getPrintingPressManager() 
+	{
+		for (Manager manager : managers)
+		{
+			if (manager.getClass() == PrintingPressManager.class)
+			{
+				return (PrintingPressManager) manager;
+			}
+		}
+		
+		return null;
+	}
+
+	public Factory getFactory(Location location) {
+		for (Manager manager : managers)
+		{
+			if (manager.factoryExistsAt(location))
+			{
+				return manager.getFactory(location);
+			}
+		}	
+		return null;
+	}
+
+	public Manager getManager(Location location) {
+		for (Manager manager : managers)
+		{
+			if (manager.factoryExistsAt(location))
+			{
+				return manager;
+			}
+		}	
+		return null;
+	}
+
+	public InteractionResponse createFactory(Location centralLocation,
+			Location inventoryLocation, Location powerLocation) {
+		InteractionResponse response = null;
+		for (Manager manager : managers)
+		{
+			response = manager.createFactory(centralLocation, inventoryLocation, powerLocation);
+			if (response.getInteractionResult() == InteractionResult.SUCCESS)
+			{
+				return response;
+			}
+		}
+		return response;
 	}
 }
