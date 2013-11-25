@@ -7,7 +7,6 @@ import org.bukkit.block.Furnace;
 import org.bukkit.inventory.Inventory;
 
 import com.github.igotyou.FactoryMod.interfaces.Properties;
-import java.util.Date;
 
 //original file:
 /**
@@ -30,7 +29,8 @@ public class FactoryObject
 	public enum FactoryType
 	{
 		PRODUCTION,
-		PRINTING_PRESS
+		PRINTING_PRESS,
+		NETHER_FACTORY
 	}
 	
 	

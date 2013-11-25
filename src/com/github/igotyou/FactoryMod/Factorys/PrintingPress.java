@@ -8,14 +8,12 @@ import java.util.regex.Pattern;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.github.igotyou.FactoryMod.FactoryModPlugin;
-import com.github.igotyou.FactoryMod.FactoryObject;
-import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.properties.PrintingPressProperties;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.ItemList;
@@ -406,7 +404,8 @@ public class PrintingPress extends BaseFactory {
 	 * Returns either a success or error message.
 	 * Called by the blockListener when a player left clicks the center block, with the InteractionMaterial
 	 */
-	public List<InteractionResponse> getCentralBlockResponse()
+	@Override
+	public List<InteractionResponse> getCentralBlockResponse(Player player)
 	{
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
 		//Is the factory off
@@ -431,7 +430,7 @@ public class PrintingPress extends BaseFactory {
 		return responses;
 	}
 	
-	public List<InteractionResponse> getChestResponse()
+	public List<InteractionResponse> getChestResponse(Player player)
 	{
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
 		String status=active ? "On" : "Off";

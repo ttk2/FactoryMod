@@ -73,6 +73,10 @@
 copy_defaults: false
 general:
   central_block: WORKBENCH
+  central_block_nether_factory: OBSIDIAN
+  nether_scale: 8
+  world_name: world
+  nether_name: world_nether
   save_cycle: 15
   return_build_materials: false
   citadel_enabled: true
@@ -148,6 +152,21 @@ printing_presses:
            amount: 6
      security_notes_per_lot: 24
 
+nether_factory:
+  fuel:
+    Charcoal:
+      material: 'COAL'
+      durability: 1
+  costs:
+     construction:
+        "Iron block":
+           material: 'IRON_BLOCK'
+           amount: 60
+     repair:
+        "Iron block":
+           material: 'IRON_BLOCK'
+           amount: 1
+           
 crafting:
   disable:
   enable:

@@ -19,12 +19,14 @@ import com.github.igotyou.FactoryMod.interfaces.Properties;
 import com.github.igotyou.FactoryMod.listeners.FactoryModListener;
 import com.github.igotyou.FactoryMod.listeners.RedstoneListener;
 import com.github.igotyou.FactoryMod.managers.FactoryModManager;
+import com.github.igotyou.FactoryMod.properties.NetherFactoryProperties;
 import com.github.igotyou.FactoryMod.properties.PrintingPressProperties;
 import com.github.igotyou.FactoryMod.properties.ProductionProperties;
 import com.github.igotyou.FactoryMod.recipes.ProductionRecipe;
 import com.github.igotyou.FactoryMod.recipes.ProbabilisticEnchantment;
 import com.github.igotyou.FactoryMod.utility.ItemList;
 import com.github.igotyou.FactoryMod.utility.NamedItemStack;
+
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
@@ -36,6 +38,7 @@ public class FactoryModPlugin extends JavaPlugin
 	public static HashMap<String, ProductionProperties> productionProperties;
 	public static HashMap<String,ProductionRecipe> productionRecipes;
 	public PrintingPressProperties printingPressProperties;
+	public NetherFactoryProperties netherFactoryProperties;
 	
 	public static final String VERSION = "v1.0"; //Current version of plugin
 	public static final String PLUGIN_NAME = "FactoryMod"; //Name of plugin
@@ -43,11 +46,15 @@ public class FactoryModPlugin extends JavaPlugin
 	public static final String PRODUCTION_SAVES_FILE = "productionSaves"; // The production saves file name
 	public static final int TICKS_PER_SECOND = 20; //The number of ticks per second
 	public static final String PRINTING_PRESSES_SAVE_FILE = "pressSaves";
-	
+	public static final String NETHER_FACTORY_SAVE_FILE = "netherSaves";
+	public static int NETHER_SCALE;
+	public static String WORLD_NAME;
+	public static String NETHER_NAME;
 	public static int PRODUCER_UPDATE_CYCLE;
 	public static boolean PRODUCTION_ENEABLED;
 	public static int SAVE_CYCLE;
 	public static Material CENTRAL_BLOCK_MATERIAL;
+	public static Material NETHER_FACTORY_CENTRAL_BLOCK_MATERIAL;
 	public static boolean RETURN_BUILD_MATERIALS;
 	public static boolean CITADEL_ENABLED;
 	public static Material FACTORY_INTERACTION_MATERIAL;
@@ -99,10 +106,18 @@ public class FactoryModPlugin extends JavaPlugin
 		this.saveDefaultConfig();
 		reloadConfig();
 		config = getConfig();
+		//what should the nether scaling be for the nether factorys?
+		NETHER_SCALE = config.getInt("general.nether_scale",8);
+		//what's the name of the overworld?
+		WORLD_NAME = config.getString("general.world_name", "world");
+		//what's the name of the overworld?
+		NETHER_NAME = config.getString("general.nether_name", "world_nether");
 		//how often should the managers save?
 		SAVE_CYCLE = config.getInt("general.save_cycle",15)*60*20;
 		//what's the material of the center block of factorys?
 		CENTRAL_BLOCK_MATERIAL = Material.getMaterial(config.getString("general.central_block"));
+		//what's the material of the center block of nether factorys?
+		NETHER_FACTORY_CENTRAL_BLOCK_MATERIAL = Material.getMaterial(config.getString("general.central_block_nether_factory"));
 		//Return the build materials upon destruction of factory.
 		RETURN_BUILD_MATERIALS = config.getBoolean("general.return_build_materials",false);
 		//is citadel enabled?
@@ -124,7 +139,6 @@ public class FactoryModPlugin extends JavaPlugin
 		LEVER_OUTPUT_ENABLED = config.getBoolean("general.lever_output_enabled",true);
 		//Do we allow factories to be started with redstone?
 		REDSTONE_START_ENABLED = config.getBoolean("general.redstone_start_enabled",true);
-		int g = 0;
 		Iterator<String> disabledRecipes=config.getStringList("crafting.disable").iterator();
 		while(disabledRecipes.hasNext())
 		{
@@ -133,7 +147,6 @@ public class FactoryModPlugin extends JavaPlugin
 			for (int itterator = 0; itterator < tempList.size(); itterator ++)
 			{
 				removeRecipe(tempList.get(itterator));
-				g++;
 			}
 
 		}
@@ -250,7 +263,9 @@ public class FactoryModPlugin extends JavaPlugin
 		}
 		
 		ConfigurationSection configPrintingPresses=config.getConfigurationSection("printing_presses");
+		ConfigurationSection configNetherFactory=config.getConfigurationSection("nether_factory");
 		printingPressProperties = PrintingPressProperties.fromConfig(this, configPrintingPresses);
+		netherFactoryProperties = NetherFactoryProperties.fromConfig(this, configNetherFactory);
 	}
 	
 	private List<ProbabilisticEnchantment> getEnchantments(ConfigurationSection configEnchantments)
@@ -358,5 +373,9 @@ public class FactoryModPlugin extends JavaPlugin
 
 	public PrintingPressProperties getPrintingPressProperties() {
 		return printingPressProperties;
+	}
+	
+	public NetherFactoryProperties getNetherFactoryProperties() {
+		return netherFactoryProperties;
 	}
 }

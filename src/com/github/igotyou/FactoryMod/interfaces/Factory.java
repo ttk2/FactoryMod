@@ -1,8 +1,10 @@
 package com.github.igotyou.FactoryMod.interfaces;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
+
 import java.util.List;
 //original file:
 /**
@@ -42,7 +44,7 @@ public interface Factory
 	 */
 	public List<InteractionResponse> togglePower();
 	public List<InteractionResponse> getChestResponse();
-	public List<InteractionResponse> getCentralBlockResponse();
+	public List<InteractionResponse> getCentralBlockResponse(Player player);
 	
 	/**
 	 * Returns the location of the machine

@@ -4,9 +4,7 @@
  */
 package com.github.igotyou.FactoryMod.utility;
 
-import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.recipes.ProbabilisticEnchantment;
-import com.github.igotyou.FactoryMod.recipes.ProductionRecipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

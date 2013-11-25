@@ -10,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Furnace;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -509,7 +510,7 @@ public abstract class BaseFactory extends FactoryObject implements Factory {
 		return new ArrayList<InteractionResponse>();
 	}
 	
-	public List<InteractionResponse> getCentralBlockResponse() {
+	public List<InteractionResponse> getCentralBlockResponse(Player player) {
 		return new ArrayList<InteractionResponse>();
 	}
 }

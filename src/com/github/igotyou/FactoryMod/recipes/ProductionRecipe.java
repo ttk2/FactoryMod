@@ -1,11 +1,7 @@
 package com.github.igotyou.FactoryMod.recipes;
 
-import java.util.HashMap;
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.bukkit.enchantments.Enchantment;
 
 import com.github.igotyou.FactoryMod.interfaces.Recipe;
 import com.github.igotyou.FactoryMod.utility.ItemList;
