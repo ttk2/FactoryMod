@@ -331,5 +331,32 @@ public class NetherFactoryManager implements Manager
 	{
 		return FactoryModPlugin.NETHER_FACTORY_SAVE_FILE;
 	}
+	
+	public ItemList<NamedItemStack> getScaledMaterials(Location location)
+	{
+		NetherFactoryProperties properties = plugin.getNetherFactoryProperties();
+		ItemList<NamedItemStack> input = properties.getConstructionMaterials();
+		int scalingMode = properties.getScalingMode();
+		if (scalingMode != 0)
+		{
+			for (NetherFactory factory : netherFactorys)
+			{
+				Location factoryLoc = factory.getCenterLocation();
+				double distance = location.distance(factoryLoc);
+				if (distance <= properties.getScalingRadius())
+				{
+					switch(scalingMode)
+					{
+					case 1:
+						Math.round(distance/properties.getScalingFactor());
+					case 2:
+						
+					default:
+					}
+				}
+			}
+		}
+		return input;
+	}
 
 }
