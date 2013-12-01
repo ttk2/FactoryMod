@@ -497,8 +497,11 @@ public class NetherFactory extends BaseFactory
 	
 	public void transferTicket(Player player, ItemStack ticket)
 	{
-		player.getInventory().remove(ticket);
-		getInventory().addItem(ticket);
+		ItemStack clonedTicket = ticket.clone();
+		clonedTicket.setAmount(1);
+		ticket.setAmount(ticket.getAmount()-1);
+		player.setItemInHand(ticket);
+		getInventory().addItem(clonedTicket);
 	}
 	
 	public enum NetherOperationMode {
