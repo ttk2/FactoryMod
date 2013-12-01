@@ -252,6 +252,7 @@ public class FactoryModListener implements Listener
 								NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
 								//toggle the recipe, and print the returned message.
 								InteractionResponse.messagePlayerResults(player, netherFactory.getTeleportationBlockResponse(player, clicked.getLocation()));
+								e.setCancelled(true);
 							}
 						}
 					}
@@ -270,6 +271,7 @@ public class FactoryModListener implements Listener
 								NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
 								//toggle the recipe, and print the returned message.
 								InteractionResponse.messagePlayerResults(player, netherFactory.getTeleportationBlockResponse(player, clicked.getLocation()));
+								e.setCancelled(true);
 							}
 						}
 					}

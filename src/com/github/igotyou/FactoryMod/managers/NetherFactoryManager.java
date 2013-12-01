@@ -214,8 +214,7 @@ public class NetherFactoryManager implements Manager
 								Location netherLocation1 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+1,startZ);
 								Location netherLocation2 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+2,startZ);
 								Location netherLocation3 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+3,startZ);				
-								if (	FactoryModPlugin.CITADEL_ENABLED && 
-										(isReinforced(netherLocation) || isReinforced(netherLocation1) || isReinforced(netherLocation2) || isReinforced(netherLocation3)))
+								if (FactoryModPlugin.CITADEL_ENABLED && (isReinforced(netherLocation) || isReinforced(netherLocation1) || isReinforced(netherLocation2) || isReinforced(netherLocation3)))
 								{
 									for(int scanX = startX-1; scanX <= startX+1 && !locationOk; scanX++)
 									{
