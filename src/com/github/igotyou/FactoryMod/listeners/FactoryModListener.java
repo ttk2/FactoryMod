@@ -325,13 +325,7 @@ public class FactoryModListener implements Listener
 	{
 		e.setCancelled(true);
 	}
-	
-	@EventHandler
-	public void portalCreateEvent(PortalCreateEvent e)
-	{
-		e.setCancelled(true);
-	}
-		
+			
 	private Location westLoc(Location loc)
 	{
 		Location newLoc = loc.clone();

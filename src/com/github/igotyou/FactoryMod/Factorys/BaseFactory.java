@@ -92,16 +92,18 @@ public abstract class BaseFactory extends FactoryObject implements Factory {
 			}
 			
 			//lots of code to make the furnace turn off, without loosing contents.
-			Furnace furnace = (Furnace) factoryPowerSourceLocation.getBlock().getState();
-			byte data = furnace.getData().getData();
-			ItemStack[] oldContents = furnace.getInventory().getContents();
-			furnace.getInventory().clear();
-			factoryPowerSourceLocation.getBlock().setType(Material.FURNACE);
-			furnace = (Furnace) factoryPowerSourceLocation.getBlock().getState();
-			furnace.setRawData(data);
-			furnace.update();
-			furnace.getInventory().setContents(oldContents);
-			
+			if (factoryPowerSourceLocation.getBlock().getType() == Material.FURNACE)
+			{
+				Furnace furnace = (Furnace) factoryPowerSourceLocation.getBlock().getState();
+				byte data = furnace.getData().getData();
+				ItemStack[] oldContents = furnace.getInventory().getContents();
+				furnace.getInventory().clear();
+				factoryPowerSourceLocation.getBlock().setType(Material.FURNACE);
+				furnace = (Furnace) factoryPowerSourceLocation.getBlock().getState();
+				furnace.setRawData(data);
+				furnace.update();
+				furnace.getInventory().setContents(oldContents);
+			}
 			//put active to false
 			active = false;
 			//reset the production timer
@@ -430,6 +432,10 @@ public abstract class BaseFactory extends FactoryObject implements Factory {
 	 */
 	public boolean isFuelAvailable()
 	{
+		if (getPowerSourceInventory() == null)
+		{
+			return false;
+		}
 		return getFuel().allIn(getPowerSourceInventory());
 	}
 

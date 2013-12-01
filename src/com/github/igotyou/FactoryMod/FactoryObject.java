@@ -2,6 +2,7 @@ package com.github.igotyou.FactoryMod;
 
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Furnace;
 import org.bukkit.inventory.Inventory;
@@ -161,6 +162,10 @@ public class FactoryObject
 	 */
 	public Inventory getPowerSourceInventory()
 	{
+		if (factoryPowerSourceLocation.getBlock().getType() != Material.FURNACE)
+		{
+			return null;
+		}
 		Furnace furnaceBlock = (Furnace)factoryPowerSourceLocation.getBlock().getState();
 		factoryPowerInventory = furnaceBlock.getInventory();
 		return factoryPowerInventory;
