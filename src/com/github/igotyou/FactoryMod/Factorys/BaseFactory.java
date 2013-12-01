@@ -92,7 +92,7 @@ public abstract class BaseFactory extends FactoryObject implements Factory {
 			}
 			
 			//lots of code to make the furnace turn off, without loosing contents.
-			if (factoryPowerSourceLocation.getBlock().getType() == Material.FURNACE)
+			if (factoryPowerSourceLocation.getBlock().getType() == Material.FURNACE ||factoryPowerSourceLocation.getBlock().getType() == Material.BURNING_FURNACE)
 			{
 				Furnace furnace = (Furnace) factoryPowerSourceLocation.getBlock().getState();
 				byte data = furnace.getData().getData();
