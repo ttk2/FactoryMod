@@ -1,7 +1,12 @@
 package com.github.igotyou.FactoryMod.Factorys;
 
+import static com.untamedears.citadel.Utility.getReinforcement;
+import static com.untamedears.citadel.Utility.isReinforced;
+
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.properties.NetherFactoryProperties;
@@ -9,6 +14,7 @@ import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
 import com.github.igotyou.FactoryMod.utility.ItemList;
 import com.github.igotyou.FactoryMod.utility.NamedItemStack;
+import com.untamedears.citadel.entity.PlayerReinforcement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +23,8 @@ public class NetherFactory extends BaseFactory
 {
 
 	private NetherFactoryProperties netherFactoryProperties;//the properties of the production factory
-	private Location netherDestination;
+	private Location netherTeleportPlatform;
+	private Location overworldTeleportPlatform;
 	private NetherOperationMode mode;
 	public NetherOperationMode getMode() {
 		return mode;
@@ -26,11 +33,12 @@ public class NetherFactory extends BaseFactory
 	/**
 	 * Constructor called when creating portal
 	 */
-	public NetherFactory (Location factoryLocation, Location factoryInventoryLocation, Location factoryPowerSource, Location netherDestination, 
+	public NetherFactory (Location factoryLocation, Location factoryInventoryLocation, Location factoryPowerSource, Location nTeleportPlatform, Location oTeleportPlatform,
 			NetherFactoryProperties netherFactoryProperties)
 	{
 		super(factoryLocation, factoryInventoryLocation, factoryPowerSource, FactoryType.NETHER_FACTORY, "Nether factory");
-		this.netherDestination = netherDestination;
+		this.netherTeleportPlatform = nTeleportPlatform;
+		this.overworldTeleportPlatform = oTeleportPlatform;
 		this.netherFactoryProperties = netherFactoryProperties;
 		this.mode = NetherOperationMode.REPAIR;
 	}
@@ -38,13 +46,14 @@ public class NetherFactory extends BaseFactory
 	/**
 	 * Constructor
 	 */
-	public NetherFactory (Location factoryLocation, Location factoryInventoryLocation, Location factoryPowerSource, Location netherDestination,
+	public NetherFactory (Location factoryLocation, Location factoryInventoryLocation, Location factoryPowerSource, Location nTeleportPlatform, Location oTeleportPlatform,
 			boolean active, double currentMaintenance,
 			long timeDisrepair, NetherOperationMode mode, NetherFactoryProperties netherFactoryProperties)
 	{
 		super(factoryLocation, factoryInventoryLocation, factoryPowerSource, FactoryType.NETHER_FACTORY, active, "Nether factory", 0 , 0, currentMaintenance, timeDisrepair);
 		this.netherFactoryProperties = netherFactoryProperties;
-		this.netherDestination = netherDestination;
+		this.netherTeleportPlatform = nTeleportPlatform;
+		this.overworldTeleportPlatform = oTeleportPlatform;
 		this.mode = mode;
 	}
 		
@@ -53,7 +62,21 @@ public class NetherFactory extends BaseFactory
 		return mode == NetherOperationMode.REPAIR;
 	}
 	
-	
+	@Override
+	public void destroy(Location destroyLocation)
+	{
+		if (destroyLocation.equals(overworldTeleportPlatform) || destroyLocation.equals(netherTeleportPlatform))
+		{
+			powerOff();
+		}
+		else if (destroyLocation.equals(factoryLocation) || destroyLocation.equals(factoryInventoryLocation) || destroyLocation.equals(factoryPowerSourceLocation))
+		{
+			powerOff();
+			currentRepair=getMaxRepair();
+			timeDisrepair=System.currentTimeMillis();	
+		}
+	}
+		
 	/**
 	 * Returns either a success or error message.
 	 * Called by the blockListener when a player left clicks the center block, with the InteractionMaterial
@@ -61,71 +84,248 @@ public class NetherFactory extends BaseFactory
 	@Override
 	public void update()
 	{
-		if(!isFuelAvailable())
+		if (mode == NetherOperationMode.REPAIR)
 		{
-			togglePower();
+			//if factory is turned on
+			if (active)
+			{
+				//if the materials required to produce the current recipe are in the factory inventory
+				if (checkHasMaterials())
+				{
+					//if the factory has been working for less than the required time for the recipe
+					if (currentProductionTimer < getProductionTime())
+					{
+						//if the factory power source inventory has enough fuel for at least 1 energyCycle
+						if (isFuelAvailable())
+						{
+							//if the time since fuel was last consumed is equal to how often fuel needs to be consumed
+							if (currentEnergyTimer == getEnergyTime()-1)
+							{
+								//remove one fuel.
+								getFuel().removeFrom(getPowerSourceInventory());
+								//0 seconds since last fuel consumption
+								currentEnergyTimer = 0;
+								fuelConsumed();
+							}
+							//if we don't need to consume fuel, just increment the energy timer
+							else
+							{
+								currentEnergyTimer++;
+							}
+							//increment the production timer
+							currentProductionTimer ++;
+							postUpdate();
+						}
+						//if there is no fuel Available turn off the factory
+						else
+						{
+							powerOff();
+						}
+					}
+					
+					//if the production timer has reached the recipes production time remove input from chest, and add output material
+					else if (currentProductionTimer >= getProductionTime())
+					{
+						consumeInputs();
+						produceOutputs();
+						//Repairs the factory
+						repair(getRepairs().removeMaxFrom(getInventory(),(int)currentRepair));
+						recipeFinished();
+						
+						currentProductionTimer = 0;
+						powerOff();
+					}
+				}	
+				else
+				{
+					powerOff();
+				}
+			}	
+		}	
+		else if (mode == NetherOperationMode.TELEPORT)
+		{
+			if(!isFuelAvailable())
+			{
+				togglePower();
+			}
 		}
 	}
 	
-	@Override
-	public List<InteractionResponse> getCentralBlockResponse(Player player)
+	public List<InteractionResponse> getTeleportationBlockResponse(Player player, Location clickedBlock)
 	{
-		Location playerLocation = player.getLocation();
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
-		//Is the factory off
-		if (!active)
+		//does the player have acsess to the nether factory via ciatdel?
+		if ((!FactoryModPlugin.CITADEL_ENABLED || (FactoryModPlugin.CITADEL_ENABLED && !isReinforced(clickedBlock))) || 
+				(((PlayerReinforcement) getReinforcement(clickedBlock)).isAccessible(player)))
 		{
-			if (playerLocation.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.WORLD_NAME))
+			if (mode == NetherOperationMode.TELEPORT)
 			{
-				//is the recipe is initiated
-				if (mode == null) {
-					mode = NetherOperationMode.REPAIR;
-				} else {		
-					mode = mode.getNext();
-				}
-				
-				responses.add(new InteractionResponse(InteractionResult.SUCCESS, "-----------------------------------------------------"));
-				responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Switched mode to: " + mode.getDescription()+"."));
-				responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Next mode is: "+mode.getNext().getDescription()+"."));
-			}
-			else if (playerLocation.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.NETHER_NAME))
-			{
-				responses.add(new InteractionResponse(InteractionResult.SUCCESS, "The " + netherFactoryProperties.getName() + " is turned off."));
-			}
-		}
-		else
-		{
-			if (isFuelAvailable())
-			{
-				if ((playerLocation.getBlockX() == factoryLocation.getBlockX() || playerLocation.getBlockX() == netherDestination.getBlockX())
-						&& ((playerLocation.getBlockY()-1)== factoryLocation.getBlockY() || (playerLocation.getBlockY()-1)== netherDestination.getBlockY())
-						&& (playerLocation.getBlockZ() == factoryLocation.getBlockZ() || playerLocation.getBlockZ() == netherDestination.getBlockZ()))
+				if (active)
 				{
-					responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Commencing teleportation..."));
-					if (playerLocation.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.WORLD_NAME))
+					if (isFuelAvailable() || !netherFactoryProperties.getUseFuelOnTeleport())
 					{
-						Location destination = new Location(netherDestination.getWorld(), netherDestination.getX(), netherDestination.getY(), netherDestination.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
-						destination.add(0.5, 1.5, 0.5);
-						player.teleport(destination);
-						getFuel().removeFrom(getPowerSourceInventory());
+						Location playerLocation = player.getLocation();
+						if (		playerLocation.getBlockX()	 	== clickedBlock.getBlockX()
+								&& (playerLocation.getBlockY()-1)	== clickedBlock.getBlockY()
+								&& 	playerLocation.getBlockZ() 		== clickedBlock.getBlockZ())
+						{
+							responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Commencing teleportation..."));
+							if (clickedBlock.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.WORLD_NAME))
+							{
+								Location destination = new Location(netherTeleportPlatform.getWorld(), netherTeleportPlatform.getX(), netherTeleportPlatform.getY(), netherTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
+								destination.add(0.5, 1.5, 0.5);
+								player.teleport(destination);
+								if (netherFactoryProperties.getUseFuelOnTeleport())
+								{
+									getFuel().removeFrom(getPowerSourceInventory());
+								}
+							}
+							else if (clickedBlock.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.NETHER_NAME))
+							{
+								Location destination = new Location(overworldTeleportPlatform.getWorld(), overworldTeleportPlatform.getX(), overworldTeleportPlatform.getY(), overworldTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
+								destination.add(0.5, 1.5, 0.5);
+								player.teleport(destination);
+								if (netherFactoryProperties.getUseFuelOnTeleport())
+								{
+									getFuel().removeFrom(getPowerSourceInventory());
+								}
+							}
+						}
+						else
+						{
+							responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, you must stand on the teleportation block!"));
+						}
 					}
-					else if (playerLocation.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.NETHER_NAME))
+					else
 					{
-						Location destination = new Location(factoryLocation.getWorld(), factoryLocation.getX(), factoryLocation.getY(), factoryLocation.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
-						destination.add(0.5, 1.5, 0.5);
-						player.teleport(destination);
-						getFuel().removeFrom(getPowerSourceInventory());
+						responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is missing fuel! ("+getFuel().getMultiple(1).toString()+")"));
 					}
 				}
 				else
 				{
-					responses.add(new InteractionResponse(InteractionResult.FAILURE, "You must stand on the center block!"));
+					responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is turned off!"));
 				}
 			}
 			else
 			{
-				responses.add(new InteractionResponse(InteractionResult.FAILURE, "Factory is missing fuel! ("+getFuel().getMultiple(1).toString()+")"));
+				responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is not in teleport mode."));
 			}
+			return responses;
+		}
+		else
+		{
+			//is the player potentialy holding a security note/ticket?
+			ItemStack itemInHand = player.getItemInHand();
+			if (itemInHand.getType() == Material.PAPER)
+			{
+				if (isInTicketMode())
+				{
+					int ticketCheck = checkTicket(itemInHand);
+					if (ticketCheck > 0)
+					{
+						if (mode == NetherOperationMode.TELEPORT)
+						{
+							if (active)
+							{
+								if (isFuelAvailable())
+								{
+									Location playerLocation = player.getLocation();
+									if (		playerLocation.getBlockX()	 	== clickedBlock.getBlockX()
+											&& (playerLocation.getBlockY()-1)	== clickedBlock.getBlockY()
+											&& 	playerLocation.getBlockZ() 		== clickedBlock.getBlockZ())
+									{
+										responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Commencing teleportation..."));
+										if (clickedBlock.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.WORLD_NAME))
+										{
+											Location destination = new Location(netherTeleportPlatform.getWorld(), netherTeleportPlatform.getX(), netherTeleportPlatform.getY(), netherTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
+											destination.add(0.5, 1.5, 0.5);
+											player.teleport(destination);
+											if (ticketCheck == 2)
+											{
+												transferTicket(player, itemInHand);
+											}
+											if (netherFactoryProperties.getUseFuelOnTeleport())
+											{
+												getFuel().removeFrom(getPowerSourceInventory());
+											}
+										}
+										else if (clickedBlock.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.NETHER_NAME))
+										{
+											Location destination = new Location(overworldTeleportPlatform.getWorld(), overworldTeleportPlatform.getX(), overworldTeleportPlatform.getY(), overworldTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
+											destination.add(0.5, 1.5, 0.5);
+											player.teleport(destination);
+											if (ticketCheck == 2)
+											{
+												transferTicket(player, itemInHand);
+											}
+											if (netherFactoryProperties.getUseFuelOnTeleport())
+											{
+												getFuel().removeFrom(getPowerSourceInventory());
+											}
+										}
+									}
+									else
+									{
+										responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, you must stand on the teleportation block!"));
+									}
+								}
+								else
+								{
+									responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is missing fuel! ("+getFuel().getMultiple(1).toString()+")"));
+								}
+							}
+							else
+							{
+								responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is turned off!"));
+							}
+						}
+						else
+						{
+							responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is not in teleport mode."));
+						}
+					}
+					else
+					{
+						responses.add(new InteractionResponse(InteractionResult.FAILURE, "Your ticket does not match any in the factory."));
+					}
+				}
+				else
+				{
+					responses.add(new InteractionResponse(InteractionResult.FAILURE, "You don't have permission to use this factory."));
+				}
+			}
+			else
+			{
+				responses.add(new InteractionResponse(InteractionResult.FAILURE, "You don't have permission to use this factory."));
+			}
+		}
+		return responses;
+	}
+	
+	@Override
+	public List<InteractionResponse> getCentralBlockResponse()
+	{
+		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
+		//Is the factory off
+		if (!active)
+		{
+			//is the recipe is initiated
+			if (mode == null) 
+			{
+				mode = NetherOperationMode.REPAIR;
+			}
+			else 
+			{		
+				mode = mode.getNext();
+			}
+				
+			responses.add(new InteractionResponse(InteractionResult.SUCCESS, "-----------------------------------------------------"));
+			responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Switched mode to: " + mode.getDescription()+"."));
+			responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Next mode is: "+mode.getNext().getDescription()+"."));
+		}
+		else
+		{
+			responses.add(new InteractionResponse(InteractionResult.FAILURE, "You can't change modes while the nether factory is on! Turn it off first."));
 		}
 		return responses;
 	}
@@ -156,7 +356,7 @@ public class NetherFactory extends BaseFactory
 		//Current mode: mode description
 		responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Current mode: " + mode.getDescription()));
 		//Nether factory links to X: Y: Z:
-		responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Nether Factory links to X:" + netherDestination.getBlockX() + " Y:" + netherDestination.getBlockY() + " Z:" + netherDestination.getBlockZ()));
+		responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Nether Factory links to X:" + netherTeleportPlatform.getBlockX() + " Y:" + netherTeleportPlatform.getBlockY() + " Z:" + netherTeleportPlatform.getBlockZ()));
 		//[Will repair XX% of the factory]
 		if(!getRepairs().isEmpty()&&maintenanceActive)
 		{
@@ -221,28 +421,84 @@ public class NetherFactory extends BaseFactory
 		return netherFactoryProperties.getRepair();
 	}
 	
-	public Location getNetherDestinationLocation()
+	public Location getNetherTeleportPlatform()
 	{
-		return netherDestination;
+		return netherTeleportPlatform;
+	}
+	
+
+	public Location getOverworldTeleportPlatform() 
+	{
+		return overworldTeleportPlatform;
 	}
 	
 	@Override
-	public boolean isWhole()
+	public boolean isWhole(boolean initCall)
 	{
-	//Check if power source exists
-	if(factoryPowerSourceLocation.getBlock().getType().getId()== 61 || factoryPowerSourceLocation.getBlock().getType().getId()== 62)
-	{
-		//Check inventory location
-		if(factoryInventoryLocation.getBlock().getType().getId()== 54) 	
+		//Check if power source exists
+		if(factoryPowerSourceLocation.getBlock().getType().getId()== 61 || factoryPowerSourceLocation.getBlock().getType().getId()== 62)
 		{
-			//Check Interaction block location
-			if(factoryLocation.getBlock().getType().getId()==FactoryModPlugin.NETHER_FACTORY_CENTRAL_BLOCK_MATERIAL.getId())
+			//Check inventory location
+			if(factoryInventoryLocation.getBlock().getType().getId()== 54) 	
+			{
+				//Check Interaction block location
+				if(factoryLocation.getBlock().getType()==FactoryModPlugin.CENTRAL_BLOCK_MATERIAL)
+				{
+					if (netherTeleportPlatform == null && overworldTeleportPlatform == null && initCall)
+					{
+						return true;
+					}
+					else
+					{
+						if (netherTeleportPlatform.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+						{
+							if (overworldTeleportPlatform.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+							{
+								return true;
+							}
+						}	
+					}
+				}
+			}
+		}
+	return false;
+	}
+	
+	public boolean isInTicketMode()
+	{
+		for (ItemStack itemSlot : getInventory().getContents())
+		{
+			if (itemSlot != null && itemSlot.getType() == Material.PAPER)
 			{
 				return true;
 			}
 		}
+		return false;
 	}
-	return false;
+	
+	public int checkTicket(ItemStack ticket)
+	{
+		for (ItemStack itemSlot : getInventory().getContents())
+		{
+			if (itemSlot.isSimilar(ticket))
+			{
+				if (itemSlot.getAmount() == 1)
+				{
+					return 1;
+				}
+				else if (itemSlot.getAmount() > 1)
+				{
+					return 2;
+				}
+			}
+		}
+		return 0;
+	}
+	
+	public void transferTicket(Player player, ItemStack ticket)
+	{
+		player.getInventory().remove(ticket);
+		getInventory().addItem(ticket);
 	}
 	
 	public enum NetherOperationMode {

@@ -54,7 +54,8 @@ public class FactoryModPlugin extends JavaPlugin
 	public static boolean PRODUCTION_ENEABLED;
 	public static int SAVE_CYCLE;
 	public static Material CENTRAL_BLOCK_MATERIAL;
-	public static Material NETHER_FACTORY_CENTRAL_BLOCK_MATERIAL;
+	public static Material NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL;
+	public static Material NETHER_FACTORY_MARKER_MATERIAL;
 	public static boolean RETURN_BUILD_MATERIALS;
 	public static boolean CITADEL_ENABLED;
 	public static Material FACTORY_INTERACTION_MATERIAL;
@@ -116,8 +117,10 @@ public class FactoryModPlugin extends JavaPlugin
 		SAVE_CYCLE = config.getInt("general.save_cycle",15)*60*20;
 		//what's the material of the center block of factorys?
 		CENTRAL_BLOCK_MATERIAL = Material.getMaterial(config.getString("general.central_block"));
-		//what's the material of the center block of nether factorys?
-		NETHER_FACTORY_CENTRAL_BLOCK_MATERIAL = Material.getMaterial(config.getString("general.central_block_nether_factory"));
+		//what's the material of the nether portal teleportation platforms?
+		NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL = Material.getMaterial(config.getString("general.teleport_platform_material_nether_factory"));
+		//what's the material of the marker blocks for nether factorys?
+		NETHER_FACTORY_MARKER_MATERIAL = Material.getMaterial(config.getString("general.marker_material_nether_factory"));
 		//Return the build materials upon destruction of factory.
 		RETURN_BUILD_MATERIALS = config.getBoolean("general.return_build_materials",false);
 		//is citadel enabled?

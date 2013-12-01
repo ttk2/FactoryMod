@@ -19,11 +19,11 @@ public class NetherFactoryProperties
 	private int repair;
 	private double repairTime;
 	private int scalingMode;
-	private int scalingFactor;
 	private int scalingRadius;
+	private boolean useFuelOnTeleport;
 	
 	public NetherFactoryProperties(ItemList<NamedItemStack> constructionMaterials,	ItemList<NamedItemStack> fuel, ItemList<NamedItemStack> repairMaterials,
-			int energyTime, String name,int repair, double repairTime, int scalingMode, int scalingFactor, int scalingRadius)
+			int energyTime, String name,int repair, double repairTime, int scalingRadius, boolean useFuelOnTeleport)
 	{
 		this.constructionMaterials = constructionMaterials;
 		this.fuel = fuel;
@@ -32,9 +32,8 @@ public class NetherFactoryProperties
 		this.name = name;
 		this.repair=repair;
 		this.repairTime=repairTime;
-		this.scalingMode = scalingMode;
-		this.scalingFactor = scalingFactor;
 		this.scalingRadius = scalingRadius;
+		this.useFuelOnTeleport = useFuelOnTeleport;
 	}
 
 	public int getRepair()
@@ -93,10 +92,9 @@ public class NetherFactoryProperties
 		int nfRepair = costs.getInt("repair_multiple",1);
 		String nfName = configNetherFactory.getString("name", "Nether Factory");
 		int repairTime = configNetherFactory.getInt("repair_time",12);
-		int nfScalingMode = configNetherFactory.getInt("cost_scaling",1);
-		int nfScalingFactor = configNetherFactory.getInt("scaling_factor", 100);
-		int nfScalingRadius = configNetherFactory.getInt("scaling_radius", 1500);
-		return new NetherFactoryProperties(nfConstructionCost, nfFuel, nfRepairCost, nfEnergyTime, nfName, nfRepair, repairTime, nfScalingMode, nfScalingFactor, nfScalingRadius);
+		int nfScalingRadius = configNetherFactory.getInt("scaling_radius", 5000);
+		boolean nfUseFuelOnTeleport = configNetherFactory.getBoolean("use_fuel_on_teleport", false);
+		return new NetherFactoryProperties(nfConstructionCost, nfFuel, nfRepairCost, nfEnergyTime, nfName, nfRepair, repairTime, nfScalingRadius,nfUseFuelOnTeleport);
 
 	}
 
@@ -104,4 +102,10 @@ public class NetherFactoryProperties
 	{
 		return repairTime;
 	}
+
+	public boolean getUseFuelOnTeleport() 
+	{
+		return useFuelOnTeleport;
+	}
+
 }

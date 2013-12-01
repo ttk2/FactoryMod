@@ -5,12 +5,15 @@
 package com.github.igotyou.FactoryMod.utility;
 
 import com.github.igotyou.FactoryMod.recipes.ProbabilisticEnchantment;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
@@ -67,9 +70,23 @@ public class ItemList<E extends NamedItemStack> extends ArrayList<E> {
 	}
 	public boolean allIn(Inventory inventory)
 	{
+		HashMap<ItemStack, Integer> amountMaterials = new HashMap<ItemStack, Integer>();
 		for(ItemStack itemStack:this)
 		{
-			if (amountAvailable(inventory, itemStack)<itemStack.getAmount())
+			ItemStack itemStackClone = itemStack.clone();
+			itemStackClone.setAmount(1);
+			if (amountMaterials.containsKey(itemStackClone))
+			{
+				amountMaterials.put(itemStackClone, amountMaterials.get(itemStackClone)+itemStack.getAmount());
+			}
+			else
+			{
+				amountMaterials.put(itemStackClone, itemStack.getAmount());
+			}
+		}
+		for (Entry<ItemStack, Integer> entry : amountMaterials.entrySet())
+		{
+			if (amountAvailable(inventory, entry.getKey())<entry.getValue())
 			{
 				return false;
 			}
@@ -199,14 +216,25 @@ public class ItemList<E extends NamedItemStack> extends ArrayList<E> {
 	public String toString()
 	{
 		String returnString="";
-		for(int i=0;i<size();i++)
+		HashMap<NamedItemStack, Integer> amountMaterials = new HashMap<NamedItemStack, Integer>();
+		for(NamedItemStack itemStack:this)
 		{
-			String name=get(i).getItemMeta().hasDisplayName() ? get(i).getItemMeta().getDisplayName() : get(i).getCommonName();
-			returnString+=String.valueOf(get(i).getAmount())+" "+name;
-			if(i<size()-1)
+			NamedItemStack itemStackClone = itemStack.clone();
+			itemStackClone.setAmount(1);
+			if (amountMaterials.containsKey(itemStackClone))
 			{
-				returnString+=", ";
+				amountMaterials.put(itemStackClone, amountMaterials.get(itemStackClone)+itemStack.getAmount());
 			}
+			else
+			{
+				amountMaterials.put(itemStackClone, itemStack.getAmount());
+			}
+		}
+		for (Entry<NamedItemStack, Integer> entry : amountMaterials.entrySet())
+		{
+			String name=entry.getKey().getItemMeta().hasDisplayName() ? entry.getKey().getItemMeta().getDisplayName() : entry.getKey().getCommonName();
+			returnString+=String.valueOf(entry.getValue()) +" "+name;
+			returnString+=",";
 		}
 		return returnString;
 	}
@@ -275,6 +303,27 @@ public class ItemList<E extends NamedItemStack> extends ArrayList<E> {
 		{
 			NamedItemStack itemStackClone=itemStack.clone();
 			itemStackClone.setAmount(itemStack.getAmount()*multiplier);
+			multipliedItemList.add(itemStackClone);
+		}
+		return multipliedItemList;
+	}
+	public ItemList<NamedItemStack> getMultiple(double multiplier) 
+	{
+		ItemList<NamedItemStack> multipliedItemList=new ItemList<NamedItemStack>();
+		for (NamedItemStack itemStack:this)
+		{
+			NamedItemStack itemStackClone=itemStack.clone();
+			long newAmount = (long) Math.round(itemStackClone.getAmount()*multiplier);
+			if (newAmount > 64)
+			{
+				for (;newAmount > 64; newAmount = newAmount-64)
+				{
+					NamedItemStack newItemStack = itemStack.clone();
+					newItemStack.setAmount(64);
+					multipliedItemList.add(newItemStack);
+				}
+			}
+			itemStackClone.setAmount((int) newAmount);
 			multipliedItemList.add(itemStackClone);
 		}
 		return multipliedItemList;

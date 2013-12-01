@@ -1,7 +1,6 @@
 package com.github.igotyou.FactoryMod.Factorys;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.interfaces.Recipe;
@@ -66,7 +65,7 @@ public class ProductionFactory extends BaseFactory
 	 * Called by the blockListener when a player left clicks the center block, with the InteractionMaterial
 	 */
 	@Override
-	public List<InteractionResponse> getCentralBlockResponse(Player player)
+	public List<InteractionResponse> getCentralBlockResponse()
 	{
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
 		//Is the factory off

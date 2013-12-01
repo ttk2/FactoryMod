@@ -10,7 +10,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Furnace;
-import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -53,11 +52,8 @@ public abstract class BaseFactory extends FactoryObject implements Factory {
 		this.timeDisrepair=3155692597470L;
 	}
 
-	public BaseFactory(Location factoryLocation,
-			Location factoryInventoryLocation, Location factoryPowerSource,
-			FactoryType factoryType, String subFactoryType) {
-		super(factoryLocation, factoryInventoryLocation, factoryPowerSource,
-				factoryType, subFactoryType);
+	public BaseFactory(Location factoryLocation,Location factoryInventoryLocation, Location factoryPowerSource,	FactoryType factoryType, String subFactoryType) {
+		super(factoryLocation, factoryInventoryLocation, factoryPowerSource,factoryType, subFactoryType);
 		this.currentRepair=0.0;
 		this.timeDisrepair=3155692597470L;//Year 2070, default starting value
 	}
@@ -157,40 +153,48 @@ public abstract class BaseFactory extends FactoryObject implements Factory {
 			//if the factory isn't broken or the current recipe can repair it
 			if(!isBroken()||isRepairing())
 			{
-				//is there fuel enough for at least once energy cycle?
-				if (isFuelAvailable())
+				if (isWhole(false))
 				{
-					//are there enough materials for the current recipe in the chest?
-					if (checkHasMaterials())
+					//is there fuel enough for at least once energy cycle?
+					if (isFuelAvailable())
 					{
-						//turn the factory on
-						powerOn();
-						//return a success message
-						response.add(new InteractionResponse(InteractionResult.SUCCESS, "Factory activated!"));
-						return response;
+						//are there enough materials for the current recipe in the chest?
+						if (checkHasMaterials())
+						{
+							//turn the factory on
+							powerOn();
+							//return a success message
+							response.add(new InteractionResponse(InteractionResult.SUCCESS, "Factory activated!"));
+							return response;
+						}
+						//there are not enough materials for the recipe!
+						else
+						{
+							//return a failure message, containing which materials are needed for the recipe
+							//[Requires the following: Amount Name, Amount Name.]
+							//[Requires one of the following: Amount Name, Amount Name.]
+							
+							ItemList<NamedItemStack> needAll=new ItemList<NamedItemStack>();
+							needAll.addAll(getAllInputs().getDifference(getInventory()));
+							if(!needAll.isEmpty())
+							{
+								response.add(new InteractionResponse(InteractionResult.FAILURE,"You need all of the following: "+needAll.toString()+"."));
+							}
+							return response;
+						}
 					}
-					//there are not enough materials for the recipe!
+					//if there isn't enough fuel for at least one energy cycle
 					else
 					{
-						//return a failure message, containing which materials are needed for the recipe
-						//[Requires the following: Amount Name, Amount Name.]
-						//[Requires one of the following: Amount Name, Amount Name.]
-						
-						ItemList<NamedItemStack> needAll=new ItemList<NamedItemStack>();
-						needAll.addAll(getAllInputs().getDifference(getInventory()));
-						if(!needAll.isEmpty())
-						{
-							response.add(new InteractionResponse(InteractionResult.FAILURE,"You need all of the following: "+needAll.toString()+"."));
-						}
+						//return a error message
+						int multiplesRequired=(int)Math.ceil(getProductionTime()/(double)getEnergyTime());
+						response.add(new InteractionResponse(InteractionResult.FAILURE, "Factory is missing fuel! ("+getFuel().getMultiple(multiplesRequired).toString()+")"));
 						return response;
 					}
 				}
-				//if there isn't enough fuel for at least one energy cycle
 				else
 				{
-					//return a error message
-					int multiplesRequired=(int)Math.ceil(getProductionTime()/(double)getEnergyTime());
-					response.add(new InteractionResponse(InteractionResult.FAILURE, "Factory is missing fuel! ("+getFuel().getMultiple(multiplesRequired).toString()+")"));
+					response.add(new InteractionResponse(InteractionResult.FAILURE, "Nether factory is missing blocks."));
 					return response;
 				}
 			}
@@ -442,7 +446,7 @@ public abstract class BaseFactory extends FactoryObject implements Factory {
 	/*
 	 * Repairs the factory 
 	 */
-	private void repair(int amountRepaired)
+	protected void repair(int amountRepaired)
 	{
 		currentRepair-=amountRepaired;
 		if(currentRepair<0)
@@ -510,7 +514,7 @@ public abstract class BaseFactory extends FactoryObject implements Factory {
 		return new ArrayList<InteractionResponse>();
 	}
 	
-	public List<InteractionResponse> getCentralBlockResponse(Player player) {
+	public List<InteractionResponse> getCentralBlockResponse() {
 		return new ArrayList<InteractionResponse>();
 	}
 }

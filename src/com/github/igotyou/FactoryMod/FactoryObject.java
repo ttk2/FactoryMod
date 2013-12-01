@@ -58,7 +58,7 @@ public class FactoryObject
 		this.factoryType = factoryType;
 		this.subFactoryType = subFactoryType;
 		this.upgraded = false;
-		if (this.isWhole())
+		if (this.isWhole(true))
 		{
 			initializeInventory();
 		}
@@ -78,7 +78,7 @@ public class FactoryObject
 		this.factoryType = factoryType;
 		this.subFactoryType = subFactoryType;
 		this.upgraded = false;
-		if (this.isWhole())
+		if (this.isWhole(true))
 		{
 			initializeInventory();
 		}
@@ -186,7 +186,7 @@ public class FactoryObject
 	/**
 	 * returns true if all factory blocks are occupied with the correct blocks
 	 */
-	public boolean isWhole()
+	public boolean isWhole(boolean initCall)
 	{
 	//Check if power source exists
 	if(factoryPowerSourceLocation.getBlock().getType().getId()== 61 || factoryPowerSourceLocation.getBlock().getType().getId()== 62)

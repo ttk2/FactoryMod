@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
+import com.github.igotyou.FactoryMod.Factorys.NetherFactory;
 import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.managers.FactoryModManager;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
@@ -38,7 +39,7 @@ public class FactoryModListener implements Listener
 	
 	private boolean isPotentialFactoryBlock(Block block) {
 		return block.getType() == FactoryModPlugin.CENTRAL_BLOCK_MATERIAL || block.getType() == Material.IRON_BLOCK || block.getType() == Material.CHEST||
-				block.getType() == Material.FURNACE || block.getType() == Material.BURNING_FURNACE || block.getType() == FactoryModPlugin.NETHER_FACTORY_CENTRAL_BLOCK_MATERIAL;
+				block.getType() == Material.FURNACE || block.getType() == Material.BURNING_FURNACE || block.getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL;
 	}
 	
 	/**
@@ -133,7 +134,7 @@ public class FactoryModListener implements Listener
 			if (player.getItemInHand().getType() == FactoryModPlugin.FACTORY_INTERACTION_MATERIAL)
 			{
 				//If the material which was clicked is the central block material
-				if (clicked.getType() == FactoryModPlugin.CENTRAL_BLOCK_MATERIAL || clicked.getType() == FactoryModPlugin.NETHER_FACTORY_CENTRAL_BLOCK_MATERIAL)
+				if (clicked.getType() == FactoryModPlugin.CENTRAL_BLOCK_MATERIAL)
 				{
 					//is there a factory at the clicked location?
 					if (factoryMan.factoryExistsAt(clicked.getLocation()))
@@ -150,7 +151,7 @@ public class FactoryModListener implements Listener
 								{
 									Factory factory = factoryMan.getFactory(clicked.getLocation());
 									//toggle the recipe, and print the returned message.
-									InteractionResponse.messagePlayerResults(player, factory.getCentralBlockResponse(player));
+									InteractionResponse.messagePlayerResults(player, factory.getCentralBlockResponse());
 								}
 							}
 							//if the player does NOT have acssess to the block that was clicked
@@ -239,7 +240,40 @@ public class FactoryModListener implements Listener
 						}
 						
 					}
-				}				
+				}
+				else if (clicked.getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+				{
+					if (factoryMan.factoryExistsAt(clicked.getLocation()))
+					{
+						if(factoryMan.factoryWholeAt(clicked.getLocation()))
+						{
+							if(factoryMan.getFactory(clicked.getLocation()).getClass() == NetherFactory.class)
+							{
+								NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
+								//toggle the recipe, and print the returned message.
+								InteractionResponse.messagePlayerResults(player, netherFactory.getTeleportationBlockResponse(player, clicked.getLocation()));
+							}
+						}
+					}
+				}
+			}
+			else if (player.getItemInHand().getType() == Material.PAPER)
+			{
+				if (clicked.getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+				{
+					if (factoryMan.factoryExistsAt(clicked.getLocation()))
+					{
+						if(factoryMan.factoryWholeAt(clicked.getLocation()))
+						{
+							if(factoryMan.getFactory(clicked.getLocation()).getClass() == NetherFactory.class)
+							{
+								NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
+								//toggle the recipe, and print the returned message.
+								InteractionResponse.messagePlayerResults(player, netherFactory.getTeleportationBlockResponse(player, clicked.getLocation()));
+							}
+						}
+					}
+				}
 			}
 		}
 		/* Section commented out since there exists range of bugs that circumvent 

@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
@@ -405,7 +404,7 @@ public class PrintingPress extends BaseFactory {
 	 * Called by the blockListener when a player left clicks the center block, with the InteractionMaterial
 	 */
 	@Override
-	public List<InteractionResponse> getCentralBlockResponse(Player player)
+	public List<InteractionResponse> getCentralBlockResponse()
 	{
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
 		//Is the factory off
@@ -430,7 +429,7 @@ public class PrintingPress extends BaseFactory {
 		return responses;
 	}
 	
-	public List<InteractionResponse> getChestResponse(Player player)
+	public List<InteractionResponse> getChestResponse()
 	{
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
 		String status=active ? "On" : "Off";
