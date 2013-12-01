@@ -162,7 +162,7 @@ public class FactoryObject
 	 */
 	public Inventory getPowerSourceInventory()
 	{
-		if (factoryPowerSourceLocation.getBlock().getType() != Material.FURNACE)
+		if (!(factoryPowerSourceLocation.getBlock().getType() == Material.FURNACE || factoryPowerSourceLocation.getBlock().getType() == Material.BURNING_FURNACE))
 		{
 			return null;
 		}
