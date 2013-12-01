@@ -10,12 +10,15 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
+import org.bukkit.event.world.PortalCreateEvent;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.Factorys.NetherFactory;
@@ -316,6 +319,19 @@ public class FactoryModListener implements Listener
 		}
 		*/
 	}
+	
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void playerPortalEvent(PlayerPortalEvent e)
+	{
+		e.setCancelled(true);
+	}
+	
+	@EventHandler
+	public void portalCreateEvent(PortalCreateEvent e)
+	{
+		e.setCancelled(true);
+	}
+		
 	private Location westLoc(Location loc)
 	{
 		Location newLoc = loc.clone();
