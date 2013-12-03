@@ -146,7 +146,7 @@ public class NetherFactoryManager implements Manager
 				NetherFactory factory = new NetherFactory(centerLocation, inventoryLocation, powerLocation, netherTeleportPlatformLocation, overworldTeleportPlatformLocation,
 						active, currentRepair, timeDisrepair,
 						mode,
-						plugin.getNetherFactoryProperties());
+						plugin.getNetherFactoryProperties(), this);
 				addFactory(factory);
 			}
 			fileInputStream.close();
@@ -255,7 +255,7 @@ public class NetherFactoryManager implements Manager
 									}
 									Location oneUp = markerLocation.clone();
 									oneUp.add(0,1,0);
-									NetherFactory netherFactory = new NetherFactory(factoryLocation, inventoryLocation, powerSourceLocation, netherLocation, oneUp, plugin.getNetherFactoryProperties());
+									NetherFactory netherFactory = new NetherFactory(factoryLocation, inventoryLocation, powerSourceLocation, netherLocation, oneUp, plugin.getNetherFactoryProperties(), this);
 									if (constructionMaterials.removeFrom(netherFactory.getInventory()))
 									{
 										addFactory(netherFactory);

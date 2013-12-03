@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
+import com.github.igotyou.FactoryMod.managers.NetherFactoryManager;
 import com.github.igotyou.FactoryMod.properties.NetherFactoryProperties;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
@@ -26,6 +27,7 @@ public class NetherFactory extends BaseFactory
 	private Location netherTeleportPlatform;
 	private Location overworldTeleportPlatform;
 	private NetherOperationMode mode;
+	private NetherFactoryManager netherManager;
 	public NetherOperationMode getMode() {
 		return mode;
 	}
@@ -34,13 +36,14 @@ public class NetherFactory extends BaseFactory
 	 * Constructor called when creating portal
 	 */
 	public NetherFactory (Location factoryLocation, Location factoryInventoryLocation, Location factoryPowerSource, Location nTeleportPlatform, Location oTeleportPlatform,
-			NetherFactoryProperties netherFactoryProperties)
+			NetherFactoryProperties netherFactoryProperties, NetherFactoryManager netherManager)
 	{
 		super(factoryLocation, factoryInventoryLocation, factoryPowerSource, FactoryType.NETHER_FACTORY, "Nether factory");
 		this.netherTeleportPlatform = nTeleportPlatform;
 		this.overworldTeleportPlatform = oTeleportPlatform;
 		this.netherFactoryProperties = netherFactoryProperties;
 		this.mode = NetherOperationMode.REPAIR;
+		this.netherManager = netherManager;
 	}
 
 	/**
@@ -48,13 +51,15 @@ public class NetherFactory extends BaseFactory
 	 */
 	public NetherFactory (Location factoryLocation, Location factoryInventoryLocation, Location factoryPowerSource, Location nTeleportPlatform, Location oTeleportPlatform,
 			boolean active, double currentMaintenance,
-			long timeDisrepair, NetherOperationMode mode, NetherFactoryProperties netherFactoryProperties)
+			long timeDisrepair, NetherOperationMode mode, NetherFactoryProperties netherFactoryProperties,
+			NetherFactoryManager netherManager)
 	{
 		super(factoryLocation, factoryInventoryLocation, factoryPowerSource, FactoryType.NETHER_FACTORY, active, "Nether factory", 0 , 0, currentMaintenance, timeDisrepair);
 		this.netherFactoryProperties = netherFactoryProperties;
 		this.netherTeleportPlatform = nTeleportPlatform;
 		this.overworldTeleportPlatform = oTeleportPlatform;
 		this.mode = mode;
+		this.netherManager = netherManager;
 	}
 		
 	@Override
@@ -355,8 +360,10 @@ public class NetherFactory extends BaseFactory
 		responses.add(new InteractionResponse(InteractionResult.SUCCESS, netherFactoryProperties.getName()+": "+status+" with "+String.valueOf(health)+"% health."));
 		//Current mode: mode description
 		responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Current mode: " + mode.getDescription()));
-		//Nether factory links to X: Y: Z:
-		responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Nether Factory links to X:" + netherTeleportPlatform.getBlockX() + " Y:" + netherTeleportPlatform.getBlockY() + " Z:" + netherTeleportPlatform.getBlockZ()));
+		//Overworld side teleport platform is at X: Y: Z:
+		responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Overworld side teleport platform is:" + overworldTeleportPlatform.getBlockX() + " Y:" + overworldTeleportPlatform.getBlockY() + " Z:" + overworldTeleportPlatform.getBlockZ()));
+		//Nether side teleport platform is at X: Y: Z:
+		responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Nether side teleport platform is:" + netherTeleportPlatform.getBlockX() + " Y:" + netherTeleportPlatform.getBlockY() + " Z:" + netherTeleportPlatform.getBlockZ()));
 		//[Will repair XX% of the factory]
 		if(!getRepairs().isEmpty()&&maintenanceActive)
 		{
@@ -394,6 +401,7 @@ public class NetherFactory extends BaseFactory
 		switch(mode) {
 		case REPAIR:
 			repairMaterials.addAll(netherFactoryProperties.getRepairMaterials());
+			repairMaterials = repairMaterials.getMultiple(netherManager.getScalingFactor(factoryLocation));
 			break;
 		default:
 			break;
