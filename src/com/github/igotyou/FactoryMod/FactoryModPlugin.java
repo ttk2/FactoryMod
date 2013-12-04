@@ -48,6 +48,11 @@ public class FactoryModPlugin extends JavaPlugin
 	public static final String PRINTING_PRESSES_SAVE_FILE = "pressSaves";
 	public static final String NETHER_FACTORY_SAVE_FILE = "netherSaves";
 	public static int NETHER_SCALE;
+	public static boolean ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM;
+	public static boolean ALLOW_BLOCK_PLACEMENT_ABOVE_TELEPORT_PLATFORM;
+	public static boolean TELEPORT_PLATFORM_INVUNERABLE;
+	public static boolean REGENERATE_TELEPORT_BLOCK_ON_TELEPORT;
+	public static boolean REMOVE_BLOCK_ABOVE_TELEPORT_PLATFORM_ON_TELEPORT;
 	public static String WORLD_NAME;
 	public static String NETHER_NAME;
 	public static int PRODUCER_UPDATE_CYCLE;
@@ -109,6 +114,11 @@ public class FactoryModPlugin extends JavaPlugin
 		config = getConfig();
 		//what should the nether scaling be for the nether factorys?
 		NETHER_SCALE = config.getInt("general.nether_scale",8);
+		//Allow reinforcement above nether factory teleport platforms.
+		ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM = config.getBoolean("general.allow_reinforcement_creation_above_teleport_platform", false);
+		//Allow people to place blocks above nether factory teleport platforms.
+		ALLOW_BLOCK_PLACEMENT_ABOVE_TELEPORT_PLATFORM = config.getBoolean("general.allow_block_placement_above_teleport_platform", false);
+		
 		//what's the name of the overworld?
 		WORLD_NAME = config.getString("general.world_name", "world");
 		//what's the name of the overworld?

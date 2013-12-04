@@ -15,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
@@ -27,6 +28,7 @@ import com.github.igotyou.FactoryMod.managers.FactoryModManager;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
 import com.untamedears.citadel.entity.PlayerReinforcement;
+import com.untamedears.citadel.events.CreateReinforcementEvent;
 
 public class FactoryModListener implements Listener
 {
@@ -58,11 +60,28 @@ public class FactoryModListener implements Listener
 		{
 			if (factoryMan.factoryExistsAt(block.getLocation()))
 			{
-				//if the blocks is not reinforced destroy it
-				if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
+				if (FactoryModPlugin.TELEPORT_PLATFORM_INVUNERABLE)
 				{
-					destroyFactoryAt(block);
+					if (factoryMan.getFactory(block.getLocation()).getClass() == NetherFactory.class)
+					{
+						e.setCancelled(true);
+					}
+					else
+					{
+						if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
+						{
+							destroyFactoryAt(block);
+						}
+					}
 				}
+				else
+				{
+					if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
+					{
+						destroyFactoryAt(block);
+					}
+				}
+				//if the blocks is not reinforced destroy it
 			}
 		}
 	}
@@ -326,6 +345,53 @@ public class FactoryModListener implements Listener
 		e.setCancelled(true);
 	}
 			
+	@EventHandler
+	public void createReinforcement(CreateReinforcementEvent e)
+	{
+		if(!FactoryModPlugin.ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM)
+		{
+			Location location = e.getBlock().getLocation();
+			for (int i = -1;i >= -3; i--)
+			{
+				Location scanBlock = location.clone();
+				scanBlock.add(0, i, 0);
+				if (scanBlock.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+				{
+					if (factoryMan.factoryExistsAt(scanBlock))
+					{
+						if (factoryMan.getFactory(scanBlock).getClass() == NetherFactory.class)
+						{
+							e.setCancelled(true);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void blockPlaceEvent(BlockPlaceEvent e)
+	{
+		if (!FactoryModPlugin.ALLOW_BLOCK_PLACEMENT_ABOVE_TELEPORT_PLATFORM)
+		{
+			Location location = e.getBlock().getLocation();
+			for (int i = -1;i >= -3; i--)
+			{
+				Location scanBlock = location.clone();
+				scanBlock.add(0, i, 0);
+				if (scanBlock.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+				{
+					if (factoryMan.factoryExistsAt(scanBlock))
+					{
+						if (factoryMan.getFactory(scanBlock).getClass() == NetherFactory.class)
+						{
+							e.setCancelled(true);
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	private Location westLoc(Location loc)
 	{
 		Location newLoc = loc.clone();
