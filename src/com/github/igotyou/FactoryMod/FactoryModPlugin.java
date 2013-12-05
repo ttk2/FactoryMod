@@ -113,24 +113,29 @@ public class FactoryModPlugin extends JavaPlugin
 		reloadConfig();
 		config = getConfig();
 		//what should the nether scaling be for the nether factorys?
-		NETHER_SCALE = config.getInt("general.nether_scale",8);
+		NETHER_SCALE = config.getInt("nether_general.nether_scale",8);
 		//Allow reinforcement above nether factory teleport platforms.
-		ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM = config.getBoolean("general.allow_reinforcement_creation_above_teleport_platform", false);
+		ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM = config.getBoolean("nether_general.allow_reinforcement_creation_above_teleport_platform", false);
 		//Allow people to place blocks above nether factory teleport platforms.
-		ALLOW_BLOCK_PLACEMENT_ABOVE_TELEPORT_PLATFORM = config.getBoolean("general.allow_block_placement_above_teleport_platform", false);
-		
+		ALLOW_BLOCK_PLACEMENT_ABOVE_TELEPORT_PLATFORM = config.getBoolean("nether_general.allow_block_placement_above_teleport_platform", false);
+		//Make teleport platforms unbreakable
+		TELEPORT_PLATFORM_INVUNERABLE = config.getBoolean("nether_general.teleport_platform_invunerable",false);
+		//Right before a player get's teleported, should the teleport platform be regenerated?
+		REGENERATE_TELEPORT_BLOCK_ON_TELEPORT = config.getBoolean("nether_general.regenerate_teleport_block_on_teleport", false);
+		//Right before a player get's teleported, should the blocks above the portal be destroyed(ignotes citadel)?
+		REMOVE_BLOCK_ABOVE_TELEPORT_PLATFORM_ON_TELEPORT = config.getBoolean("nether_general.remove_blocks_above_teleport_platform_on_teleport", false);
 		//what's the name of the overworld?
-		WORLD_NAME = config.getString("general.world_name", "world");
+		WORLD_NAME = config.getString("nether_general.world_name", "world");
 		//what's the name of the overworld?
-		NETHER_NAME = config.getString("general.nether_name", "world_nether");
+		NETHER_NAME = config.getString("nether_general.nether_name", "world_nether");
 		//how often should the managers save?
 		SAVE_CYCLE = config.getInt("general.save_cycle",15)*60*20;
 		//what's the material of the center block of factorys?
 		CENTRAL_BLOCK_MATERIAL = Material.getMaterial(config.getString("general.central_block"));
 		//what's the material of the nether portal teleportation platforms?
-		NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL = Material.getMaterial(config.getString("general.teleport_platform_material_nether_factory"));
+		NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL = Material.getMaterial(config.getString("nether_general.teleport_platform_material_nether_factory"));
 		//what's the material of the marker blocks for nether factorys?
-		NETHER_FACTORY_MARKER_MATERIAL = Material.getMaterial(config.getString("general.marker_material_nether_factory"));
+		NETHER_FACTORY_MARKER_MATERIAL = Material.getMaterial(config.getString("nether_general.marker_material_nether_factory"));
 		//Return the build materials upon destruction of factory.
 		RETURN_BUILD_MATERIALS = config.getBoolean("general.return_build_materials",false);
 		//is citadel enabled?

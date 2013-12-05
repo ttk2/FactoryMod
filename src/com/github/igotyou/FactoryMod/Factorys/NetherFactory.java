@@ -3,6 +3,7 @@ package com.github.igotyou.FactoryMod.Factorys;
 import static com.untamedears.citadel.Utility.getReinforcement;
 import static com.untamedears.citadel.Utility.isReinforced;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -177,8 +178,12 @@ public class NetherFactory extends BaseFactory
 							responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Commencing teleportation..."));
 							if (clickedBlock.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.WORLD_NAME))
 							{
+								if (FactoryModPlugin.REMOVE_BLOCK_ABOVE_TELEPORT_PLATFORM_ON_TELEPORT)
+								{
+									removeBlocksAboveTeleportPlatform(netherTeleportPlatform);
+								}
 								Location destination = new Location(netherTeleportPlatform.getWorld(), netherTeleportPlatform.getX(), netherTeleportPlatform.getY(), netherTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
-								destination.add(0.5, 1.5, 0.5);
+								destination.add(0.5, 1.5, 0.5);								
 								player.teleport(destination);
 								if (netherFactoryProperties.getUseFuelOnTeleport())
 								{
@@ -187,6 +192,10 @@ public class NetherFactory extends BaseFactory
 							}
 							else if (clickedBlock.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.NETHER_NAME))
 							{
+								if (FactoryModPlugin.REMOVE_BLOCK_ABOVE_TELEPORT_PLATFORM_ON_TELEPORT)
+								{
+									removeBlocksAboveTeleportPlatform(overworldTeleportPlatform);
+								}
 								Location destination = new Location(overworldTeleportPlatform.getWorld(), overworldTeleportPlatform.getX(), overworldTeleportPlatform.getY(), overworldTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
 								destination.add(0.5, 1.5, 0.5);
 								player.teleport(destination);
@@ -242,6 +251,10 @@ public class NetherFactory extends BaseFactory
 										responses.add(new InteractionResponse(InteractionResult.SUCCESS, "Commencing teleportation..."));
 										if (clickedBlock.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.WORLD_NAME))
 										{
+											if (FactoryModPlugin.REMOVE_BLOCK_ABOVE_TELEPORT_PLATFORM_ON_TELEPORT)
+											{
+												removeBlocksAboveTeleportPlatform(netherTeleportPlatform);
+											}
 											Location destination = new Location(netherTeleportPlatform.getWorld(), netherTeleportPlatform.getX(), netherTeleportPlatform.getY(), netherTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
 											destination.add(0.5, 1.5, 0.5);
 											player.teleport(destination);
@@ -256,6 +269,10 @@ public class NetherFactory extends BaseFactory
 										}
 										else if (clickedBlock.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.NETHER_NAME))
 										{
+											if (FactoryModPlugin.REMOVE_BLOCK_ABOVE_TELEPORT_PLATFORM_ON_TELEPORT)
+											{
+												removeBlocksAboveTeleportPlatform(overworldTeleportPlatform);
+											}
 											Location destination = new Location(overworldTeleportPlatform.getWorld(), overworldTeleportPlatform.getX(), overworldTeleportPlatform.getY(), overworldTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
 											destination.add(0.5, 1.5, 0.5);
 											player.teleport(destination);
@@ -382,7 +399,7 @@ public class NetherFactory extends BaseFactory
 	public ItemList<NamedItemStack> getInputs() {
 		if(mode == NetherOperationMode.REPAIR)
 		{
-			return netherFactoryProperties.getRepairMaterials();
+			return new ItemList<NamedItemStack>();
 		}
 		else
 		{
@@ -505,6 +522,37 @@ public class NetherFactory extends BaseFactory
 			}
 		}
 		return 0;
+	}
+	
+	public void removeBlocksAboveTeleportPlatform(Location teleportPlatform)
+	{
+		Location netherLocation1 = teleportPlatform.clone();
+		netherLocation1.add(0, 1, 0);
+		Location netherLocation2 = teleportPlatform.clone();
+		netherLocation2.add(0, 2, 0);
+		Location netherLocation3 = teleportPlatform.clone();
+		netherLocation3.add(0, 3, 0);
+		netherLocation1.getBlock().setType(Material.AIR);
+		netherLocation1.getBlock().getState().update(true);
+		netherLocation2.getBlock().setType(Material.AIR);
+		netherLocation2.getBlock().getState().update(true);
+		netherLocation3.getBlock().setType(Material.AIR);
+		netherLocation3.getBlock().getState().update(true);
+	}
+	
+	public void regenerateTeleportBlock(Location location)
+	{
+		if (location.equals(overworldTeleportPlatform))
+		{
+			netherTeleportPlatform.getBlock().setType(FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL);
+			netherTeleportPlatform.getBlock().getState().update(true);
+		}
+		else if(location.equals(netherTeleportPlatform))
+		{
+			overworldTeleportPlatform.getBlock().setType(FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL);
+			overworldTeleportPlatform.getBlock().getState().update(true);
+		}
+		
 	}
 	
 	public void transferTicket(Player player, ItemStack ticket)

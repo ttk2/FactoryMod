@@ -380,6 +380,10 @@ public class NetherFactoryManager implements Manager
 		for (NetherFactory factory : netherFactorys)
 		{
 			Location factoryLoc = factory.getCenterLocation();
+			if(factory.getCenterLocation().equals(location))
+			{
+				continue;
+			}
 			//the distance function uses square root, which is quite expensive, let's check if it's even realistic that it's within range first.
 			if ((location.getBlockX()-factoryLoc.getBlockX()) < properties.getScalingRadius() || (location.getBlockX()-factoryLoc.getBlockX()) > -(properties.getScalingRadius()))
 			{

@@ -64,7 +64,12 @@ public class FactoryModListener implements Listener
 				{
 					if (factoryMan.getFactory(block.getLocation()).getClass() == NetherFactory.class)
 					{
-						e.setCancelled(true);
+						NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(block.getLocation());
+						if (!netherFactory.isBroken())
+						{
+							InteractionResponse.messagePlayerResult(e.getPlayer(), new InteractionResponse(InteractionResult.FAILURE, "You aren't allowed to break the nether factory teleport platform!"));
+							e.setCancelled(true);
+						}
 					}
 					else
 					{
@@ -267,11 +272,15 @@ public class FactoryModListener implements Listener
 				{
 					if (factoryMan.factoryExistsAt(clicked.getLocation()))
 					{
-						if(factoryMan.factoryWholeAt(clicked.getLocation()))
+						if(factoryMan.getFactory(clicked.getLocation()).getClass() == NetherFactory.class)
 						{
-							if(factoryMan.getFactory(clicked.getLocation()).getClass() == NetherFactory.class)
+							NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
+							if (FactoryModPlugin.REGENERATE_TELEPORT_BLOCK_ON_TELEPORT)
 							{
-								NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
+								netherFactory.regenerateTeleportBlock(clicked.getLocation());
+							}
+							if(factoryMan.factoryWholeAt(clicked.getLocation()))
+							{						
 								//toggle the recipe, and print the returned message.
 								InteractionResponse.messagePlayerResults(player, netherFactory.getTeleportationBlockResponse(player, clicked.getLocation()));
 								e.setCancelled(true);
@@ -286,11 +295,15 @@ public class FactoryModListener implements Listener
 				{
 					if (factoryMan.factoryExistsAt(clicked.getLocation()))
 					{
-						if(factoryMan.factoryWholeAt(clicked.getLocation()))
+						if(factoryMan.getFactory(clicked.getLocation()).getClass() == NetherFactory.class)
 						{
-							if(factoryMan.getFactory(clicked.getLocation()).getClass() == NetherFactory.class)
+							NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
+							if (FactoryModPlugin.REGENERATE_TELEPORT_BLOCK_ON_TELEPORT)
 							{
-								NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
+								netherFactory.regenerateTeleportBlock(clicked.getLocation());
+							}
+							if(factoryMan.factoryWholeAt(clicked.getLocation()))
+							{						
 								//toggle the recipe, and print the returned message.
 								InteractionResponse.messagePlayerResults(player, netherFactory.getTeleportationBlockResponse(player, clicked.getLocation()));
 								e.setCancelled(true);
@@ -361,7 +374,12 @@ public class FactoryModListener implements Listener
 					{
 						if (factoryMan.getFactory(scanBlock).getClass() == NetherFactory.class)
 						{
-							e.setCancelled(true);
+							NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(e.getBlock().getLocation());
+							if (!netherFactory.isBroken())
+							{
+								InteractionResponse.messagePlayerResult(e.getPlayer(), new InteractionResponse(InteractionResult.FAILURE, "You aren't allowed to reniforce blocks up to 3 blocks above a nether factory teleport platform!"));
+								e.setCancelled(true);
+							}
 						}
 					}
 				}
@@ -384,7 +402,12 @@ public class FactoryModListener implements Listener
 					{
 						if (factoryMan.getFactory(scanBlock).getClass() == NetherFactory.class)
 						{
-							e.setCancelled(true);
+							NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(e.getBlock().getLocation());
+							if (!netherFactory.isBroken())
+							{
+								InteractionResponse.messagePlayerResult(e.getPlayer(), new InteractionResponse(InteractionResult.FAILURE, "You aren't allowed to place blocks up to 3 blocks above a nether factory teleport platform!"));
+								e.setCancelled(true);
+							}
 						}
 					}
 				}
