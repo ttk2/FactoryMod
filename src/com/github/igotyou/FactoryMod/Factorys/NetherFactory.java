@@ -19,7 +19,9 @@ import com.github.igotyou.FactoryMod.utility.NamedItemStack;
 import com.untamedears.citadel.entity.PlayerReinforcement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 public class NetherFactory extends BaseFactory
 {
@@ -503,25 +505,26 @@ public class NetherFactory extends BaseFactory
 	
 	public int checkTicket(ItemStack ticket)
 	{
-		for (ItemStack itemSlot : getInventory().getContents())
+		int amount = 0;
+		for(ItemStack itemStack: getInventory().getContents())
 		{
-			if (itemSlot == null)
+			if (itemStack.isSimilar(ticket))
 			{
-				continue;
-			}
-			if (itemSlot.isSimilar(ticket))
-			{
-				if (itemSlot.getAmount() == 1)
-				{
-					return 1;
-				}
-				else if (itemSlot.getAmount() > 1)
-				{
-					return 2;
-				}
+				amount = amount+itemStack.getAmount();
 			}
 		}
-		return 0;
+		if (amount == 1)
+		{
+			return 1;
+		}
+		else if (amount >= 2)
+		{
+			return 2;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 	public void removeBlocksAboveTeleportPlatform(Location teleportPlatform)
