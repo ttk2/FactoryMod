@@ -508,6 +508,10 @@ public class NetherFactory extends BaseFactory
 		int amount = 0;
 		for(ItemStack itemStack: getInventory().getContents())
 		{
+			if (itemStack == null)
+			{
+				continue;
+			}
 			if (itemStack.isSimilar(ticket))
 			{
 				amount = amount+itemStack.getAmount();
