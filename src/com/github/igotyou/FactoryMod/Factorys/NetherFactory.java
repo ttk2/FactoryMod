@@ -163,7 +163,7 @@ public class NetherFactory extends BaseFactory
 	{
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
 		//does the player have acsess to the nether factory via ciatdel?
-		if ((!FactoryModPlugin.CITADEL_ENABLED || (FactoryModPlugin.CITADEL_ENABLED && !isReinforced(clickedBlock))) || 
+		if ((!FactoryModPlugin.CITADEL_ENABLED || (FactoryModPlugin.CITADEL_ENABLED && !isReinforced(factoryLocation))) || 
 				(((PlayerReinforcement) getReinforcement(factoryLocation)).isAccessible(player)))
 		{
 			if (mode == NetherOperationMode.TELEPORT)
