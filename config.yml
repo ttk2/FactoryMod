@@ -83,6 +83,7 @@ production_general:
   repair_period: 28
   disrepair_period: 14
 nether_general:
+  disable_portals: true
   nether_scale: 8
   world_name: world
   nether_name: world_nether

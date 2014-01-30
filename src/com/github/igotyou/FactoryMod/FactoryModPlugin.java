@@ -47,6 +47,7 @@ public class FactoryModPlugin extends JavaPlugin
 	public static final int TICKS_PER_SECOND = 20; //The number of ticks per second
 	public static final String PRINTING_PRESSES_SAVE_FILE = "pressSaves";
 	public static final String NETHER_FACTORY_SAVE_FILE = "netherSaves";
+	public static boolean DISABLE_PORTALS;
 	public static int NETHER_SCALE;
 	public static boolean ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM;
 	public static boolean ALLOW_BLOCK_PLACEMENT_ABOVE_TELEPORT_PLATFORM;
@@ -114,6 +115,8 @@ public class FactoryModPlugin extends JavaPlugin
 		config = getConfig();
 		//what should the nether scaling be for the nether factorys?
 		NETHER_SCALE = config.getInt("nether_general.nether_scale",8);
+		//Should we Disable regular portals?
+		DISABLE_PORTALS = config.getBoolean("nether_general.disable_portals", true);
 		//Allow reinforcement above nether factory teleport platforms.
 		ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM = config.getBoolean("nether_general.allow_reinforcement_creation_above_teleport_platform", false);
 		//Allow people to place blocks above nether factory teleport platforms.
