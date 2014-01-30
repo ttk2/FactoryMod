@@ -357,7 +357,14 @@ public class FactoryModListener implements Listener
 	{
 		if(FactoryModPlugin.DISABLE_PORTALS)
 		{
-			e.setCancelled(true);
+			if(e.getTo().getWorld().getEnvironment() == Environment.NETHER)
+			{
+				e.setCancelled(true);
+			}
+			if(e.getFrom().getWorld().getEnvironment() == Environment.NETHER)
+			{
+				e.setCancelled(true);
+			}
 		}
 	}
 			
