@@ -355,7 +355,17 @@ public class FactoryModListener implements Listener
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void playerPortalEvent(PlayerPortalEvent e)
 	{
-		e.setCancelled(true);
+		if(FactoryModPlugin.DISABLE_PORTALS)
+		{
+			if(e.getTo().getWorld().getEnvironment() == Environment.NETHER)
+			{
+				e.setCancelled(true);
+			}
+			if(e.getFrom().getWorld().getEnvironment() == Environment.NETHER)
+			{
+				e.setCancelled(true);
+			}
+		}
 	}
 			
 	@EventHandler
