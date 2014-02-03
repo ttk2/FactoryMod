@@ -62,6 +62,7 @@ public class FactoryModPlugin extends JavaPlugin
 	public static Material CENTRAL_BLOCK_MATERIAL;
 	public static Material NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL;
 	public static Material NETHER_FACTORY_MARKER_MATERIAL;
+	public static int NETHER_MARKER_MAX_DISTANCE;
 	public static boolean RETURN_BUILD_MATERIALS;
 	public static boolean CITADEL_ENABLED;
 	public static Material FACTORY_INTERACTION_MATERIAL;
@@ -139,6 +140,8 @@ public class FactoryModPlugin extends JavaPlugin
 		NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL = Material.getMaterial(config.getString("nether_general.teleport_platform_material_nether_factory"));
 		//what's the material of the marker blocks for nether factorys?
 		NETHER_FACTORY_MARKER_MATERIAL = Material.getMaterial(config.getString("nether_general.marker_material_nether_factory"));
+		//how far from the factory can the marker be?
+		NETHER_MARKER_MAX_DISTANCE = config.getInt("nether_general.marker_max_distance");
 		//Return the build materials upon destruction of factory.
 		RETURN_BUILD_MATERIALS = config.getBoolean("general.return_build_materials",false);
 		//is citadel enabled?

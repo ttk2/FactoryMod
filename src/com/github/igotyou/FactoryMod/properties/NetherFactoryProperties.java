@@ -20,10 +20,11 @@ public class NetherFactoryProperties
 	private double repairTime;
 	private int scalingMode;
 	private int scalingRadius;
+	private int costScalingRadius;
 	private boolean useFuelOnTeleport;
 	
 	public NetherFactoryProperties(ItemList<NamedItemStack> constructionMaterials,	ItemList<NamedItemStack> fuel, ItemList<NamedItemStack> repairMaterials,
-			int energyTime, String name,int repair, double repairTime, int scalingRadius, boolean useFuelOnTeleport)
+			int energyTime, String name,int repair, double repairTime, int scalingRadius, boolean useFuelOnTeleport, int costScalingRadius)
 	{
 		this.constructionMaterials = constructionMaterials;
 		this.fuel = fuel;
@@ -33,6 +34,7 @@ public class NetherFactoryProperties
 		this.repair=repair;
 		this.repairTime=repairTime;
 		this.scalingRadius = scalingRadius;
+		this.costScalingRadius = costScalingRadius;
 		this.useFuelOnTeleport = useFuelOnTeleport;
 	}
 
@@ -44,6 +46,11 @@ public class NetherFactoryProperties
 	public int getScalingRadius()
 	{
 		return scalingRadius;
+	}
+	
+	public int getCostScalingRadius()
+	{
+		return costScalingRadius;
 	}
 	
 	//0 == no scaling, 1==linear scaling, 2==exponential scaling
@@ -93,8 +100,9 @@ public class NetherFactoryProperties
 		String nfName = configNetherFactory.getString("name", "Nether Factory");
 		int repairTime = configNetherFactory.getInt("repair_time",12);
 		int nfScalingRadius = configNetherFactory.getInt("scaling_radius", 5000);
+		int costScalingRadius = configNetherFactory.getInt("scaling_radius", 5000);
 		boolean nfUseFuelOnTeleport = configNetherFactory.getBoolean("use_fuel_on_teleport", false);
-		return new NetherFactoryProperties(nfConstructionCost, nfFuel, nfRepairCost, nfEnergyTime, nfName, nfRepair, repairTime, nfScalingRadius,nfUseFuelOnTeleport);
+		return new NetherFactoryProperties(nfConstructionCost, nfFuel, nfRepairCost, nfEnergyTime, nfName, nfRepair, repairTime, nfScalingRadius,nfUseFuelOnTeleport, costScalingRadius);
 
 	}
 

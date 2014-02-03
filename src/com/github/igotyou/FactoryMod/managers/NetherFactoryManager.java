@@ -193,7 +193,7 @@ public class NetherFactoryManager implements Manager
 							boolean markerFound = false;
 							Location markerLocation = factoryLocation.clone();
 							int blockY = markerLocation.getBlockY();
-							for (int centerY = blockY+1; centerY <= blockY+20 && !markerFound; centerY++)
+							for (int centerY = blockY-plugin.NETHER_MARKER_MAX_DISTANCE; centerY <= blockY+plugin.NETHER_MARKER_MAX_DISTANCE && !markerFound; centerY++)
 							{
 								markerLocation.setY(centerY);
 								Location oneUp = markerLocation.clone();
@@ -392,7 +392,7 @@ public class NetherFactoryManager implements Manager
 					double distance = location.distance(factoryLoc);
 					if (distance <= properties.getScalingRadius())
 					{
-						scalingFactor = scalingFactor * Math.exp(1/(distance/5000));
+						scalingFactor = scalingFactor * Math.exp(1/(distance/properties.getCostScalingRadius()));
 					}
 				}
 			}
