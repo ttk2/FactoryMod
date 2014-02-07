@@ -89,7 +89,7 @@ nether_general:
   nether_name: world_nether
   teleport_platform_material_nether_factory: OBSIDIAN
   marker_material_nether_factory: COAL_BLOCK
-  marker_max_distance: 20
+  marker_max_distance: 64
   allow_reinforcement_creation_above_teleport_platform: false
   allow_block_placement_above_teleport_platform: true
   teleport_platform_invunerable: false
@@ -169,12 +169,24 @@ nether_factory:
       durability: 1
   costs:
     construction:
-      "Iron block":
-        material: 'IRON_BLOCK'
-        amount: 60
+      "Aspect of Nether":
+        material: 'MAGMA_CREAM'
+        amount: 8
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+      "Aspect of Terra":
+        material: 'DIAMOND'
+        amount: 8
+        display_name: Aspect of Terra
+        lore: A concentrated essence of the Terra
+      "Aspect of END":
+        material: 'FLINT'
+        amount: 8
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
     repair:
-       "Iron block":
-         material: 'IRON_BLOCK'
+       "Diamond block":
+         material: 'DIAMOND_BLOCK'
          amount: 1
     repair_multiple: 1    
   fuel_time: 10
@@ -1743,6 +1755,37 @@ production_factories:
         material: INK_SACK
         amount: 6
         durability: 4
+      Redstone:
+        material: REDSTONE
+        amount: 5
+      Netherquartz:
+        material: QUARTZ
+        amount: 2
+  Aspect_Factory:
+    name: Arcane Elementizer
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Netherbrick:
+        material: NETHER_BRICK
+        amount: 1536
+      Redstone:
+        material: REDSTONE
+        amount: 1152
+      Netherquartz:
+        material: QUARTZ
+        amount: 576
+    recipes:
+      - Forge_Aspect_of_Terra
+      - Forge_Aspect_of_End
+      - Forge_Aspect_of_Nether
+    repair_multiple: 26
+    repair_inputs:
+      Nether Brick:
+        material: NETHER_BRICK
+        amount: 6
       Redstone:
         material: REDSTONE
         amount: 5
@@ -3684,8 +3727,8 @@ production_recipes:
         amount: 512
     outputs:
       Nether bricks:
-        material: NETHER_BRICK_ITEM
-        amount: 1024
+        material: NETHER_BRICK
+        amount: 256
   Bake_clay_blocks:
     name: Bake Clay Blocks
     production_time: 32
@@ -5041,3 +5084,67 @@ production_recipes:
       Iron Horse Armor:
         material: IRON_BARDING
         amount: 1
+  Forge_Aspect_of_Terra:
+    name: Forge Aspect of Terra
+    production_time: 64
+    inputs:
+      Emerald Block:
+        material: EMERALD_BLOCK
+        amount: 24
+      Diamond Block:
+        material: DIAMOND_BLOCK
+        amount: 24
+      Gold Ore:
+        material: GOLD_ORE
+        amount: 8
+      Slime Ball:
+        material: SLIME_BALL
+        amount: 8
+      Anvil:
+        material: ANVIL
+        amount: 8
+    outputs:
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 1
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+  Forge_Aspect_of_End:
+    name: Forge Aspect of End
+    production_time: 64
+    inputs:
+      Ender Pearl:
+        material: ENDER_PEARL
+        amount: 256
+      Ender Chest:
+        material: ENDER_CHEST
+        amount: 256
+      Endstone:
+        material: ENDER_STONE
+        amount: 1024
+    outputs:
+      Aspect of End:
+        material: FLINT
+        amount: 1
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+  Forge_Aspect_of_Nether:
+    name: Forge Aspect of Nether
+    production_time: 64
+    inputs:
+      Ghast Tears:
+        material: GHAST_TEAR
+        amount: 16
+      Quartz Ore:
+        material: QUARTZ_ORE
+        amount: 512
+      Glowstone:
+        material: GLOWSTONE
+        amount: 512
+    outputs:
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 1
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+
