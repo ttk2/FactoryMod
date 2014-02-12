@@ -98,95 +98,95 @@ nether_general:
 printing_presses:
   fuel:
     Charcoal:
-      material: 'COAL'
+      material: COAL
       durability: 1
   costs:
      construction:
-        "Iron block":
-           material: 'IRON_BLOCK'
+        Iron block:
+           material: IRON_BLOCK
            amount: 60
-        "Redstone":
+        Redstone:
            material: REDSTONE
            amount: 256
-        "Quartz":
+        Quartz:
            material: QUARTZ
            amount: 64
-        "Piston":
+        Piston:
            material: PISTON_BASE
            amount: 20
-        "Gold plate":
+        Gold plate:
            material: GOLD_PLATE
            amount: 20
      plates:
-        "Iron ingot":
-           material: 'IRON_INGOT'
+        Iron ingot:
+           material: IRON_INGOT
            amount: 4
-        "Gold nugget":
-           material: "GOLD_NUGGET"
+        Gold nugget:
+           material: GOLD_NUGGET
            amount: 1
      repair:
-        "Iron block":
-           material: 'IRON_BLOCK'
+        Iron block:
+           material: IRON_BLOCK
            amount: 1
      repair_multiple: 5
      binding: # Each
         Leather:
-           material: 'LEATHER'
+           material: LEATHER
            amount: 1
      page_lot:
         Paper:
-           material: 'PAPER'
+           material: PAPER
            amount: 16
         Ink:
-           material: 'INK_SACK'
+           material: INK_SACK
            durability: 0
            amount: 2
      pages_per_lot: 24
      pamphlet_lot:
         Paper:
-           material: 'PAPER'
+           material: PAPER
            amount: 16
         Ink:
-           material: 'INK_SACK'
+           material: INK_SACK
            durability: 0
            amount: 2
      pamphlets_per_lot: 24
      security_lot:
-        "Gold nuggets":
-           material: 'GOLD_NUGGET'
+        Gold nuggets:
+           material: GOLD_NUGGET
            amount: 1
-        "Cactus green":
-           material: 'INK_SACK'
+        Cactus green:
+           material: INK_SACK
            durability: 2
            amount: 6
      security_notes_per_lot: 24
 
 nether_factory:
-  name: 'Nether Factory'
+  name: Nether Factory
   fuel:
     Charcoal:
-      material: 'COAL'
+      material: COAL
       durability: 1
   costs:
     construction:
-      "Aspect of Nether":
-        material: 'MAGMA_CREAM'
+      Aspect of Nether:
+        material: MAGMA_CREAM
         amount: 8
         display_name: Aspect of Nether
         lore: A concentrated essence of the Nether
-      "Aspect of Terra":
-        material: 'DIAMOND'
+      Aspect of Terra:
+        material: DIAMOND
         amount: 8
         display_name: Aspect of Terra
-        lore: A concentrated essence of the Terra
-      "Aspect of END":
-        material: 'FLINT'
+        lore: A concentrated essence of Terra
+      Aspect of END:
+        material: FLINT
         amount: 8
         display_name: Aspect of End
         lore: A concentrated essence of the End
     repair:
-       "Diamond block":
-         material: 'DIAMOND_BLOCK'
+       Diamond block:
+         material: DIAMOND_BLOCK
          amount: 1
     repair_multiple: 1    
   fuel_time: 10
@@ -254,9 +254,9 @@ production_factories:
         material: BREAD
         amount: 256
     recipes:
-      - Baked_Potato
-      - Cookie
-      - Bread
+      - Bake_Potato
+      - Bake_Cookie
+      - Bake_Bread
     repair_multiple: 26
     repair_inputs:
       Baked Potato:
@@ -563,11 +563,11 @@ production_factories:
         amount: 600
         durability: 1
     recipes:
-      - Smelt_Oak_Wood
-      - Smelt_Spruce_Wood
-      - Smelt_Birch_Wood
-      - Smelt_Jungle_Wood
-      - Smelt_Coal
+      - Burn_Oak_Wood
+      - Burn_Spruce_Wood
+      - Burn_Birch_Wood
+      - Burn_Jungle_Wood
+      - Burn_Coal
     repair_multiple: 60
     repair_inputs:
       Charcoal:
@@ -1098,7 +1098,7 @@ production_factories:
         material: WOOL
         durability: 7
   Grill:
-    name: Bakery
+    name: Grill
     fuel:
       Charcoal:
         material: COAL
@@ -1117,10 +1117,10 @@ production_factories:
         material: COOKED_BEEF
         amount: 64
     recipes:
-      - Cooked_Chicken
-      - Cooked_Fish
-      - Grilled_Pork
-      - Cooked_Beef
+      - Cook_Chicken
+      - Cook_Fish
+      - Grill_Pork
+      - Cook_Beef
     repair_multiple: 2
     repair_inputs:
       Cooked Chicken:
@@ -1649,7 +1649,7 @@ production_factories:
        amount: 1
        durability: 0
   Basic_Redstone_Factory:
-    name: Basic Redstone Mechanism Factory
+    name: Redstone Mechanism Factory
     fuel:
       Charcoal:
         material: COAL
@@ -1729,7 +1729,7 @@ production_factories:
         material: SLIME_BALL
         amount: 1
   Fancy_Ore_Smelter:
-    name: Fancy Ore Smelter
+    name: Precious Ore Refinery
     fuel:
       Charcoal:
         material: COAL
@@ -1746,9 +1746,9 @@ production_factories:
         material: QUARTZ
         amount: 576
     recipes:
-      - Smelt_Lapis_Lazuli_Ore
-      - Smelt_Redstone_Ore
-      - Smelt_Netherquartz_Ore
+      - Refine_Lapis_Lazuli_Ore
+      - Refine_Redstone_Ore
+      - Refine_Netherquartz_Ore
     repair_multiple: 26
     repair_inputs:
       Lapis Lazuli:
@@ -1815,7 +1815,7 @@ production_factories:
       - Smelt_Coal_Ore
       - Smelt_Iron_Ore
       - Smelt_Gold_Ore
-      - Smelt_Diamond_Ore
+      - Refine_Diamond_Ore
     repair_multiple: 10
     repair_inputs:
       Coal:
@@ -1830,7 +1830,7 @@ production_factories:
       Diamond:
         material: DIAMOND
   Stone_Brick_Smelter:
-    name: Fancy Stone Brick Smelter
+    name: Fancy Brick Sculptor
     fuel:
       Charcoal:
         material: COAL
@@ -1844,9 +1844,9 @@ production_factories:
         amount: 256
         durability: 4
     recipes:
-      - Smelt_Cracked_Stone_Brick
-      - Smelt_Mossy_Stone_Brick
-      - Smelt_Chiseled_Stone_Brick
+      - Carve_Cracked_Stone_Brick
+      - Craft_Mossy_Stone_Brick
+      - Carve_Chiseled_Stone_Brick
     repair_multiple: 26
     repair_inputs:
       Stone Brick:
@@ -2046,7 +2046,7 @@ production_recipes:
       Exp Bottle:
         material: EXP_BOTTLE
         amount: 24
-  Baked_Potato:
+  Bake_Potato:
     name: Bake Potato
     production_time: 24
     inputs:
@@ -2150,8 +2150,8 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 7
-  Smelt_Diamond_Ore:
-    name: Smelt Diamond Ore
+  Refine_Diamond_Ore:
+    name: Refine Diamond Ore
     production_time: 1
     inputs:
       Diamond Ore:
@@ -2214,7 +2214,7 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 1
-  Smelt_Jungle_Wood:
+  Burn_Jungle_Wood:
     name: Burn Jungle Wood
     production_time: 24
     inputs:
@@ -2228,7 +2228,7 @@ production_recipes:
         amount: 512
         durability: 1
   Diamond_Boots:
-    name: Forge Diamond Boots.
+    name: Forge Diamond Boots
     production_time: 20
     inputs:
       Diamond:
@@ -2270,7 +2270,7 @@ production_recipes:
         amount: 64
         durability: 12
   Iron_Boots:
-    name: Forge Iron Boots.
+    name: Forge Iron Boots
     production_time: 20
     inputs:
       Iron Ingot:
@@ -2297,7 +2297,7 @@ production_recipes:
         amount: 64
         durability: 12
   Gold_Spade:
-    name: Forge Gold Spade.
+    name: Forge Gold Spade
     production_time: 5
     inputs:
       Gold Ingot:
@@ -2383,7 +2383,7 @@ production_recipes:
         amount: 64
         durability: 9
   Diamond_Hoe:
-    name: Forge Diamond Hoe.
+    name: Forge Diamond Hoe
     production_time: 10
     inputs:
       Diamond:
@@ -2394,7 +2394,7 @@ production_recipes:
         material: DIAMOND_HOE
         amount: 30
   Gold_Chestplate:
-    name: Forge Gold Chestplate.
+    name: Forge Gold Chestplate
     production_time: 40
     inputs:
       Gold Ingot:
@@ -2644,7 +2644,7 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 12
-  Smelt_Spruce_Wood:
+  Burn_Spruce_Wood:
     name: Burn Spruce Wood
     production_time: 24
     inputs:
@@ -2793,7 +2793,7 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 5
-  Smelt_Birch_Wood:
+  Burn_Birch_Wood:
     name: Burn Birch Wood
     production_time: 24
     inputs:
@@ -2807,7 +2807,7 @@ production_recipes:
         amount: 512
         durability: 1
   Diamond_Sword:
-    name: Forge Diamond Sword.
+    name: Forge Diamond Sword
     production_time: 10
     inputs:
       Diamond:
@@ -2866,7 +2866,7 @@ production_recipes:
         amount: 64
         durability: 2
   Iron_Helmet:
-    name: Forge Iron Helmet.
+    name: Forge Iron Helmet
     production_time: 25
     inputs:
       Iron Ingot:
@@ -2892,8 +2892,8 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 9
-  Cooked_Chicken:
-    name: Grill Raw Chicken
+  Cook_Chicken:
+    name: Cook Raw Chicken
     production_time: 6
     inputs:
       Raw Chicken:
@@ -3028,7 +3028,7 @@ production_recipes:
         amount: 64
         durability: 11
   Gold_Pickaxe:
-    name: Forge Gold Pickaxe.
+    name: Forge Gold Pickaxe
     production_time: 15
     inputs:
       Gold Ingot:
@@ -3145,8 +3145,8 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 1
-  Cooked_Beef:
-    name: Grill Raw Beef
+  Cook_Beef:
+    name: Cook Raw Beef
     production_time: 6
     inputs:
       Raw Beef:
@@ -3185,7 +3185,7 @@ production_recipes:
         material: EXP_BOTTLE
         amount: 8
   Iron_Chestplate:
-    name: Forge Iron Chestplate.
+    name: Forge Iron Chestplate
     production_time: 40
     inputs:
       Iron Ingot:
@@ -3212,7 +3212,7 @@ production_recipes:
         amount: 64
         durability: 14
   Gold_Leggings:
-    name: Forge Gold Leggings.
+    name: Forge Gold Leggings
     production_time: 35
     inputs:
       Gold Ingot:
@@ -3307,7 +3307,7 @@ production_recipes:
         amount: 64
         durability: 13
   Diamond_Chestplate:
-    name: Forge Diamond Chestplate.
+    name: Forge Diamond Chestplate
     production_time: 40
     inputs:
       Diamond:
@@ -3350,7 +3350,7 @@ production_recipes:
         amount: 64
         durability: 8
   Iron_Leggings:
-    name: Forge Iron Leggings.
+    name: Forge Iron Leggings
     production_time: 35
     inputs:
       Iron Ingot:
@@ -3490,7 +3490,7 @@ production_recipes:
         amount: 64
         durability: 7
   Iron_Spade:
-    name: Forge Iron Spade.
+    name: Forge Iron Spade
     production_time: 5
     inputs:
       Iron Ingot:
@@ -3626,7 +3626,7 @@ production_recipes:
         amount: 64
         durability: 14
   Iron_Axe:
-    name: Forge Iron Axe.
+    name: Forge Iron Axe
     production_time: 15
     inputs:
       Iron Ingot:
@@ -3637,7 +3637,7 @@ production_recipes:
         material: IRON_AXE
         amount: 30
   Cookie:
-    name: Bake Cocoa
+    name: Bake Cookies
     production_time: 24
     inputs:
       Wheat:
@@ -3697,7 +3697,7 @@ production_recipes:
         material: WOOL
         amount: 64
   Bread:
-    name: Bake Wheat
+    name: Bake Bread
     production_time: 24
     inputs:
       Wheat:
@@ -3773,8 +3773,8 @@ production_recipes:
       Sandstone:
         material: SANDSTONE
         amount: 384
-  Smelt_Lapis_Lazuli_Ore:
-    name: Smelt Lapis Lazuli Ore
+  Refine_Lapis_Lazuli_Ore:
+    name: Refine Lapis Lazuli Ore
     production_time: 6
     inputs:
       Lapis Ore:
@@ -3785,8 +3785,8 @@ production_recipes:
         material: INK_SACK
         amount: 512
         durability: 4
-  Smelt_Redstone_Ore:
-    name: Smelt Redstone Ore
+  Refine_Redstone_Ore:
+    name: Refine Redstone Ore
     production_time: 16
     inputs:
       Redstone Ore:
@@ -3796,8 +3796,8 @@ production_recipes:
       Redstone:
         material: REDSTONE
         amount: 1024
-  Smelt_Netherquartz_Ore:
-    name: Smelt Netherquartz ore
+  Refine_Netherquartz_Ore:
+    name: Refine Netherquartz ore
     production_time: 6
     inputs:
       Netherquartz ore:
@@ -3824,7 +3824,7 @@ production_recipes:
         amount: 64
         durability: 7
   Diamond_Helmet:
-    name: Forge Diamond Helmet.
+    name: Forge Diamond Helmet
     production_time: 25
     inputs:
       Diamond:
@@ -4019,7 +4019,7 @@ production_recipes:
         amount: 64
         durability: 12
   Iron_Pickaxe:
-    name: Forge Iron Pickaxe.
+    name: Forge Iron Pickaxe
     production_time: 15
     inputs:
       Iron Ingot:
@@ -4061,8 +4061,8 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 1
-  Smelt_Cracked_Stone_Brick:
-    name: Smelt Cracked Stone Brick
+  Carve_Cracked_Stone_Brick:
+    name: Carve Cracked Stone Brick
     production_time: 64
     inputs:
       Stone Brick:
@@ -4157,7 +4157,7 @@ production_recipes:
         material: EXP_BOTTLE
         amount: 42
   Diamond_Leggings:
-    name: Forge Diamond Leggings.
+    name: Forge Diamond Leggings
     production_time: 35
     inputs:
       Diamond:
@@ -4200,7 +4200,7 @@ production_recipes:
         amount: 64
         durability: 8
   Iron_Sword:
-    name: Forge Iron Sword.
+    name: Forge Iron Sword
     production_time: 10
     inputs:
       Iron Ingot:
@@ -4275,7 +4275,7 @@ production_recipes:
         amount: 64
         durability: 3
   Gold_Hoe:
-    name: Forge Gold Hoe.
+    name: Forge Gold Hoe
     production_time: 10
     inputs:
       Gold Ingot:
@@ -4290,7 +4290,7 @@ production_recipes:
         type: DURABILITY
         level: 3
   Gold_Sword:
-    name: Forge Gold Sword.
+    name: Forge Gold Sword
     production_time: 10
     inputs:
       Gold Ingot:
@@ -4356,8 +4356,8 @@ production_recipes:
         type: LOOT_BONUS_MOBS
         level: 3
         probability: 0.3
-  Smelt_Chiseled_Stone_Brick:
-    name: Smelt Chiseled Stone Brick
+  Carve_Chiseled_Stone_Brick:
+    name: Carve Chiseled Stone Brick
     production_time: 64
     inputs:
       Stone Brick:
@@ -4376,7 +4376,7 @@ production_recipes:
         amount: 64
         durability: 3
   Diamond_Pickaxe:
-    name: Forge Diamond Pickaxe.
+    name: Forge Diamond Pickaxe
     production_time: 15
     inputs:
       Diamond:
@@ -4386,8 +4386,8 @@ production_recipes:
       Diamond Pickaxe:
         material: DIAMOND_PICKAXE
         amount: 15
-  Smelt_Mossy_Stone_Brick:
-    name: Smelt Mossy Stone Brick
+  Craft_Mossy_Stone_Brick:
+    name: Craft Mossy Stone Brick
     production_time: 64
     inputs:
       Stone Brick:
@@ -4421,7 +4421,7 @@ production_recipes:
         amount: 64
         durability: 2
   Iron_Hoe:
-    name: Forge Iron Hoe.
+    name: Forge Iron Hoe
     production_time: 10
     inputs:
       Iron Ingot:
@@ -4521,7 +4521,7 @@ production_recipes:
         amount: 512
         durability: 1
   Gold_Axe:
-    name: Forge Gold Axe.
+    name: Forge Gold Axe
     production_time: 15
     inputs:
       Gold Ingot:
@@ -4611,8 +4611,8 @@ production_recipes:
         type: LOOT_BONUS_MOBS
         level: 3
         probability: 0.3
-  Cooked_Fish:
-    name: Grill Raw Fish
+  Cook_Fish:
+    name: Cook Raw Fish
     production_time: 6
     inputs:
       Raw Fish:
@@ -4638,7 +4638,7 @@ production_recipes:
         amount: 64
         durability: 15
   Diamond_Spade:
-    name: Forge Diamond Spade.
+    name: Forge Diamond Spade
     production_time: 5
     inputs:
       Diamond:
@@ -4692,7 +4692,7 @@ production_recipes:
         material: POWERED_RAIL
         amount: 102
   Gold_Helmet:
-    name: Forge Gold Helmet.
+    name: Forge Gold Helmet
     production_time: 25
     inputs:
       Gold Ingot:
@@ -4799,7 +4799,7 @@ production_recipes:
         amount: 64
         durability: 5
   Gold_Boots:
-    name: Forge Gold Boots.
+    name: Forge Gold Boots
     production_time: 20
     inputs:
       Gold Ingot:
@@ -4969,7 +4969,7 @@ production_recipes:
       Stone:
         material: STONE
         amount: 854
-  Grilled_Pork:
+  Grill_Pork:
     name: Grill Pork
     production_time: 6
     inputs:
@@ -5012,7 +5012,7 @@ production_recipes:
         material: WOOL
         amount: 64
   Diamond_Axe:
-    name: Forge Diamond Axe.
+    name: Forge Diamond Axe
     production_time: 15
     inputs:
       Diamond:
@@ -5022,7 +5022,7 @@ production_recipes:
       Diamond Axe:
         material: DIAMOND_AXE
         amount: 30
-  Smelt_Oak_Wood:
+  Burn_Oak_Wood:
     name: Burn Oak Wood
     production_time: 24
     inputs:
