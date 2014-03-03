@@ -220,7 +220,7 @@ public class ProductionManager implements Manager
 						return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + production.getProductionFactoryProperties().getName());
 					}
 				}
-				return new InteractionResponse(InteractionResult.FAILURE, "Incorrect materials in chest! Stacks must match perfectly.");
+				return new InteractionResponse(InteractionResult.FAILURE, "No factory was identified!");
 			}
 			return new InteractionResponse(InteractionResult.FAILURE, "There is already a factory there!");
 		}

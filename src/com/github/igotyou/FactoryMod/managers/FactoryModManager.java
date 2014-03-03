@@ -323,7 +323,7 @@ public class FactoryModManager
 
 	public InteractionResponse createFactory(Location centralLocation,
 			Location inventoryLocation, Location powerLocation) {
-		InteractionResponse response = null;
+		InteractionResponse response;
 		for (Manager manager : managers)
 		{
 			response = manager.createFactory(centralLocation, inventoryLocation, powerLocation);
@@ -332,6 +332,6 @@ public class FactoryModManager
 				return response;
 			}
 		}
-		return response;
+		return new InteractionResponse(InteractionResult.FAILURE, "No factory was identified!");
 	}
 }

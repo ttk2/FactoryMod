@@ -173,123 +173,127 @@ public class NetherFactoryManager implements Manager
 	public InteractionResponse createFactory(Location factoryLocation, Location inventoryLocation, Location powerSourceLocation) 
 	{
 		NetherFactoryProperties netherFactoryProperties = plugin.getNetherFactoryProperties();
-		if (factoryLocation.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.WORLD_NAME))
+		Block inventoryBlock = inventoryLocation.getBlock();
+		Chest chest = (Chest) inventoryBlock.getState();
+		Inventory chestInventory = chest.getInventory();
+		ItemList<NamedItemStack> constructionMaterials = netherFactoryProperties.getConstructionMaterials();
+		if(constructionMaterials.oneIn(chestInventory))
 		{
-			if (factoryLocation.getBlock().getType().equals(FactoryModPlugin.CENTRAL_BLOCK_MATERIAL))
+			if (factoryLocation.getWorld().getName().equalsIgnoreCase(FactoryModPlugin.WORLD_NAME))
 			{
-				if (!factoryExistsAt(factoryLocation))
+				if (factoryLocation.getBlock().getType().equals(FactoryModPlugin.CENTRAL_BLOCK_MATERIAL))
 				{
-					Block inventoryBlock = inventoryLocation.getBlock();
-					Chest chest = (Chest) inventoryBlock.getState();
-					Inventory chestInventory = chest.getInventory();
-					double scalingFactor = getScalingFactor(factoryLocation);
-					if (scalingFactor < 10000)
+					if (!factoryExistsAt(factoryLocation))
 					{
-						ItemList<NamedItemStack> constructionMaterials = netherFactoryProperties.getConstructionMaterials();
-						constructionMaterials = constructionMaterials.getMultiple(scalingFactor);
-						boolean hasMaterials = constructionMaterials.allIn(chestInventory);
-						if (hasMaterials)
+						double scalingFactor = getScalingFactor(factoryLocation);
+						if (scalingFactor < 10000)
 						{
-							boolean markerFound = false;
-							Location markerLocation = factoryLocation.clone();
-							int blockY = markerLocation.getBlockY();
-							for (int centerY = blockY-plugin.NETHER_MARKER_MAX_DISTANCE; centerY <= blockY+plugin.NETHER_MARKER_MAX_DISTANCE && !markerFound; centerY++)
+							constructionMaterials = constructionMaterials.getMultiple(scalingFactor);
+							boolean hasMaterials = constructionMaterials.allIn(chestInventory);
+							if (hasMaterials)
 							{
-								markerLocation.setY(centerY);
-								Location oneUp = markerLocation.clone();
-								oneUp.setY(centerY+1);
-								if (markerLocation.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_MARKER_MATERIAL && oneUp.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+								boolean markerFound = false;
+								Location markerLocation = factoryLocation.clone();
+								int blockY = markerLocation.getBlockY();
+								for (int centerY = blockY-plugin.NETHER_MARKER_MAX_DISTANCE; centerY <= blockY+plugin.NETHER_MARKER_MAX_DISTANCE && !markerFound; centerY++)
 								{
-									markerFound = true;
-								}
-							}
-							if (markerFound)
-							{
-								int nether_scale = FactoryModPlugin.NETHER_SCALE;
-								boolean locationOk = false;
-								int startX = Math.round(factoryLocation.getBlockX()/nether_scale);
-								int startY = factoryLocation.getBlockY();
-								int startZ = Math.round(factoryLocation.getBlockZ()/nether_scale);
-								Location netherLocation = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY,startZ);
-								Location netherLocation1 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+1,startZ);
-								Location netherLocation2 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+2,startZ);
-								Location netherLocation3 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+3,startZ);				
-								if (FactoryModPlugin.CITADEL_ENABLED && (isReinforced(netherLocation) || isReinforced(netherLocation1) || isReinforced(netherLocation2) || isReinforced(netherLocation3)))
-								{
-									for(int scanX = startX-1; scanX <= startX+1 && !locationOk; scanX++)
+									markerLocation.setY(centerY);
+									Location oneUp = markerLocation.clone();
+									oneUp.setY(centerY+1);
+									if (markerLocation.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_MARKER_MATERIAL && oneUp.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
 									{
-										
-										for(int scanZ = startZ-1; scanZ <= startZ+1 && !locationOk; scanZ++)
+										markerFound = true;
+									}
+								}
+								if (markerFound)
+								{
+									int nether_scale = FactoryModPlugin.NETHER_SCALE;
+									boolean locationOk = false;
+									int startX = Math.round(factoryLocation.getBlockX()/nether_scale);
+									int startY = factoryLocation.getBlockY();
+									int startZ = Math.round(factoryLocation.getBlockZ()/nether_scale);
+									Location netherLocation = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY,startZ);
+									Location netherLocation1 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+1,startZ);
+									Location netherLocation2 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+2,startZ);
+									Location netherLocation3 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+3,startZ);				
+									if (FactoryModPlugin.CITADEL_ENABLED && (isReinforced(netherLocation) || isReinforced(netherLocation1) || isReinforced(netherLocation2) || isReinforced(netherLocation3)))
+									{
+										for(int scanX = startX-1; scanX <= startX+1 && !locationOk; scanX++)
 										{
-											for(int scanY = startY; scanY <= 250 && !locationOk; scanY++)
+											
+											for(int scanZ = startZ-1; scanZ <= startZ+1 && !locationOk; scanZ++)
 											{
-												netherLocation = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY,scanZ);
-												netherLocation1 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+1,scanZ);
-												netherLocation2 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+2,scanZ);
-												netherLocation3 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+3,scanZ);
-												if(!isReinforced(netherLocation) && !isReinforced(netherLocation1) && !isReinforced(netherLocation2) && !isReinforced(netherLocation3))
+												for(int scanY = startY; scanY <= 250 && !locationOk; scanY++)
 												{
-													locationOk = true;
-													
+													netherLocation = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY,scanZ);
+													netherLocation1 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+1,scanZ);
+													netherLocation2 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+2,scanZ);
+													netherLocation3 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+3,scanZ);
+													if(!isReinforced(netherLocation) && !isReinforced(netherLocation1) && !isReinforced(netherLocation2) && !isReinforced(netherLocation3))
+													{
+														locationOk = true;
+														
+													}
 												}
 											}
 										}
 									}
-								}
-								if (!factoryExistsAt(netherLocation))
-								{
-									netherLocation.getBlock().setType(FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL);
-									netherLocation.getBlock().getState().update(true);
-									netherLocation1.getBlock().setType(Material.AIR);
-									netherLocation1.getBlock().getState().update(true);
-									netherLocation2.getBlock().setType(Material.AIR);
-									netherLocation2.getBlock().getState().update(true);
-									netherLocation3.getBlock().setType(Material.AIR);
-									netherLocation3.getBlock().getState().update(true);
-									if(netherLocation.getBlock().getType() != (FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL) && 
-											netherLocation1.getBlock().getType() != Material.AIR &&
-											netherLocation2.getBlock().getType() != Material.AIR &&
-											netherLocation3.getBlock().getType() != Material.AIR)
+									if (!factoryExistsAt(netherLocation))
 									{
-										return new InteractionResponse(InteractionResult.FAILURE, "For some reason the nether side obsidian block did not generate...blame bukkit");
+										netherLocation.getBlock().setType(FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL);
+										netherLocation.getBlock().getState().update(true);
+										netherLocation1.getBlock().setType(Material.AIR);
+										netherLocation1.getBlock().getState().update(true);
+										netherLocation2.getBlock().setType(Material.AIR);
+										netherLocation2.getBlock().getState().update(true);
+										netherLocation3.getBlock().setType(Material.AIR);
+										netherLocation3.getBlock().getState().update(true);
+										if(netherLocation.getBlock().getType() != (FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL) && 
+												netherLocation1.getBlock().getType() != Material.AIR &&
+												netherLocation2.getBlock().getType() != Material.AIR &&
+												netherLocation3.getBlock().getType() != Material.AIR)
+										{
+											return new InteractionResponse(InteractionResult.FAILURE, "For some reason the nether side obsidian block did not generate...blame bukkit");
+										}
+										Location oneUp = markerLocation.clone();
+										oneUp.add(0,1,0);
+										NetherFactory netherFactory = new NetherFactory(factoryLocation, inventoryLocation, powerSourceLocation, netherLocation, oneUp, plugin.getNetherFactoryProperties(), this);
+										if (constructionMaterials.removeFrom(netherFactory.getInventory()))
+										{
+											addFactory(netherFactory);
+											return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + netherFactoryProperties.getName());
+										}
 									}
-									Location oneUp = markerLocation.clone();
-									oneUp.add(0,1,0);
-									NetherFactory netherFactory = new NetherFactory(factoryLocation, inventoryLocation, powerSourceLocation, netherLocation, oneUp, plugin.getNetherFactoryProperties(), this);
-									if (constructionMaterials.removeFrom(netherFactory.getInventory()))
+									else
 									{
-										addFactory(netherFactory);
-										return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + netherFactoryProperties.getName());
+										return new InteractionResponse(InteractionResult.FAILURE, "There is a other " + netherFactoryProperties.getName() + " too close.");
 									}
 								}
 								else
 								{
-									return new InteractionResponse(InteractionResult.FAILURE, "There is a other " + netherFactoryProperties.getName() + " too close.");
+									return new InteractionResponse(InteractionResult.FAILURE, "No marker found. Place a " + FactoryModPlugin.NETHER_FACTORY_MARKER_MATERIAL + " 1-20 blocks above the center block of the nether factory with a " + FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL + " right above.");
 								}
 							}
-							else
-							{
-								return new InteractionResponse(InteractionResult.FAILURE, "No marker found. Place a " + FactoryModPlugin.NETHER_FACTORY_MARKER_MATERIAL + " 1-20 blocks above the center block of the nether factory with a " + FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL + " right above.");
-							}
+							return new InteractionResponse(InteractionResult.FAILURE, "Not enough materials in chest! You need " + constructionMaterials.toString());
 						}
-						return new InteractionResponse(InteractionResult.FAILURE, "Not enough materials in chest! You need " + constructionMaterials.toString());
+						else
+						{
+							return new InteractionResponse(InteractionResult.FAILURE, "Factory is too close to a other nether factory!");
+						}
 					}
-					else
-					{
-						return new InteractionResponse(InteractionResult.FAILURE, "Factory is too close to a other nether factory!");
-					}
+					return new InteractionResponse(InteractionResult.FAILURE, "There is already a " + netherFactoryProperties.getName() + " there!");
 				}
-				return new InteractionResponse(InteractionResult.FAILURE, "There is already a " + netherFactoryProperties.getName() + " there!");
+				else
+				{
+					return new InteractionResponse(InteractionResult.FAILURE, "Wrong center block!");
+				}
 			}
 			else
 			{
-				return new InteractionResponse(InteractionResult.FAILURE, "Wrong center block!");
+				return new InteractionResponse(InteractionResult.FAILURE, netherFactoryProperties.getName() + "'s can only be built in the overworld");
 			}
 		}
-		else
-		{
-			return new InteractionResponse(InteractionResult.FAILURE, netherFactoryProperties.getName() + "'s can only be built in the overworld");
-		}
+		return new InteractionResponse(InteractionResult.FAILURE, "No factory was identified!");
 	}
 
 	public InteractionResponse addFactory(Factory factory) 

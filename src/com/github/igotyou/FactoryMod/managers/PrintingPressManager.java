@@ -180,34 +180,37 @@ public class PrintingPressManager implements Manager
 
 	public InteractionResponse createFactory(Location factoryLocation, Location inventoryLocation, Location powerSourceLocation) 
 	{
-	PrintingPressProperties printingPressProperties = plugin.getPrintingPressProperties();
-		
-		if (factoryLocation.getBlock().getType().equals(FactoryModPlugin.CENTRAL_BLOCK_MATERIAL))
+		PrintingPressProperties printingPressProperties = plugin.getPrintingPressProperties();
+		Block inventoryBlock = inventoryLocation.getBlock();
+		Chest chest = (Chest) inventoryBlock.getState();
+		Inventory chestInventory = chest.getInventory();
+		ItemList<NamedItemStack> inputs = printingPressProperties.getConstructionMaterials();
+		if(inputs.oneIn(chestInventory))
 		{
-			if (!factoryExistsAt(factoryLocation))
+			if (factoryLocation.getBlock().getType().equals(FactoryModPlugin.CENTRAL_BLOCK_MATERIAL))
 			{
-				Block inventoryBlock = inventoryLocation.getBlock();
-				Chest chest = (Chest) inventoryBlock.getState();
-				Inventory chestInventory = chest.getInventory();
-				ItemList<NamedItemStack> inputs = printingPressProperties.getConstructionMaterials();
-				boolean hasMaterials = inputs.allIn(chestInventory);
-				if (hasMaterials)
+				if (!factoryExistsAt(factoryLocation))
 				{
-					PrintingPress production = new PrintingPress(factoryLocation, inventoryLocation, powerSourceLocation, false, plugin.getPrintingPressProperties());
-					if (printingPressProperties.getConstructionMaterials().removeFrom(production.getInventory()))
+					boolean hasMaterials = inputs.allIn(chestInventory);
+					if (hasMaterials)
 					{
-						addFactory(production);
-						return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + printingPressProperties.getName());
+						PrintingPress production = new PrintingPress(factoryLocation, inventoryLocation, powerSourceLocation, false, plugin.getPrintingPressProperties());
+						if (printingPressProperties.getConstructionMaterials().removeFrom(production.getInventory()))
+						{
+							addFactory(production);
+							return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + printingPressProperties.getName());
+						}
 					}
+					return new InteractionResponse(InteractionResult.FAILURE, "Not enough materials in chest!");
 				}
-				return new InteractionResponse(InteractionResult.FAILURE, "Not enough materials in chest!");
+				return new InteractionResponse(InteractionResult.FAILURE, "There is already a " + printingPressProperties.getName() + " there!");
 			}
-			return new InteractionResponse(InteractionResult.FAILURE, "There is already a " + printingPressProperties.getName() + " there!");
+			else
+			{
+				return new InteractionResponse(InteractionResult.FAILURE, "Wrong center block!");	
+			}
 		}
-		else
-		{
-			return new InteractionResponse(InteractionResult.FAILURE, "Wrong center block!");	
-		}
+		return new InteractionResponse(InteractionResult.FAILURE, "No factory was identified!");
 	}
 
 	public InteractionResponse addFactory(Factory factory) 
