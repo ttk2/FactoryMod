@@ -2297,10 +2297,14 @@ production_factories:
     inputs:
       Obsidian:
         material: OBSIDIAN
-        amount: 3328
+        amount: 640
       Sticky_piston:
         material: STICKY_PISTON
         amount: 128
+      Villager_egg:
+        material: MONSTER_EGG
+        durability: 120
+        amount: 64
     recipes:
       - Produce_Bastions
     repair_multiple: 32
@@ -2310,6 +2314,10 @@ production_factories:
         amount: 8
       Sticky_piston:
         material: STICKY_PISTON
+        amount: 1
+      Villager_egg:
+        material: MONSTER_EGG
+        durability: 120
         amount: 1
 production_recipes:
   Wood_XP_Bottle_0:
