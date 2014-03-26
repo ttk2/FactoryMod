@@ -2288,6 +2288,37 @@ production_factories:
     repair_inputs:
       Stick:
         material: STICK
+  Bastion_Factory:
+    name: Bastion Factory
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Obsidian:
+        material: OBSIDIAN
+        amount: 640
+      Sticky_piston:
+        material: STICKY_PISTON
+        amount: 128
+      Villager_egg:
+        material: MONSTER_EGG
+        durability: 120
+        amount: 64
+    recipes:
+      - Produce_Bastions
+    repair_multiple: 32
+    repair_inputs:
+      Emerald_block:
+        material: EMERALD_BLOCK
+        amount: 8
+      Sticky_piston:
+        material: STICKY_PISTON
+        amount: 1
+      Villager_egg:
+        material: MONSTER_EGG
+        durability: 120
+        amount: 1
 production_recipes:
   Wood_XP_Bottle_0:
     name: Brew XP Bottles  - 1
@@ -6542,4 +6573,24 @@ production_recipes:
       Packed_Ice:
         material: PACKED_ICE
         amount: 576
+  Produce_Bastions:
+    name: Produce Bastions
+    production_time: 32
+    inputs:
+      Redstone_block:
+        material: REDSTONE_BLOCK
+        amount: 64
+      Lapis_block:
+        material: LAPIS_BLOCK
+        amount: 64
+      Emerald_block:
+        material: EMERALD_BLOCK
+        amount: 64
+      Coal_block:
+        material: COAL_BLOCK
+        amount: 64
+    outputs:
+      Bastion:
+        material: SPONGE
+        amount: 32
 
