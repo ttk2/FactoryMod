@@ -6623,7 +6623,7 @@ production_recipes:
         material: SMOOTH_BRICK
         amount: 8
         durability: 2
-	outputs:
+    outputs:
       Walls:
         material: INK_SACK
         amount: 1
@@ -6639,7 +6639,7 @@ production_recipes:
       Redstone Ore:
         material: REDSTONE ORE
         amount: 4
-	outputs:
+    outputs:
       Base:
         material: IRON_INGOT
         amount: 1
@@ -6654,7 +6654,7 @@ production_recipes:
       Gold Ore:
         material: GOLD_ORE
         amount: 2
-	outputs:
+    outputs:
       Gearbox:
         material: WATCH
         amount: 1
