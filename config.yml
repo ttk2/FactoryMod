@@ -6615,8 +6615,7 @@ production_recipes:
         amount: 576
   Bastion_Walls:
     name: Walls
-    production_time: 2
-	inputs:
+    inputs:
       Lapis Ore:
         material: LAPIS_ORE 
         amount: 8
@@ -6633,8 +6632,7 @@ production_recipes:
         lore: An item used to create a Bastion Block
   Bastion_Base:
     name: Base
-    production_time: 2
-	inputs:
+    inputs:
       Diamond Ore:
         material: DIAMOND_ORE
         amount: 16
@@ -6649,8 +6647,7 @@ production_recipes:
         lore: An item used to create a Bastion Block
   Bastion_Gearbox
     name: Gearbox
-    production_time: 2
-	inputs:
+    inputs:
       Iron Ingot:
         material: IRON_IGNOT
         amount: 4
@@ -6665,9 +6662,8 @@ production_recipes:
         lore: An item used to create a Bastion Block
   Bastion_Object_Dart
     name: Object d'art
-    production_time: 2
-	inputs:      
-	  Lapis Lazuli:
+    inputs:      
+      Lapis Lazuli:
         material: INK_SACK
         amount: 1
         durability: 4
@@ -6741,6 +6737,7 @@ production_recipes:
         display_name: Object d'art
         lore: An item used to create a Bastion Block
   Bastion_Framing:
+    name: Framing
     inputs:
       Chest:
         material: CHEST
@@ -6755,6 +6752,7 @@ production_recipes:
         display_name: Framing
         lore: An item used to create a Bastion Block
   Bastion_Flooring:
+    name: FLooring
     inputs:
       Clay Ball:
         material: CALL_BALL
@@ -6769,6 +6767,7 @@ production_recipes:
         display_name: Flooring
         lore: An item used to create a Bastion Block
   Bastion_Rations:
+    name: Rations
     inputs:
       Wheat:
         meterial: WHEAT
@@ -6783,10 +6782,11 @@ production_recipes:
         display_name: Rations
         lore: An item used to create a Bastion Block
   Bastion_Smaragdus_Polisher:
+    name: Smaradus
     inputs:
       Emerald Block:
         material: EMERALD_BLOCK
-        amount: 1
+        amount: 3
     outputs:
       Smaragdus:
         material: EMERALD
@@ -6794,6 +6794,7 @@ production_recipes:
         display_name: Smaragdus
         lore: An item used to create a Bastion Block
   Bastion_Silicon_Tetranitratobihydrotrioxycarbon:
+    name: Silicon Tetranitratobihydrotrioxycarbon
     inputs:
       Sulphur:
         material: SULPHUR
@@ -6818,6 +6819,7 @@ production_recipes:
         display_name: Silicon Tetranitratobihydrotrioxycarbon
         lore: An item used to create a Bastion Block
   Bastion_Pure_Ice:
+    name: Pure Ice
     inputs:
       Compact Ice:
         material: COMPACT_ICE
@@ -6832,6 +6834,7 @@ production_recipes:
         display_name: Pure Ice
         lore: An item used to repair the Bastion Factory
   Bastion_Factory:
+    name: Bastion Factory
     inputs:
       Silicon Tetranitratobihydrotrioxycarbon:
         material: FIREWORK_CHARGE
@@ -6840,7 +6843,7 @@ production_recipes:
        lore: An item used to create a Bastion Block
       Smaragdus:
         material: EMERALD
-        amount: 1
+        amount: 2
         display_name: Smaragdus
         lore: An item used to create a Bastion Block
       Rations:
@@ -6870,12 +6873,12 @@ production_recipes:
         lore: An item used to create a Bastion Block
       Base:
         material: IRON_INGOT
-        amount: 1
+        amount: 8
         display_name: Base
         lore: An item used to create a Bastion Block
       Walls:
         material: INK_SACK
-        amount: 1
+        amount: 4
         durablity: 4
         display_name: Walls
         lore: An item used to create a Bastion Block
