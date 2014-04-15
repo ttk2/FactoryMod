@@ -1,39 +1,29 @@
 package com.github.igotyou.FactoryMod.managers;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
-import com.github.igotyou.FactoryMod.FactoryObject.FactoryType;
 import com.github.igotyou.FactoryMod.Factorys.PrintingPress;
 import com.github.igotyou.FactoryMod.Factorys.PrintingPress.OperationMode;
 import com.github.igotyou.FactoryMod.Factorys.ProductionFactory;
 import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.interfaces.Manager;
 import com.github.igotyou.FactoryMod.properties.PrintingPressProperties;
-import com.github.igotyou.FactoryMod.properties.ProductionProperties;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
-import com.github.igotyou.FactoryMod.recipes.ProductionRecipe;
 import com.github.igotyou.FactoryMod.utility.ItemList;
 import com.github.igotyou.FactoryMod.utility.NamedItemStack;
 import java.util.Iterator;
@@ -190,27 +180,37 @@ public class PrintingPressManager implements Manager
 
 	public InteractionResponse createFactory(Location factoryLocation, Location inventoryLocation, Location powerSourceLocation) 
 	{
-	PrintingPressProperties printingPressProperties = plugin.getPrintingPressProperties();
-		
-		if (!factoryExistsAt(factoryLocation))
+		PrintingPressProperties printingPressProperties = plugin.getPrintingPressProperties();
+		Block inventoryBlock = inventoryLocation.getBlock();
+		Chest chest = (Chest) inventoryBlock.getState();
+		Inventory chestInventory = chest.getInventory();
+		ItemList<NamedItemStack> inputs = printingPressProperties.getConstructionMaterials();
+		if(inputs.oneIn(chestInventory))
 		{
-			Block inventoryBlock = inventoryLocation.getBlock();
-			Chest chest = (Chest) inventoryBlock.getState();
-			Inventory chestInventory = chest.getInventory();
-			ItemList<NamedItemStack> inputs = printingPressProperties.getConstructionMaterials();
-			boolean hasMaterials = inputs.allIn(chestInventory);
-			if (hasMaterials)
+			if (factoryLocation.getBlock().getType().equals(FactoryModPlugin.CENTRAL_BLOCK_MATERIAL))
 			{
-				PrintingPress production = new PrintingPress(factoryLocation, inventoryLocation, powerSourceLocation, false, plugin.getPrintingPressProperties());
-				if (printingPressProperties.getConstructionMaterials().removeFrom(production.getInventory()))
+				if (!factoryExistsAt(factoryLocation))
 				{
-					addFactory(production);
-					return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + printingPressProperties.getName());
+					boolean hasMaterials = inputs.allIn(chestInventory);
+					if (hasMaterials)
+					{
+						PrintingPress production = new PrintingPress(factoryLocation, inventoryLocation, powerSourceLocation, false, plugin.getPrintingPressProperties());
+						if (printingPressProperties.getConstructionMaterials().removeFrom(production.getInventory()))
+						{
+							addFactory(production);
+							return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + printingPressProperties.getName());
+						}
+					}
+					return new InteractionResponse(InteractionResult.FAILURE, "Not enough materials in chest!");
 				}
+				return new InteractionResponse(InteractionResult.FAILURE, "There is already a " + printingPressProperties.getName() + " there!");
 			}
-			return new InteractionResponse(InteractionResult.FAILURE, "Not enough materials in chest!");
+			else
+			{
+				return new InteractionResponse(InteractionResult.FAILURE, "Wrong center block!");	
+			}
 		}
-		return new InteractionResponse(InteractionResult.FAILURE, "There is already a " + printingPressProperties.getName() + " there!");
+		return new InteractionResponse(InteractionResult.FAILURE, "No factory was identified!");
 	}
 
 	public InteractionResponse addFactory(Factory factory) 
@@ -254,7 +254,7 @@ public class PrintingPressManager implements Manager
 		boolean returnValue = false;
 		if (getFactory(factoryLocation) != null)
 		{
-			returnValue = getFactory(factoryLocation).isWhole();
+			returnValue = getFactory(factoryLocation).isWhole(false);
 		}
 		return returnValue;
 	}

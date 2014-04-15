@@ -7,28 +7,28 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
-import com.github.igotyou.FactoryMod.Factorys.PrintingPress;
-import com.github.igotyou.FactoryMod.Factorys.ProductionFactory;
+import com.github.igotyou.FactoryMod.Factorys.NetherFactory;
 import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.managers.FactoryModManager;
-import com.github.igotyou.FactoryMod.managers.PrintingPressManager;
-import com.github.igotyou.FactoryMod.managers.ProductionManager;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
 import com.untamedears.citadel.entity.PlayerReinforcement;
-import org.bukkit.event.entity.ExpBottleEvent;
-import org.bukkit.event.player.PlayerExpChangeEvent;
+import com.untamedears.citadel.events.CreateReinforcementEvent;
 
 public class FactoryModListener implements Listener
 {
@@ -44,7 +44,7 @@ public class FactoryModListener implements Listener
 	
 	private boolean isPotentialFactoryBlock(Block block) {
 		return block.getType() == FactoryModPlugin.CENTRAL_BLOCK_MATERIAL || block.getType() == Material.IRON_BLOCK || block.getType() == Material.CHEST||
-				block.getType() == Material.FURNACE || block.getType() == Material.BURNING_FURNACE;
+				block.getType() == Material.FURNACE || block.getType() == Material.BURNING_FURNACE || block.getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL;
 	}
 	
 	/**
@@ -60,11 +60,33 @@ public class FactoryModListener implements Listener
 		{
 			if (factoryMan.factoryExistsAt(block.getLocation()))
 			{
-				//if the blocks is not reinforced destroy it
-				if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
+				if (FactoryModPlugin.TELEPORT_PLATFORM_INVUNERABLE)
 				{
-					destroyFactoryAt(block);
+					if (factoryMan.getFactory(block.getLocation()).getClass() == NetherFactory.class)
+					{
+						NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(block.getLocation());
+						if (!netherFactory.isBroken())
+						{
+							InteractionResponse.messagePlayerResult(e.getPlayer(), new InteractionResponse(InteractionResult.FAILURE, "You aren't allowed to break the nether factory teleport platform!"));
+							e.setCancelled(true);
+						}
+					}
+					else
+					{
+						if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
+						{
+							destroyFactoryAt(block);
+						}
+					}
 				}
+				else
+				{
+					if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
+					{
+						destroyFactoryAt(block);
+					}
+				}
+				//if the blocks is not reinforced destroy it
 			}
 		}
 	}
@@ -96,7 +118,6 @@ public class FactoryModListener implements Listener
 			{
 				if (factoryMan.factoryExistsAt(block.getLocation()))
 				{
-					Factory factory = factoryMan.getFactory(block.getLocation());
 					if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
 					{
 						destroyFactoryAt(block);
@@ -176,7 +197,7 @@ public class FactoryModListener implements Listener
 					else
 					{
 						//if the player is allowed to interact with that block.
-						if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !isReinforced(clicked)) || 
+						if ((!FactoryModPlugin.CITADEL_ENABLED || (FactoryModPlugin.CITADEL_ENABLED && !isReinforced(clicked))) || 
 								(((PlayerReinforcement) getReinforcement(clicked)).isAccessible(player)))
 						{
 							InteractionResponse.messagePlayerResult(player, createFactory(clicked.getLocation(), player));
@@ -247,6 +268,49 @@ public class FactoryModListener implements Listener
 						
 					}
 				}
+				else if (clicked.getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+				{
+					if (factoryMan.factoryExistsAt(clicked.getLocation()))
+					{
+						if(factoryMan.getFactory(clicked.getLocation()).getClass() == NetherFactory.class)
+						{
+							NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
+							if (FactoryModPlugin.REGENERATE_TELEPORT_BLOCK_ON_TELEPORT)
+							{
+								netherFactory.regenerateTeleportBlock(clicked.getLocation());
+							}
+							if(factoryMan.factoryWholeAt(clicked.getLocation()))
+							{						
+								//toggle the recipe, and print the returned message.
+								InteractionResponse.messagePlayerResults(player, netherFactory.getTeleportationBlockResponse(player, clicked.getLocation()));
+								e.setCancelled(true);
+							}
+						}
+					}
+				}
+			}
+			else if (player.getItemInHand().getType() == Material.PAPER)
+			{
+				if (clicked.getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+				{
+					if (factoryMan.factoryExistsAt(clicked.getLocation()))
+					{
+						if(factoryMan.getFactory(clicked.getLocation()).getClass() == NetherFactory.class)
+						{
+							NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(clicked.getLocation());
+							if (FactoryModPlugin.REGENERATE_TELEPORT_BLOCK_ON_TELEPORT)
+							{
+								netherFactory.regenerateTeleportBlock(clicked.getLocation());
+							}
+							if(factoryMan.factoryWholeAt(clicked.getLocation()))
+							{						
+								//toggle the recipe, and print the returned message.
+								InteractionResponse.messagePlayerResults(player, netherFactory.getTeleportationBlockResponse(player, clicked.getLocation()));
+								e.setCancelled(true);
+							}
+						}
+					}
+				}
 			}
 		}
 		/* Section commented out since there exists range of bugs that circumvent 
@@ -287,6 +351,80 @@ public class FactoryModListener implements Listener
 		}
 		*/
 	}
+	
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void playerPortalEvent(PlayerPortalEvent e)
+	{
+		if(FactoryModPlugin.DISABLE_PORTALS)
+		{
+			if(e.getTo().getWorld().getEnvironment() == Environment.NETHER)
+			{
+				e.setCancelled(true);
+			}
+			if(e.getFrom().getWorld().getEnvironment() == Environment.NETHER)
+			{
+				e.setCancelled(true);
+			}
+		}
+	}
+			
+	@EventHandler
+	public void createReinforcement(CreateReinforcementEvent e)
+	{
+		if(!FactoryModPlugin.ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM)
+		{
+			Location location = e.getBlock().getLocation();
+			for (int i = -1;i >= -3; i--)
+			{
+				Location scanBlock = location.clone();
+				scanBlock.add(0, i, 0);
+				if (scanBlock.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+				{
+					if (factoryMan.factoryExistsAt(scanBlock))
+					{
+						if (factoryMan.getFactory(scanBlock).getClass() == NetherFactory.class)
+						{
+							NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(e.getBlock().getLocation());
+							if (!netherFactory.isBroken())
+							{
+								InteractionResponse.messagePlayerResult(e.getPlayer(), new InteractionResponse(InteractionResult.FAILURE, "You aren't allowed to reniforce blocks up to 3 blocks above a nether factory teleport platform!"));
+								e.setCancelled(true);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void blockPlaceEvent(BlockPlaceEvent e)
+	{
+		if (!FactoryModPlugin.ALLOW_BLOCK_PLACEMENT_ABOVE_TELEPORT_PLATFORM)
+		{
+			Location location = e.getBlock().getLocation();
+			for (int i = -1;i >= -3; i--)
+			{
+				Location scanBlock = location.clone();
+				scanBlock.add(0, i, 0);
+				if (scanBlock.getBlock().getType() == FactoryModPlugin.NETHER_FACTORY_TELEPORT_PLATFORM_MATERIAL)
+				{
+					if (factoryMan.factoryExistsAt(scanBlock))
+					{
+						if (factoryMan.getFactory(scanBlock).getClass() == NetherFactory.class)
+						{
+							NetherFactory netherFactory = (NetherFactory) factoryMan.getFactory(e.getBlock().getLocation());
+							if (!netherFactory.isBroken())
+							{
+								InteractionResponse.messagePlayerResult(e.getPlayer(), new InteractionResponse(InteractionResult.FAILURE, "You aren't allowed to place blocks up to 3 blocks above a nether factory teleport platform!"));
+								e.setCancelled(true);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	private Location westLoc(Location loc)
 	{
 		Location newLoc = loc.clone();

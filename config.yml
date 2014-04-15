@@ -83,6 +83,19 @@ production_general:
   update_cycle: 20
   repair_period: 28
   disrepair_period: 14
+nether_general:
+  disable_portals: true
+  nether_scale: 8
+  world_name: world
+  nether_name: world_nether
+  teleport_platform_material_nether_factory: OBSIDIAN
+  marker_material_nether_factory: COAL_BLOCK
+  marker_max_distance: 64
+  allow_reinforcement_creation_above_teleport_platform: false
+  allow_block_placement_above_teleport_platform: true
+  teleport_platform_invunerable: false
+  regenerate_teleport_block_on_teleport: false
+  remove_blocks_above_teleport_platform_on_teleport: true
 printing_presses:
   fuel:
     Charcoal:
@@ -149,6 +162,40 @@ printing_presses:
            amount: 6
      security_notes_per_lot: 64
 
+nether_factory:
+  name: Nether Factory
+  fuel:
+    Charcoal:
+      material: COAL
+      durability: 1
+  costs:
+    construction:
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 8
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 8
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+      Aspect of END:
+        material: FLINT
+        amount: 8
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+    repair:
+       Diamond block:
+         material: DIAMOND_BLOCK
+         amount: 1
+    repair_multiple: 1    
+  fuel_time: 10
+  repair_time: 12
+  scaling_radius: 5000
+  cost_scaling_radius: 5000
+  use_fuel_on_teleport: false
+	 
 crafting:
   disable:
   enable:

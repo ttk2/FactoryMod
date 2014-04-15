@@ -63,8 +63,9 @@ public class FactoryModManager
 		
 		//if (FactoryModPlugin.PRODUCTION_ENEABLED)
 		//{
-			initializeProductionManager();
 			initializePrintingPressManager();
+			initializeNetherFactoryManager();
+			initializeProductionManager();
 		//}
 	}
 	
@@ -87,6 +88,14 @@ public class FactoryModManager
 		
 		managers.add(printingMan);
 	}
+	
+	private void initializeNetherFactoryManager()
+	{
+		NetherFactoryManager netherMan = new NetherFactoryManager(plugin);
+		
+		managers.add(netherMan);
+	}
+	
 	
 	/**
 	 * When plugin disabled, this is called.
@@ -276,6 +285,19 @@ public class FactoryModManager
 		
 		return null;
 	}
+	
+	public NetherFactoryManager getNetherFactoryManager() 
+	{
+		for (Manager manager : managers)
+		{
+			if (manager.getClass() == NetherFactoryManager.class)
+			{
+				return (NetherFactoryManager) manager;
+			}
+		}
+		
+		return null;
+	}
 
 	public Factory getFactory(Location location) {
 		for (Manager manager : managers)
@@ -301,7 +323,7 @@ public class FactoryModManager
 
 	public InteractionResponse createFactory(Location centralLocation,
 			Location inventoryLocation, Location powerLocation) {
-		InteractionResponse response = null;
+		InteractionResponse response;
 		for (Manager manager : managers)
 		{
 			response = manager.createFactory(centralLocation, inventoryLocation, powerLocation);
@@ -310,6 +332,6 @@ public class FactoryModManager
 				return response;
 			}
 		}
-		return response;
+		return new InteractionResponse(InteractionResult.FAILURE, "No factory was identified!");
 	}
 }
