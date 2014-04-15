@@ -26,6 +26,7 @@ public class PrintingPressProperties {
 	private int pageLead;
 	private int setPlateTime;
 	private int repairTime;
+	private int bookPagesCap;
 
 
 	public int getPageLead() {
@@ -46,7 +47,7 @@ public class PrintingPressProperties {
 			ItemList<NamedItemStack> securityMaterials,
 			int securityNotesPerLot,
 			int energyTime, String name, int repair, int paperRate,
-			int pageLead, int setPlateTime, int repairTime
+			int pageLead, int setPlateTime, int repairTime, int bookPagesCap
 			)
 	{
 		this.fuel = fuel;
@@ -66,6 +67,7 @@ public class PrintingPressProperties {
 		this.pageLead = pageLead;
 		this.setPlateTime = setPlateTime;
 		this.repairTime = repairTime;
+		this.bookPagesCap = bookPagesCap;
 	}
 
 	
@@ -126,7 +128,8 @@ public class PrintingPressProperties {
 		int pageLead = configPrintingPresses.getInt("page_lead",12);
 		int setPageTime = configPrintingPresses.getInt("set_page_time",20);
 		int repairTime = configPrintingPresses.getInt("repair_time",12);
-		return new PrintingPressProperties(ppFuel, ppConstructionCost, ppRepairCost, ppPlateCost, ppBindingCost, ppPageCost, pagesPerLot, ppPamphletCost, pamphletsPerLot, ppSecurityCost, securityNotesPerLot, ppEnergyTime, ppName, ppRepair, paperRate, pageLead, setPageTime, repairTime);
+		int bookPagesCap = configPrintingPresses.getInt("book_pages_cap",16);
+		return new PrintingPressProperties(ppFuel, ppConstructionCost, ppRepairCost, ppPlateCost, ppBindingCost, ppPageCost, pagesPerLot, ppPamphletCost, pamphletsPerLot, ppSecurityCost, securityNotesPerLot, ppEnergyTime, ppName, ppRepair, paperRate, pageLead, setPageTime, repairTime, bookPagesCap);
 	}
 
 
@@ -172,5 +175,10 @@ public class PrintingPressProperties {
 
 	public ItemList<NamedItemStack> getConstructionMaterials() {
 		return constructionMaterials;
+	}
+
+
+	public int getBookPagesCap() {
+		return bookPagesCap;
 	}
 }
