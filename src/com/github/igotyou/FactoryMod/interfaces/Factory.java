@@ -3,6 +3,7 @@ package com.github.igotyou.FactoryMod.interfaces;
 import org.bukkit.Location;
 
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
+
 import java.util.List;
 //original file:
 /**

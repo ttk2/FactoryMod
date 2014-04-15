@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
@@ -25,7 +24,6 @@ import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.Factorys.ProductionFactory;
 import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.interfaces.Manager;
-import com.github.igotyou.FactoryMod.interfaces.Recipe;
 import com.github.igotyou.FactoryMod.properties.ProductionProperties;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
@@ -195,76 +193,47 @@ public class ProductionManager implements Manager
 
 	public InteractionResponse createFactory(Location factoryLocation, Location inventoryLocation, Location powerSourceLocation) 
 	{
-		if (!factoryExistsAt(factoryLocation))
+		if (factoryLocation.getBlock().getType().equals(FactoryModPlugin.CENTRAL_BLOCK_MATERIAL))
 		{
-			HashMap<String, ProductionProperties> properties = plugin.productionProperties;
-			Block inventoryBlock = inventoryLocation.getBlock();
-			Chest chest = (Chest) inventoryBlock.getState();
-			Inventory chestInventory = chest.getInventory();
-			String subFactoryType = null;
-			for (Map.Entry<String, ProductionProperties> entry : properties.entrySet())
+			if (!factoryExistsAt(factoryLocation))
 			{
-				ItemList<NamedItemStack> inputs = entry.getValue().getInputs();
-				if(inputs.exactlyIn(chestInventory))
+				HashMap<String, ProductionProperties> properties = plugin.productionProperties;
+				Block inventoryBlock = inventoryLocation.getBlock();
+				Chest chest = (Chest) inventoryBlock.getState();
+				Inventory chestInventory = chest.getInventory();
+				String subFactoryType = null;
+				for (Map.Entry<String, ProductionProperties> entry : properties.entrySet())
 				{
-					subFactoryType = entry.getKey();
+					ItemList<NamedItemStack> inputs = entry.getValue().getInputs();
+					if(inputs.exactlyIn(chestInventory))
+					{
+						subFactoryType = entry.getKey();
+					}
 				}
-			}
-			if (subFactoryType != null)
-			{
-				ProductionFactory production = new ProductionFactory(factoryLocation, inventoryLocation, powerSourceLocation,subFactoryType);
-				if (properties.get(subFactoryType).getInputs().allIn(production.getInventory()))
+				if (subFactoryType != null)
 				{
-					addFactory(production);
-					properties.get(subFactoryType).getInputs().removeFrom(production.getInventory());
-					return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + production.getProductionFactoryProperties().getName());
+					ProductionFactory production = new ProductionFactory(factoryLocation, inventoryLocation, powerSourceLocation,subFactoryType);
+					if (properties.get(subFactoryType).getInputs().allIn(production.getInventory()))
+					{
+						addFactory(production);
+						properties.get(subFactoryType).getInputs().removeFrom(production.getInventory());
+						return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + production.getProductionFactoryProperties().getName());
+					}
 				}
+				return new InteractionResponse(InteractionResult.FAILURE, "No factory was identified!");
 			}
-			return new InteractionResponse(InteractionResult.FAILURE, "Incorrect materials in chest! Stacks must match perfectly.");
+			return new InteractionResponse(InteractionResult.FAILURE, "There is already a factory there!");
 		}
-		return new InteractionResponse(InteractionResult.FAILURE, "There is already a factory there!");
+		else
+		{
+			return new InteractionResponse(InteractionResult.FAILURE, "Wrong center block!");	
+		}
 	}
 	
-	public InteractionResponse createFactory(Location factoryLocation, Location inventoryLocation, Location powerSourceLocation, int productionTimer, int energyTimer) 
-	{
-		if (!factoryExistsAt(factoryLocation))
-		{
-			HashMap<String, ProductionProperties> properties = plugin.productionProperties;
-			Block inventoryBlock = inventoryLocation.getBlock();
-			Chest chest = (Chest) inventoryBlock.getState();
-			Inventory chestInventory = chest.getInventory();
-			String subFactoryType = null;
-			boolean hasMaterials = true;
-			for (Map.Entry<String, ProductionProperties> entry : properties.entrySet())
-			{
-				ItemList<NamedItemStack> inputs = entry.getValue().getInputs();
-				if(!inputs.allIn(chestInventory))
-				{
-					hasMaterials = false;
-				}
-				if (hasMaterials == true)
-				{
-					subFactoryType = entry.getKey();
-				}
-			}
-			if (hasMaterials && subFactoryType != null)
-			{
-				ProductionFactory production = new ProductionFactory(factoryLocation, inventoryLocation, powerSourceLocation,subFactoryType);
-				if (properties.get(subFactoryType).getInputs().removeFrom(production.getInventory()))
-				{
-					addFactory(production);
-					return new InteractionResponse(InteractionResult.SUCCESS, "Successfully created " + subFactoryType + " production factory");
-				}
-			}
-			return new InteractionResponse(InteractionResult.FAILURE, "Not enough materials in chest!");
-		}
-		return new InteractionResponse(InteractionResult.FAILURE, "There is already a factory there!");
-	}
-
 	public InteractionResponse addFactory(Factory factory) 
 	{
 		ProductionFactory production = (ProductionFactory) factory;
-		if (production.getCenterLocation().getBlock().getType().equals(Material.WORKBENCH) && (!factoryExistsAt(production.getCenterLocation()))
+		if (production.getCenterLocation().getBlock().getType().equals(FactoryModPlugin.CENTRAL_BLOCK_MATERIAL) && (!factoryExistsAt(production.getCenterLocation()))
 				|| !factoryExistsAt(production.getInventoryLocation()) || !factoryExistsAt(production.getPowerSourceLocation()))
 		{
 			producers.add(production);
@@ -302,7 +271,7 @@ public class ProductionManager implements Manager
 		boolean returnValue = false;
 		if (getFactory(factoryLocation) != null)
 		{
-			returnValue = getFactory(factoryLocation).isWhole();
+			returnValue = getFactory(factoryLocation).isWhole(false);
 		}
 		return returnValue;
 	}

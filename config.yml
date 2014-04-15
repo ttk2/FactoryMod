@@ -83,72 +83,129 @@ production_general:
   update_cycle: 20
   repair_period: 28
   disrepair_period: 14
+nether_general:
+  disable_portals: true
+  nether_scale: 8
+  world_name: world
+  nether_name: world_nether
+  teleport_platform_material_nether_factory: OBSIDIAN
+  marker_material_nether_factory: COAL_BLOCK
+  marker_max_distance: 64
+  allow_reinforcement_creation_above_teleport_platform: false
+  allow_block_placement_above_teleport_platform: true
+  teleport_platform_invunerable: false
+  regenerate_teleport_block_on_teleport: false
+  remove_blocks_above_teleport_platform_on_teleport: true
 printing_presses:
   fuel:
     Charcoal:
-      material: 'COAL'
+      material: COAL
       durability: 1
   costs:
      construction:
-        "Iron block":
-           material: 'IRON_BLOCK'
+        Iron block:
+           material: IRON_BLOCK
            amount: 60
-        "Redstone":
+        Redstone:
            material: REDSTONE
            amount: 256
-        "Quartz":
+        Quartz:
            material: QUARTZ
            amount: 64
-        "Piston":
+        Piston:
            material: PISTON_BASE
            amount: 20
-        "Gold plate":
+        Gold plate:
            material: GOLD_PLATE
            amount: 20
      plates:
-        "Iron ingot":
-           material: 'IRON_INGOT'
+        Iron ingot:
+           material: IRON_INGOT
            amount: 4
-        "Gold nugget":
-           material: "GOLD_NUGGET"
+        Gold nugget:
+           material: GOLD_NUGGET
            amount: 1
      repair:
-        "Iron block":
-           material: 'IRON_BLOCK'
+        Iron block:
+           material: IRON_BLOCK
            amount: 1
      repair_multiple: 5
      binding: # Each
         Leather:
-           material: 'LEATHER'
+           material: LEATHER
            amount: 1
      page_lot:
         Paper:
+<<<<<<< HEAD
            material: 'PAPER'
            amount: 4
+=======
+           material: PAPER
+           amount: 16
+>>>>>>> origin/ttk2
         Ink:
-           material: 'INK_SACK'
+           material: INK_SACK
            durability: 0
            amount: 1
      pages_per_lot: 32
      pamphlet_lot:
         Paper:
+<<<<<<< HEAD
            material: 'PAPER'
            amount: 8
+=======
+           material: PAPER
+           amount: 16
+>>>>>>> origin/ttk2
         Ink:
-           material: 'INK_SACK'
+           material: INK_SACK
            durability: 0
            amount: 1
      pamphlets_per_lot: 32
      security_lot:
-        "Gold nuggets":
-           material: 'GOLD_NUGGET'
+        Gold nuggets:
+           material: GOLD_NUGGET
            amount: 1
-        "Cactus green":
-           material: 'INK_SACK'
+        Cactus green:
+           material: INK_SACK
            durability: 2
            amount: 6
      security_notes_per_lot: 64
 
+nether_factory:
+  name: Nether Factory
+  fuel:
+    Charcoal:
+      material: COAL
+      durability: 1
+  costs:
+    construction:
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 8
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 8
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+      Aspect of END:
+        material: FLINT
+        amount: 8
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+    repair:
+       Diamond block:
+         material: DIAMOND_BLOCK
+         amount: 1
+    repair_multiple: 1    
+  fuel_time: 10
+  repair_time: 12
+  scaling_radius: 5000
+  cost_scaling_radius: 5000
+  use_fuel_on_teleport: false
+           
 crafting:
   disable:
   enable:
@@ -211,11 +268,17 @@ production_factories:
         material: PUMPKIN_PIE
         amount: 192
     recipes:
+<<<<<<< HEAD
       - Baked_Potato
       - Bake_Cookie
       - Bake_Bread
       - Bake_Cake
       - Bake_Pumpkin_Pie
+=======
+      - Bake_Potato
+      - Bake_Cookie
+      - Bake_Bread
+>>>>>>> origin/ttk2
     repair_multiple: 26
     repair_inputs:
       Baked Potato:
@@ -524,6 +587,7 @@ production_factories:
         amount: 600
         durability: 1
     recipes:
+<<<<<<< HEAD
       - Smelt_Oak_Wood
       - Smelt_Spruce_Wood
       - Smelt_Birch_Wood
@@ -531,6 +595,13 @@ production_factories:
       - Burn_Acacia_Wood
       - Burn_Dark_Oak_Wood
       - Smelt_Coal
+=======
+      - Burn_Oak_Wood
+      - Burn_Spruce_Wood
+      - Burn_Birch_Wood
+      - Burn_Jungle_Wood
+      - Burn_Coal
+>>>>>>> origin/ttk2
     repair_multiple: 60
     repair_inputs:
       Charcoal:
@@ -1065,7 +1136,7 @@ production_factories:
         material: WOOL
         durability: 7
   Grill:
-    name: Bakery
+    name: Grill
     fuel:
       Charcoal:
         material: COAL
@@ -1088,12 +1159,19 @@ production_factories:
         material: COOKED_BEEF
         amount: 64
     recipes:
+<<<<<<< HEAD
       - Cooked_Chicken
       - Cooked_Fish
       - Grilled_Pork
       - Cooked_Beef
       - Cook_Salmon
       - Bastion_Rations
+=======
+      - Cook_Chicken
+      - Cook_Fish
+      - Grill_Pork
+      - Cook_Beef
+>>>>>>> origin/ttk2
     repair_multiple: 2
     repair_inputs:
       Cooked Chicken:
@@ -1632,7 +1710,7 @@ production_factories:
        amount: 1
        durability: 0
   Basic_Redstone_Factory:
-    name: Basic Redstone Mechanism Factory
+    name: Redstone Mechanism Factory
     fuel:
       Charcoal:
         material: COAL
@@ -1753,7 +1831,7 @@ production_factories:
         material: LEATHER
         amount: 1
   Fancy_Ore_Smelter:
-    name: Fancy Ore Smelter
+    name: Precious Ore Refinery
     fuel:
       Charcoal:
         material: COAL
@@ -1770,16 +1848,53 @@ production_factories:
         material: QUARTZ
         amount: 576
     recipes:
+<<<<<<< HEAD
       - Smelt_Lapis_Lazuli_Ore
       - Smelt_Redstone_Ore
       - Smelt_Netherquartz_Ore
       - Bastion_Walls
+=======
+      - Refine_Lapis_Lazuli_Ore
+      - Refine_Redstone_Ore
+      - Refine_Netherquartz_Ore
+>>>>>>> origin/ttk2
     repair_multiple: 26
     repair_inputs:
       Lapis Lazuli:
         material: INK_SACK
         amount: 6
         durability: 4
+      Redstone:
+        material: REDSTONE
+        amount: 5
+      Netherquartz:
+        material: QUARTZ
+        amount: 2
+  Aspect_Factory:
+    name: Arcane Elementizer
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Netherbrick:
+        material: NETHER_BRICK
+        amount: 1536
+      Redstone:
+        material: REDSTONE
+        amount: 1152
+      Netherquartz:
+        material: QUARTZ
+        amount: 576
+    recipes:
+      - Forge_Aspect_of_Terra
+      - Forge_Aspect_of_End
+      - Forge_Aspect_of_Nether
+    repair_multiple: 26
+    repair_inputs:
+      Nether Brick:
+        material: NETHER_BRICK
+        amount: 6
       Redstone:
         material: REDSTONE
         amount: 5
@@ -1809,8 +1924,12 @@ production_factories:
       - Smelt_Coal_Ore
       - Smelt_Iron_Ore
       - Smelt_Gold_Ore
+<<<<<<< HEAD
       - Smelt_Diamond_Ore
       - Bastion_Base
+=======
+      - Refine_Diamond_Ore
+>>>>>>> origin/ttk2
     repair_multiple: 10
     repair_inputs:
       Coal:
@@ -1825,7 +1944,7 @@ production_factories:
       Diamond:
         material: DIAMOND
   Stone_Brick_Smelter:
-    name: Fancy Stone Brick Smelter
+    name: Fancy Brick Sculptor
     fuel:
       Charcoal:
         material: COAL
@@ -1839,10 +1958,16 @@ production_factories:
         amount: 256
         durability: 4
     recipes:
+<<<<<<< HEAD
       - Smelt_Cracked_Stone_Brick
       - Smelt_Mossy_Stone_Brick
       - Smelt_Chiseled_Stone_Brick
       - Bastion_Flooring
+=======
+      - Carve_Cracked_Stone_Brick
+      - Craft_Mossy_Stone_Brick
+      - Carve_Chiseled_Stone_Brick
+>>>>>>> origin/ttk2
     repair_multiple: 26
     repair_inputs:
       Stone Brick:
@@ -2160,7 +2285,70 @@ production_factories:
         material: COAL
         durability: 1
     inputs:
+<<<<<<< HEAD
       Lapis Lazuli:
+=======
+      Stick:
+        material: STICK
+        amount: 1024
+    recipes:
+      - Wood_XP_Bottle_0
+      - Wood_XP_Bottle_1
+      - Wood_XP_Bottle_2
+      - Wood_XP_Bottle_3
+      - Wood_XP_Bottle_4
+      - Wood_XP_Bottle_5
+    repair_multiple: 103
+    repair_inputs:
+      Stick:
+        material: STICK
+production_recipes:
+  Wood_XP_Bottle_0:
+    name: Brew XP Bottles  - 1
+    inputs:
+      Glass Bottle:
+        material: GLASS_BOTTLE
+        amount: 24
+      Wheat:
+        material: WHEAT
+        amount: 1280
+    outputs:
+      Exp Bottle:
+        material: EXP_BOTTLE
+        amount: 24
+  Bake_Potato:
+    name: Bake Potato
+    production_time: 24
+    inputs:
+      Potato:
+        material: POTATO_ITEM
+        amount: 192
+    outputs:
+      Baked Potato:
+        material: BAKED_POTATO
+        amount: 384
+  Wood_XP_Bottle_2:
+    name: Brew XP Bottles  - 3
+    inputs:
+      Glass Bottle:
+        material: GLASS_BOTTLE
+        amount: 10
+      Baked Potato:
+        material: BAKED_POTATO
+        amount: 1280
+    outputs:
+      Exp Bottle:
+        material: EXP_BOTTLE
+        amount: 10
+  Dye_Black_Wool_Cyan:
+    name: Dye Black Wool Cyan
+    inputs:
+      Black Wool:
+        material: WOOL
+        amount: 64
+        durability: 15
+      Cyan Dye:
+>>>>>>> origin/ttk2
         material: INK_SACK
         amount: 20
         durability: 4
@@ -2211,9 +2399,66 @@ production_factories:
         material: INK_SACK
         amount: 20
         durability: 7
+<<<<<<< HEAD
       Light Blue Dye:
         material: INK_SACK
         amount: 20
+=======
+  Refine_Diamond_Ore:
+    name: Refine Diamond Ore
+    production_time: 1
+    inputs:
+      Diamond Ore:
+        material: DIAMOND_ORE
+        amount: 16
+    outputs:
+      Diamond:
+        material: DIAMOND
+        amount: 48
+  Diamond_XP_Bottle_0:
+    name: Brew XP Bottles  - 1
+    inputs:
+      Glass Bottle:
+        material: GLASS_BOTTLE
+        amount: 128
+      Carrot:
+        material: CARROT_ITEM
+        amount: 96
+      Melon Block:
+        material: MELON_BLOCK
+        amount: 32
+      Cactus:
+        material: CACTUS
+        amount: 256
+      Red Rose:
+        material: RED_ROSE
+        amount: 8
+      Rotten Flesh:
+        material: ROTTEN_FLESH
+        amount: 128
+      Red Mushroom:
+        material: RED_MUSHROOM
+        amount: 32
+      Vine:
+        material: VINE
+        amount: 32
+      Bread:
+        material: BREAD
+        amount: 128
+      Grilled Pork:
+        material: GRILLED_PORK
+        amount: 32
+    outputs:
+      Exp Bottle:
+        material: EXP_BOTTLE
+        amount: 128
+  Dye_Brown_Wool_Orange:
+    name: Dye Brown Wool Orange
+    inputs:
+      Brown Wool:
+        material: WOOL
+        amount: 64
+>>>>>>> origin/ttk2
         durability: 12
       Rose Red:
         material: INK_SACK
@@ -2326,6 +2571,12 @@ production_factories:
       Charcoal:
         material: COAL
         durability: 1
+<<<<<<< HEAD
+=======
+  Burn_Jungle_Wood:
+    name: Burn Jungle Wood
+    production_time: 24
+>>>>>>> origin/ttk2
     inputs:
       Ice:
         material: ICE
@@ -2351,6 +2602,12 @@ production_factories:
       Charcoal:
         material: COAL
         durability: 1
+<<<<<<< HEAD
+=======
+  Diamond_Boots:
+    name: Forge Diamond Boots
+    production_time: 20
+>>>>>>> origin/ttk2
     inputs:
       Lapis Lazuli:
         material: INK_SACK
@@ -2364,8 +2621,22 @@ production_factories:
         material: INK_SACK
         amount: 20
         durability: 3
+<<<<<<< HEAD
       Purple Dye:
         material: INK_SACK
+=======
+    outputs:
+      Brown Wool:
+        material: WOOL
+        amount: 64
+        durability: 12
+  Iron_Boots:
+    name: Forge Iron Boots
+    production_time: 20
+    inputs:
+      Iron Ingot:
+        material: IRON_INGOT
+>>>>>>> origin/ttk2
         amount: 20
         durability: 5
       Dandelion Yellow:
@@ -2407,6 +2678,7 @@ production_factories:
         material: INK_SACK
         amount: 20
         durability: 12
+<<<<<<< HEAD
       Rose Red:
         material: INK_SACK
         amount: 20
@@ -2491,6 +2763,11 @@ production_factories:
       Charcoal:
         material: COAL
         durability: 1
+=======
+  Gold_Spade:
+    name: Forge Gold Spade
+    production_time: 5
+>>>>>>> origin/ttk2
     inputs:
       Stick:
         material: STICK
@@ -2653,9 +2930,90 @@ production_recipes:
       Orange Wool:
         material: WOOL
         amount: 64
+<<<<<<< HEAD
         durability: 1
   Dye_Light_Gray_Wool_Green:
     name: Dye Light Gray Wool Green
+=======
+        durability: 9
+  Diamond_Hoe:
+    name: Forge Diamond Hoe
+    production_time: 10
+    inputs:
+      Diamond:
+        material: DIAMOND
+        amount: 10
+    outputs:
+      Diamond Hoe:
+        material: DIAMOND_HOE
+        amount: 30
+  Gold_Chestplate:
+    name: Forge Gold Chestplate
+    production_time: 40
+    inputs:
+      Gold Ingot:
+        material: GOLD_INGOT
+        amount: 40
+    outputs:
+      Gold Chestplate:
+        material: GOLD_CHESTPLATE
+        amount: 15
+        durability: -218
+    enchantments:
+      Unbreaking 3:
+        type: DURABILITY
+        level: 3
+      Blast Protection 1:
+        type: PROTECTION_EXPLOSIONS
+        level: 1
+        probability: 0.5
+      Blast Protection 2:
+        type: PROTECTION_EXPLOSIONS
+        level: 2
+        probability: 0.4
+      Blast Protection 3:
+        type: PROTECTION_EXPLOSIONS
+        level: 3
+        probability: 0.3
+      Blast Protection 4:
+        type: PROTECTION_EXPLOSIONS
+        level: 4
+        probability: 0.4
+      Fire Protection 1:
+        type: PROTECTION_FIRE
+        level: 1
+        probability: 0.5
+      Fire Protection 2:
+        type: PROTECTION_FIRE
+        level: 2
+        probability: 0.4
+      Fire Protection 3:
+        type: PROTECTION_FIRE
+        level: 3
+        probability: 0.3
+      Fire Protection 4:
+        type: PROTECTION_FIRE
+        level: 4
+        probability: 0.4
+      Projectile Protection 1:
+        type: PROTECTION_PROJECTILE
+        level: 1
+        probability: 0.5
+      Projectile Protection 2:
+        type: PROTECTION_PROJECTILE
+        level: 2
+        probability: 0.4
+      Projectile Protection 3:
+        type: PROTECTION_PROJECTILE
+        level: 3
+        probability: 0.3
+      Projectile Protection 4:
+        type: PROTECTION_PROJECTILE
+        level: 4
+        probability: 0.4
+  Dye_Light_Gray_Wool_Light_Blue:
+    name: Dye Light Gray Wool Light Blue
+>>>>>>> origin/ttk2
     inputs:
       Light Gray Wool:
         material: WOOL
@@ -2942,10 +3300,17 @@ production_recipes:
       Cyan Wool:
         material: WOOL
         amount: 64
+<<<<<<< HEAD
         durability: 9
   Diamond_Hoe:
     name: Forge Diamond Hoe.
     production_time: 10
+=======
+        durability: 12
+  Burn_Spruce_Wood:
+    name: Burn Spruce Wood
+    production_time: 24
+>>>>>>> origin/ttk2
     inputs:
       Diamond:
         material: DIAMOND
@@ -3354,7 +3719,7 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 5
-  Smelt_Birch_Wood:
+  Burn_Birch_Wood:
     name: Burn Birch Wood
     production_time: 24
     inputs:
@@ -3368,7 +3733,7 @@ production_recipes:
         amount: 512
         durability: 1
   Diamond_Sword:
-    name: Forge Diamond Sword.
+    name: Forge Diamond Sword
     production_time: 10
     inputs:
       Diamond:
@@ -3427,7 +3792,7 @@ production_recipes:
         amount: 64
         durability: 2
   Iron_Helmet:
-    name: Forge Iron Helmet.
+    name: Forge Iron Helmet
     production_time: 25
     inputs:
       Iron Ingot:
@@ -3453,8 +3818,8 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 9
-  Cooked_Chicken:
-    name: Grill Raw Chicken
+  Cook_Chicken:
+    name: Cook Raw Chicken
     production_time: 6
     inputs:
       Raw Chicken:
@@ -3589,7 +3954,7 @@ production_recipes:
         amount: 64
         durability: 11
   Gold_Pickaxe:
-    name: Forge Gold Pickaxe.
+    name: Forge Gold Pickaxe
     production_time: 15
     inputs:
       Gold Ingot:
@@ -3706,8 +4071,13 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 1
+<<<<<<< HEAD
   Cooked_Beef:
     name: Cook Beef
+=======
+  Cook_Beef:
+    name: Cook Raw Beef
+>>>>>>> origin/ttk2
     production_time: 6
     inputs:
       Raw Beef:
@@ -3787,7 +4157,7 @@ production_recipes:
         material: EXP_BOTTLE
         amount: 8
   Iron_Chestplate:
-    name: Forge Iron Chestplate.
+    name: Forge Iron Chestplate
     production_time: 40
     inputs:
       Iron Ingot:
@@ -3814,7 +4184,7 @@ production_recipes:
         amount: 64
         durability: 14
   Gold_Leggings:
-    name: Forge Gold Leggings.
+    name: Forge Gold Leggings
     production_time: 35
     inputs:
       Gold Ingot:
@@ -3909,7 +4279,7 @@ production_recipes:
         amount: 64
         durability: 13
   Diamond_Chestplate:
-    name: Forge Diamond Chestplate.
+    name: Forge Diamond Chestplate
     production_time: 40
     inputs:
       Diamond:
@@ -3952,7 +4322,7 @@ production_recipes:
         amount: 64
         durability: 8
   Iron_Leggings:
-    name: Forge Iron Leggings.
+    name: Forge Iron Leggings
     production_time: 35
     inputs:
       Iron Ingot:
@@ -4092,7 +4462,7 @@ production_recipes:
         amount: 64
         durability: 7
   Iron_Spade:
-    name: Forge Iron Spade.
+    name: Forge Iron Spade
     production_time: 5
     inputs:
       Iron Ingot:
@@ -4228,7 +4598,7 @@ production_recipes:
         amount: 64
         durability: 14
   Iron_Axe:
-    name: Forge Iron Axe.
+    name: Forge Iron Axe
     production_time: 15
     inputs:
       Iron Ingot:
@@ -4238,8 +4608,13 @@ production_recipes:
       Iron Axe:
         material: IRON_AXE
         amount: 30
+<<<<<<< HEAD
   Bake_Cookie:
     name: Bake Cocoa
+=======
+  Cookie:
+    name: Bake Cookies
+>>>>>>> origin/ttk2
     production_time: 24
     inputs:
       Wheat:
@@ -4298,8 +4673,13 @@ production_recipes:
       White Wool:
         material: WOOL
         amount: 64
+<<<<<<< HEAD
   Bake_Bread:
     name: Bake Wheat
+=======
+  Bread:
+    name: Bake Bread
+>>>>>>> origin/ttk2
     production_time: 24
     inputs:
       Wheat:
@@ -4369,8 +4749,8 @@ production_recipes:
         amount: 512
     outputs:
       Nether bricks:
-        material: NETHER_BRICK_ITEM
-        amount: 1024
+        material: NETHER_BRICK
+        amount: 256
   Bake_clay_blocks:
     name: Bake Clay Blocks
     production_time: 32
@@ -4415,14 +4795,21 @@ production_recipes:
       Sandstone:
         material: SANDSTONE
         amount: 384
+<<<<<<< HEAD
   Smelt_Glass_Panes:
     name: Smelt Glass Panes
     production_time: 32
+=======
+  Refine_Lapis_Lazuli_Ore:
+    name: Refine Lapis Lazuli Ore
+    production_time: 6
+>>>>>>> origin/ttk2
     inputs:
       Sand:
         material: GLASS
         amount: 192
     outputs:
+<<<<<<< HEAD
       Glass Pane:
         material: THIN_GLASS
         amount: 768
@@ -4469,12 +4856,19 @@ production_recipes:
         material: LAPIS_ORE
         amount: 32
     outputs:
+=======
+>>>>>>> origin/ttk2
       Lapis Lazuli:
         material: INK_SACK
         amount: 512
         durability: 4
+<<<<<<< HEAD
   Smelt_Redstone_Ore:
     name: Smelt Redstone Ore
+=======
+  Refine_Redstone_Ore:
+    name: Refine Redstone Ore
+>>>>>>> origin/ttk2
     production_time: 16
     inputs:
       Redstone Ore:
@@ -4484,8 +4878,8 @@ production_recipes:
       Redstone:
         material: REDSTONE
         amount: 1024
-  Smelt_Netherquartz_Ore:
-    name: Smelt Netherquartz ore
+  Refine_Netherquartz_Ore:
+    name: Refine Netherquartz ore
     production_time: 6
     inputs:
       Netherquartz ore:
@@ -4512,7 +4906,7 @@ production_recipes:
         amount: 64
         durability: 7
   Diamond_Helmet:
-    name: Forge Diamond Helmet.
+    name: Forge Diamond Helmet
     production_time: 25
     inputs:
       Diamond:
@@ -4732,7 +5126,7 @@ production_recipes:
         amount: 64
         durability: 12
   Iron_Pickaxe:
-    name: Forge Iron Pickaxe.
+    name: Forge Iron Pickaxe
     production_time: 15
     inputs:
       Iron Ingot:
@@ -4774,8 +5168,8 @@ production_recipes:
         material: WOOL
         amount: 64
         durability: 1
-  Smelt_Cracked_Stone_Brick:
-    name: Smelt Cracked Stone Brick
+  Carve_Cracked_Stone_Brick:
+    name: Carve Cracked Stone Brick
     production_time: 64
     inputs:
       Stone Brick:
@@ -4870,7 +5264,7 @@ production_recipes:
         material: EXP_BOTTLE
         amount: 42
   Diamond_Leggings:
-    name: Forge Diamond Leggings.
+    name: Forge Diamond Leggings
     production_time: 35
     inputs:
       Diamond:
@@ -4913,7 +5307,7 @@ production_recipes:
         amount: 64
         durability: 8
   Iron_Sword:
-    name: Forge Iron Sword.
+    name: Forge Iron Sword
     production_time: 10
     inputs:
       Iron Ingot:
@@ -4988,7 +5382,7 @@ production_recipes:
         amount: 64
         durability: 3
   Gold_Hoe:
-    name: Forge Gold Hoe.
+    name: Forge Gold Hoe
     production_time: 10
     inputs:
       Gold Ingot:
@@ -5003,7 +5397,7 @@ production_recipes:
         type: DURABILITY
         level: 3
   Gold_Sword:
-    name: Forge Gold Sword.
+    name: Forge Gold Sword
     production_time: 10
     inputs:
       Gold Ingot:
@@ -5069,8 +5463,8 @@ production_recipes:
         type: LOOT_BONUS_MOBS
         level: 3
         probability: 0.3
-  Smelt_Chiseled_Stone_Brick:
-    name: Smelt Chiseled Stone Brick
+  Carve_Chiseled_Stone_Brick:
+    name: Carve Chiseled Stone Brick
     production_time: 64
     inputs:
       Stone Brick:
@@ -5089,7 +5483,7 @@ production_recipes:
         amount: 64
         durability: 3
   Diamond_Pickaxe:
-    name: Forge Diamond Pickaxe.
+    name: Forge Diamond Pickaxe
     production_time: 15
     inputs:
       Diamond:
@@ -5099,8 +5493,8 @@ production_recipes:
       Diamond Pickaxe:
         material: DIAMOND_PICKAXE
         amount: 15
-  Smelt_Mossy_Stone_Brick:
-    name: Smelt Mossy Stone Brick
+  Craft_Mossy_Stone_Brick:
+    name: Craft Mossy Stone Brick
     production_time: 64
     inputs:
       Stone Brick:
@@ -5134,7 +5528,7 @@ production_recipes:
         amount: 64
         durability: 2
   Iron_Hoe:
-    name: Forge Iron Hoe.
+    name: Forge Iron Hoe
     production_time: 10
     inputs:
       Iron Ingot:
@@ -5234,7 +5628,7 @@ production_recipes:
         amount: 512
         durability: 1
   Gold_Axe:
-    name: Forge Gold Axe.
+    name: Forge Gold Axe
     production_time: 15
     inputs:
       Gold Ingot:
@@ -5324,8 +5718,8 @@ production_recipes:
         type: LOOT_BONUS_MOBS
         level: 3
         probability: 0.3
-  Cooked_Fish:
-    name: Grill Raw Fish
+  Cook_Fish:
+    name: Cook Raw Fish
     production_time: 6
     inputs:
       Raw Fish:
@@ -5351,7 +5745,7 @@ production_recipes:
         amount: 64
         durability: 15
   Diamond_Spade:
-    name: Forge Diamond Spade.
+    name: Forge Diamond Spade
     production_time: 5
     inputs:
       Diamond:
@@ -5445,7 +5839,7 @@ production_recipes:
         material: MINECART
         amount: 27
   Gold_Helmet:
-    name: Forge Gold Helmet.
+    name: Forge Gold Helmet
     production_time: 25
     inputs:
       Gold Ingot:
@@ -5552,7 +5946,7 @@ production_recipes:
         amount: 64
         durability: 5
   Gold_Boots:
-    name: Forge Gold Boots.
+    name: Forge Gold Boots
     production_time: 20
     inputs:
       Gold Ingot:
@@ -7082,6 +7476,7 @@ production_recipes:
         amount: 256
         durability: 1
     outputs:
+<<<<<<< HEAD
       Objet d'art:
         material: FLINT
         amount: 1
@@ -7089,6 +7484,26 @@ production_recipes:
         lore: An item used to create a Bastion Block
   Bastion_Framing:
     name: Framing
+=======
+      Lime Wool:
+        material: WOOL
+        amount: 64
+        durability: 5
+  Smelt_Stone:
+    name: Smelt Stone
+    production_time: 80
+    inputs:
+      Cobblestone:
+        material: COBBLESTONE
+        amount: 640
+    outputs:
+      Stone:
+        material: STONE
+        amount: 854
+  Grill_Pork:
+    name: Grill Pork
+    production_time: 6
+>>>>>>> origin/ttk2
     inputs:
       Chest:
         material: CHEST
@@ -7127,6 +7542,7 @@ production_recipes:
         material: BOWL
         amount: 32
     outputs:
+<<<<<<< HEAD
       Rations:
         material: MUSHROOM_SOUP
         amount: 32
@@ -7135,11 +7551,20 @@ production_recipes:
   Bastion_Smaragdus_Polisher:
     name: Smaragdus
     production_time: 32
+=======
+      White Wool:
+        material: WOOL
+        amount: 64
+  Diamond_Axe:
+    name: Forge Diamond Axe
+    production_time: 15
+>>>>>>> origin/ttk2
     inputs:
       Emerald Block:
         material: EMERALD_BLOCK
         amount: 16
     outputs:
+<<<<<<< HEAD
       Smaragdus:
         material: EMERALD
         amount: 16
@@ -7147,6 +7572,14 @@ production_recipes:
         lore: An item used to create a Bastion Block
   Bastion_Silicon_Tetranitratobihydrotrioxycarbon:
     name: Silicon_Tetranitratobihydrotrioxycarbon
+=======
+      Diamond Axe:
+        material: DIAMOND_AXE
+        amount: 30
+  Burn_Oak_Wood:
+    name: Burn Oak Wood
+    production_time: 24
+>>>>>>> origin/ttk2
     inputs:
       Sulphur:
         material: SULPHUR
@@ -7226,6 +7659,7 @@ production_recipes:
       Base:
         material: IRON_INGOT
         amount: 1
+<<<<<<< HEAD
         display_name: Base
         lore: An item used to create a Bastion Block
       Walls:
@@ -7240,3 +7674,69 @@ production_recipes:
         amount: 32
         display_name: Bastion
         
+=======
+  Forge_Aspect_of_Terra:
+    name: Forge Aspect of Terra
+    production_time: 64
+    inputs:
+      Emerald Block:
+        material: EMERALD_BLOCK
+        amount: 24
+      Diamond Block:
+        material: DIAMOND_BLOCK
+        amount: 24
+      Gold Ore:
+        material: GOLD_ORE
+        amount: 8
+      Slime Ball:
+        material: SLIME_BALL
+        amount: 8
+      Anvil:
+        material: ANVIL
+        amount: 8
+    outputs:
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 1
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+  Forge_Aspect_of_End:
+    name: Forge Aspect of End
+    production_time: 64
+    inputs:
+      Ender Pearl:
+        material: ENDER_PEARL
+        amount: 256
+      Ender Chest:
+        material: ENDER_CHEST
+        amount: 256
+      Endstone:
+        material: ENDER_STONE
+        amount: 1024
+    outputs:
+      Aspect of End:
+        material: FLINT
+        amount: 1
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+  Forge_Aspect_of_Nether:
+    name: Forge Aspect of Nether
+    production_time: 64
+    inputs:
+      Ghast Tears:
+        material: GHAST_TEAR
+        amount: 16
+      Quartz Ore:
+        material: QUARTZ_ORE
+        amount: 512
+      Glowstone:
+        material: GLOWSTONE
+        amount: 512
+    outputs:
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 1
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+
+>>>>>>> origin/ttk2
