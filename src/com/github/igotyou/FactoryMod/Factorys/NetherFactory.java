@@ -3,7 +3,6 @@ package com.github.igotyou.FactoryMod.Factorys;
 import static com.untamedears.citadel.Utility.getReinforcement;
 import static com.untamedears.citadel.Utility.isReinforced;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,9 +18,7 @@ import com.github.igotyou.FactoryMod.utility.NamedItemStack;
 import com.untamedears.citadel.entity.PlayerReinforcement;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class NetherFactory extends BaseFactory
 {
