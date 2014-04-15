@@ -4,16 +4,15 @@
  */
 package com.github.igotyou.FactoryMod.utility;
 
+import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.recipes.ProbabilisticEnchantment;
-
+import com.github.igotyou.FactoryMod.recipes.ProductionRecipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
@@ -70,23 +69,9 @@ public class ItemList<E extends NamedItemStack> extends ArrayList<E> {
 	}
 	public boolean allIn(Inventory inventory)
 	{
-		HashMap<ItemStack, Integer> amountMaterials = new HashMap<ItemStack, Integer>();
 		for(ItemStack itemStack:this)
 		{
-			ItemStack itemStackClone = itemStack.clone();
-			itemStackClone.setAmount(1);
-			if (amountMaterials.containsKey(itemStackClone))
-			{
-				amountMaterials.put(itemStackClone, amountMaterials.get(itemStackClone)+itemStack.getAmount());
-			}
-			else
-			{
-				amountMaterials.put(itemStackClone, itemStack.getAmount());
-			}
-		}
-		for (Entry<ItemStack, Integer> entry : amountMaterials.entrySet())
-		{
-			if (amountAvailable(inventory, entry.getKey())<entry.getValue())
+			if (amountAvailable(inventory, itemStack)<itemStack.getAmount())
 			{
 				return false;
 			}
@@ -216,25 +201,14 @@ public class ItemList<E extends NamedItemStack> extends ArrayList<E> {
 	public String toString()
 	{
 		String returnString="";
-		HashMap<NamedItemStack, Integer> amountMaterials = new HashMap<NamedItemStack, Integer>();
-		for(NamedItemStack itemStack:this)
+		for(int i=0;i<size();i++)
 		{
-			NamedItemStack itemStackClone = itemStack.clone();
-			itemStackClone.setAmount(1);
-			if (amountMaterials.containsKey(itemStackClone))
+			String name=get(i).getItemMeta().hasDisplayName() ? get(i).getItemMeta().getDisplayName() : get(i).getCommonName();
+			returnString+=String.valueOf(get(i).getAmount())+" "+name;
+			if(i<size()-1)
 			{
-				amountMaterials.put(itemStackClone, amountMaterials.get(itemStackClone)+itemStack.getAmount());
+				returnString+=", ";
 			}
-			else
-			{
-				amountMaterials.put(itemStackClone, itemStack.getAmount());
-			}
-		}
-		for (Entry<NamedItemStack, Integer> entry : amountMaterials.entrySet())
-		{
-			String name=entry.getKey().getItemMeta().hasDisplayName() ? entry.getKey().getItemMeta().getDisplayName() : entry.getKey().getCommonName();
-			returnString+=String.valueOf(entry.getValue()) +" "+name;
-			returnString+=",";
 		}
 		return returnString;
 	}
@@ -245,7 +219,7 @@ public class ItemList<E extends NamedItemStack> extends ArrayList<E> {
 		for(ItemStack currentItemStack:inventory)
 		{
 			if(currentItemStack!=null)
-			{
+			{	
 				/*For some reason I can't fathom the orientaion of the comparison
 				 * of the two ItemStacks in the following statement matters.
 				 * It likely has to do with the fact that itemStack is a NamedItemStack
@@ -303,27 +277,6 @@ public class ItemList<E extends NamedItemStack> extends ArrayList<E> {
 		{
 			NamedItemStack itemStackClone=itemStack.clone();
 			itemStackClone.setAmount(itemStack.getAmount()*multiplier);
-			multipliedItemList.add(itemStackClone);
-		}
-		return multipliedItemList;
-	}
-	public ItemList<NamedItemStack> getMultiple(double multiplier) 
-	{
-		ItemList<NamedItemStack> multipliedItemList=new ItemList<NamedItemStack>();
-		for (NamedItemStack itemStack:this)
-		{
-			NamedItemStack itemStackClone=itemStack.clone();
-			long newAmount = (long) Math.round(itemStackClone.getAmount()*multiplier);
-			if (newAmount > 64)
-			{
-				for (;newAmount > 64; newAmount = newAmount-64)
-				{
-					NamedItemStack newItemStack = itemStack.clone();
-					newItemStack.setAmount(64);
-					multipliedItemList.add(newItemStack);
-				}
-			}
-			itemStackClone.setAmount((int) newAmount);
 			multipliedItemList.add(itemStackClone);
 		}
 		return multipliedItemList;

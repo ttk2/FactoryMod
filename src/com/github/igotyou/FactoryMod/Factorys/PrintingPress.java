@@ -13,6 +13,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.github.igotyou.FactoryMod.FactoryModPlugin;
+import com.github.igotyou.FactoryMod.FactoryObject;
+import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.properties.PrintingPressProperties;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.ItemList;
@@ -110,7 +113,7 @@ public class PrintingPress extends BaseFactory {
 				if (plates != null) {
 					pageCount = Math.max(1, ((BookMeta) plates.getItemMeta()).getPageCount());
 				}
-				pageCount = Math.min(pageCount, 5);
+				pageCount = Math.min(pageCount, printingPressProperties.getBookPagesCap());
 				return printingPressProperties.getSetPlateTime() * pageCount;
 			case REPAIR:
 				return printingPressProperties.getRepairTime();
@@ -128,7 +131,7 @@ public class PrintingPress extends BaseFactory {
 			NamedItemStack plates = getPlateResult();
 			if (plates != null) {
 				int pageCount = ((BookMeta) plates.getItemMeta()).getPageCount();
-				pageCount = Math.min(pageCount, 5);
+				pageCount = Math.min(pageCount, printingPressProperties.getBookPagesCap());
 				inputs.addAll(printingPressProperties.getPlateMaterials().getMultiple(pageCount));
 			}
 			break;
@@ -230,10 +233,12 @@ public class PrintingPress extends BaseFactory {
 		ItemList<NamedItemStack> pages = printingPressProperties.getPageMaterials();
 		boolean hasPages = pages.allIn(getInventory());
 		boolean inputStall = false;
+		
+		int pageCount = getPrintResult().pageCount();
+		pageCount = Math.min(pageCount, printingPressProperties.getBookPagesCap());
+		
 		if (hasPages) {
 			// Check bindings
-			int pageCount = getPrintResult().pageCount();
-			pageCount = Math.min(pageCount, 5);
 			int expectedBindings = (int) Math.floor((double) (containedPaper + printingPressProperties.getPagesPerLot()) / (double) pageCount);
 			boolean hasBindings = true;
 			ItemList<NamedItemStack> allBindings = new ItemList<NamedItemStack>();
@@ -261,7 +266,6 @@ public class PrintingPress extends BaseFactory {
 		}
 		
 		// Put materials in queue
-		int pageCount = getPrintResult().pageCount();
 		int booksInPages = containedPaper / pageCount;
 		int copiesIn = Math.min(booksInPages, containedBindings);
 		containedPaper -= copiesIn * pageCount;
@@ -403,7 +407,6 @@ public class PrintingPress extends BaseFactory {
 	 * Returns either a success or error message.
 	 * Called by the blockListener when a player left clicks the center block, with the InteractionMaterial
 	 */
-	@Override
 	public List<InteractionResponse> getCentralBlockResponse()
 	{
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
