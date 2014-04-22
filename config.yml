@@ -1986,6 +1986,71 @@ production_factories:
       Sand:
         material: SAND
         amount: 4
+  Essential_Still:
+    name: Essential Still
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Fern:
+        material: LONG_GRASS
+        durability: 2
+        amount: 256
+      Dead Bush:
+        material: DEAD_BUSH
+        amount: 256
+      Lily Pad:
+        material: WATER_LILY
+        amount: 256
+      Bone:
+        material: BONE
+        amount: 256
+      Clownfish:
+        material: RAW_FISH
+        durability: 2
+        amount: 256
+      Pufferfish:
+        material: RAW_FISH
+        durability: 3
+        amount: 256
+      Soul Sand:
+        material: SOUL_SAND
+        amount: 256
+    recipes:
+      - Distill_Pteridol
+      - Distill_Lilium_Essence
+      - Distill_Desert_Hydrosol
+      - Distill_Calcium
+      - Distill_Tetrodotoxin
+      - Distill_Nematocysts
+      - Distill_Aminol
+    repair_multiple: 64
+    repair_inputs:
+      Fern:
+        material: LONG_GRASS
+        durability: 2
+        amount: 1
+      Dead Bush:
+        material: DEAD_BUSH
+        amount: 1
+      Lily Pad:
+        material: WATER_LILY
+        amount: 1
+      Bone:
+        material: BONE
+        amount: 1
+      Clownfish:
+        material: RAW_FISH
+        durability: 2
+        amount: 1
+      Pufferfish:
+        material: RAW_FISH
+        durability: 3
+        amount: 1
+      Soul Sand:
+        material: SOUL_SAND
+        amount: 1
   Iron_Forge_factory:
     name: Iron Forge
     fuel:
@@ -7239,4 +7304,95 @@ production_recipes:
         material: SPONGE
         amount: 32
         display_name: Bastion
-        
+  Distill_Pteridol:
+    name: Distill Pteridol
+    inputs:
+      Fern:
+        material: LONG_GRASS
+        durability: 2
+        amount: 64
+    outputs:
+      Pteridol:
+        material: GLASS_BOTTLE
+        display_name: Pteridol
+        amount: 1
+  Distill_Lilium_Essence:
+    name: Distill Lilium Essence
+    inputs:
+      Lily Pad:
+        material: WATER_LILY
+        amount: 16
+    outputs:
+      Lilium Essence:
+        material: GLASS_BOTTLE
+        display_name: Lilium Essence
+        amount: 1
+  Distill_Desert_Hydrosol:
+    name: Distill Desert Hydrosol
+    inputs:
+      Dead Bush:
+        material: DEAD_BUSH
+        amount: 1
+    outputs:
+      Desert Hydrosol:
+        material: GLASS_BOTTLE
+        display_name: Desert Hydrosol
+        amount: 1
+  Distill_Calcium:
+    name: Distill Calcium
+    inputs:
+      Bone:
+        material: BONE
+        amount: 64
+    outputs:
+      Liquid Calcium:
+        material: GLASS_BOTTLE
+        display_name: Liquid Calcium
+        amount: 1
+  Distill_Nematocysts:
+    name: Distill Nematocysts
+    inputs:
+      Clownfish:
+        material: RAW_FISH
+        durability: 2
+        amount: 16
+      Liquid Calcium:
+        material: GLASS_BOTTLE
+        display_name: Liquid Calcium
+        amount: 1
+    outputs:
+      Nematocysts:
+        material: GLASS_BOTTLE
+        display_name: Nematocysts
+        amount: 1
+  Distill_Tetrodotoxin:
+    name: Distill Pteridol
+    inputs:
+      Pufferfish:
+        material: RAW_FISH
+        durability: 3
+        amount: 16
+      Liquid Calcium:
+        material: GLASS_BOTTLE
+        display_name: Liquid Calcium
+        amount: 1
+    outputs:
+      Tetrodotoxin:
+        material: GLASS_BOTTLE
+        display_name: Tetrodotoxin
+        amount: 1
+  Distill_Aminol:
+    name: Distill Aminol
+    inputs:
+      Pufferfish:
+        material: SOUL_SAND
+        amount: 64
+      Liquid Calcium:
+        material: GLASS_BOTTLE
+        display_name: Liquid Calcium
+        amount: 1
+    outputs:
+      Aminol:
+        material: GLASS_BOTTLE
+        display_name: Aminol
+        amount: 1
