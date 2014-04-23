@@ -7366,16 +7366,17 @@ production_recipes:
     name: Distill Calcium
     production_time: 8
     inputs:
-      Bone:
-        material: BONE
+      Bone Meal:
+        material: INK_SACK
         amount: 1728
+        durability: 15
       Glass Bottle:
         material: GLASS_BOTTLE
         amount: 64
     outputs:
-      Liquid Calcium:
+      Buffer Solution:
         material: GLASS_BOTTLE
-        display_name: Liquid Calcium
+        display_name: Buffer Solution
         lore: Buffer for Advanced Potions
         amount: 64
   Distill_Nonrenewable_Caenol:
@@ -7385,9 +7386,9 @@ production_recipes:
       Dead Bush:
         material: DEAD_BUSH
         amount: 32
-      Liquid Calcium:
+      Buffer Solution:
         material: GLASS_BOTTLE
-        display_name: Liquid Calcium
+        display_name: Buffer Solution
         lore: Buffer for Advanced Potions
         amount: 8
     outputs:
@@ -7402,9 +7403,9 @@ production_recipes:
       Slime ball:
         material: SLIME_BALL
         amount: 64
-      Liquid Calcium:
+      Buffer Solution:
         material: GLASS_BOTTLE
-        display_name: Liquid Calcium
+        display_name: Buffer Solution
         lore: Buffer for Advanced Potions
         amount: 8
     outputs:
@@ -7420,9 +7421,9 @@ production_recipes:
         material: RAW_FISH
         durability: 3
         amount: 128
-      Liquid Calcium:
+      Buffer Solution:
         material: GLASS_BOTTLE
-        display_name: Liquid Calcium
+        display_name: Buffer Solution
         lore: Buffer for Advanced Potions
         amount: 8
     outputs:
@@ -7437,9 +7438,9 @@ production_recipes:
       Soul sand:
         material: SOUL_SAND
         amount: 128
-      Liquid Calcium:
+      Buffer Solution:
         material: GLASS_BOTTLE
-        display_name: Liquid Calcium
+        display_name: Buffer Solution
         lore: Buffer for Advanced Potions
         amount: 8
     outputs:
@@ -7455,9 +7456,9 @@ production_recipes:
         material: RAW_FISH
         durability: 2
         amount: 64
-      Liquid Calcium:
+      Buffer Solution:
         material: GLASS_BOTTLE
-        display_name: Liquid Calcium
+        display_name: Buffer Solution
         lore: Buffer for Advanced Potions
         amount: 8
     outputs:
@@ -7472,10 +7473,10 @@ production_recipes:
       Fern:
         material: LONG_GRASS
         durability: 2
-        amount: 512
-      Liquid Calcium:
+        amount: 256
+      Buffer Solution:
         material: GLASS_BOTTLE
-        display_name: Liquid Calcium
+        display_name: Buffer Solution
         lore: Buffer for Advanced Potions
         amount: 8
     outputs:
@@ -7490,9 +7491,9 @@ production_recipes:
       Lily Pad:
         material: WATER_LILY
         amount: 32
-      Liquid Calcium:
+      Buffer Solution:
         material: GLASS_BOTTLE
-        display_name: Liquid Calcium
+        display_name: Buffer Solution
         lore: Buffer for Advanced Potions
         amount: 8
     outputs:
@@ -7642,15 +7643,15 @@ production_recipes:
       Pteridol:
         material: GLASS_BOTTLE
         display_name: Pteridol
-        amount: 4
+        amount: 8
       Tetrodotoxin:
         material: GLASS_BOTTLE
         display_name: Tetrodotoxin
-        amount: 1
+        amount: 2
       Lilium Essence:
         material: GLASS_BOTTLE
         display_name: Lilium Essence
-        amount: 3
+        amount: 6
     outputs:
       Potion of Haste:
         material: POTION
