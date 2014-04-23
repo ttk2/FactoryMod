@@ -2023,7 +2023,7 @@ production_factories:
       - Distill_Renewable_Ethereol
       - Distill_Pteridol
       - Distill_Lilium_Essence
-    repair_multiple: 64
+    repair_multiple: 16
     repair_inputs:
       Fern:
         material: LONG_GRASS
@@ -2037,7 +2037,7 @@ production_factories:
         amount: 1
       Bone:
         material: BONE
-        amount: 1
+        amount: 8
       Clownfish:
         material: RAW_FISH
         durability: 2
@@ -7454,7 +7454,7 @@ production_recipes:
       Clownfish:
         material: RAW_FISH
         durability: 2
-        amount: 128
+        amount: 64
       Liquid Calcium:
         material: GLASS_BOTTLE
         display_name: Liquid Calcium
@@ -7660,9 +7660,9 @@ production_recipes:
         potion_effects:
           Haste:
             type: FAST_DIGGING
-            duration: 7200
+            duration: 2400
             amplifier: 2
           Hunger:
             type: HUNGER
-            duration: 9600
-            amplifier: 3
+            duration: 3600
+            amplifier: 7
