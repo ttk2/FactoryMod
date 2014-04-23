@@ -297,7 +297,7 @@ public class FactoryModPlugin extends JavaPlugin
 					PotionEffectType effect = PotionEffectType.getByName(type);
 					if (effect != null) {
 						int duration=configEffect.getInt("duration",200);
-						int amplifier=configEffect.getInt("amplifier",1);
+						int amplifier=configEffect.getInt("amplifier",0);
 						potionEffects.add(new PotionEffect(effect, duration, amplifier));
 					}
 				}

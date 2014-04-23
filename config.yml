@@ -1996,35 +1996,33 @@ production_factories:
       Fern:
         material: LONG_GRASS
         durability: 2
-        amount: 256
+        amount: 512
       Dead Bush:
         material: DEAD_BUSH
-        amount: 256
+        amount: 64
       Lily Pad:
         material: WATER_LILY
-        amount: 256
+        amount: 128
       Bone:
         material: BONE
-        amount: 256
+        amount: 512
       Clownfish:
         material: RAW_FISH
         durability: 2
-        amount: 256
+        amount: 128
       Pufferfish:
         material: RAW_FISH
         durability: 3
         amount: 256
-      Soul Sand:
-        material: SOUL_SAND
-        amount: 256
     recipes:
+      - Distill_Calcium
+      - Distill_Nonrenewable_Caenol
+      - Distill_Renewable_Caenol
+      - Distill_Tetrodotoxin
+      - Distill_Nonrenewable_Ethereol
+      - Distill_Renewable_Ethereol
       - Distill_Pteridol
       - Distill_Lilium_Essence
-      - Distill_Desert_Hydrosol
-      - Distill_Calcium
-      - Distill_Tetrodotoxin
-      - Distill_Nematocysts
-      - Distill_Aminol
     repair_multiple: 64
     repair_inputs:
       Fern:
@@ -2048,8 +2046,68 @@ production_factories:
         material: RAW_FISH
         durability: 3
         amount: 1
-      Soul Sand:
-        material: SOUL_SAND
+  Advanced_Brewery:
+    name: Advanced Brewery
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Charcoal:
+        material: COAL
+        durability: 1
+        amount: 512
+      Caenol:
+        material: GLASS_BOTTLE
+        display_name: Caenol
+        amount: 64
+      Tetrodotoxin:
+        material: GLASS_BOTTLE
+        display_name: Tetrodotoxin
+        amount: 64
+      Ethereol:
+        material: GLASS_BOTTLE
+        display_name: Ethereol
+        amount: 64
+      Pteridol:
+        material: GLASS_BOTTLE
+        display_name: Pteridol
+        amount: 64
+      Lilium Essence:
+        material: GLASS_BOTTLE
+        display_name: Lilium Essence
+        amount: 64
+    recipes:
+      - Brew_Fortissimus_Potion
+      - Brew_Extended_Fortissimus_Potion
+      - Brew_Elevative_Potion
+      - Brew_Extended_Elevative_Potion
+      - Brew_Haste_Potion
+    repair_multiple: 8
+    repair_inputs:
+      Charcoal:
+        material: COAL
+        durability: 1
+        amount: 16
+      Caenol:
+        material: GLASS_BOTTLE
+        display_name: Caenol
+        amount: 1
+      Tetrodotoxin:
+        material: GLASS_BOTTLE
+        display_name: Tetrodotoxin
+        amount: 1
+      Ethereol:
+        material: GLASS_BOTTLE
+        display_name: Ethereol
+        amount: 1
+      Pteridol:
+        material: GLASS_BOTTLE
+        display_name: Pteridol
+        amount: 1
+      Lilium Essence:
+        material: GLASS_BOTTLE
+        display_name: Lilium Essence
         amount: 1
   Iron_Forge_factory:
     name: Iron Forge
@@ -7304,95 +7362,307 @@ production_recipes:
         material: SPONGE
         amount: 32
         display_name: Bastion
-  Distill_Pteridol:
-    name: Distill Pteridol
-    inputs:
-      Fern:
-        material: LONG_GRASS
-        durability: 2
-        amount: 64
-    outputs:
-      Pteridol:
-        material: GLASS_BOTTLE
-        display_name: Pteridol
-        amount: 1
-  Distill_Lilium_Essence:
-    name: Distill Lilium Essence
-    inputs:
-      Lily Pad:
-        material: WATER_LILY
-        amount: 16
-    outputs:
-      Lilium Essence:
-        material: GLASS_BOTTLE
-        display_name: Lilium Essence
-        amount: 1
-  Distill_Desert_Hydrosol:
-    name: Distill Desert Hydrosol
-    inputs:
-      Dead Bush:
-        material: DEAD_BUSH
-        amount: 1
-    outputs:
-      Desert Hydrosol:
-        material: GLASS_BOTTLE
-        display_name: Desert Hydrosol
-        amount: 1
   Distill_Calcium:
     name: Distill Calcium
+    production_time: 8
     inputs:
       Bone:
         material: BONE
+        amount: 1728
+      Glass Bottle:
+        material: GLASS_BOTTLE
         amount: 64
     outputs:
       Liquid Calcium:
         material: GLASS_BOTTLE
         display_name: Liquid Calcium
-        amount: 1
-  Distill_Nematocysts:
-    name: Distill Nematocysts
+        lore: Buffer for Advanced Potions
+        amount: 64
+  Distill_Nonrenewable_Caenol:
+    name: Distill Caenol
+    production_time: 8
     inputs:
-      Clownfish:
-        material: RAW_FISH
-        durability: 2
-        amount: 16
+      Dead Bush:
+        material: DEAD_BUSH
+        amount: 32
       Liquid Calcium:
         material: GLASS_BOTTLE
         display_name: Liquid Calcium
-        amount: 1
+        lore: Buffer for Advanced Potions
+        amount: 8
     outputs:
-      Nematocysts:
+      Caenol:
         material: GLASS_BOTTLE
-        display_name: Nematocysts
-        amount: 1
+        display_name: Caenol
+        amount: 8
+  Distill_Renewable_Caenol:
+    name: Distill Renewable Caenol
+    production_time: 16
+    inputs:
+      Slime ball:
+        material: SLIME_BALL
+        amount: 64
+      Liquid Calcium:
+        material: GLASS_BOTTLE
+        display_name: Liquid Calcium
+        lore: Buffer for Advanced Potions
+        amount: 8
+    outputs:
+      Caenol:
+        material: GLASS_BOTTLE
+        display_name: Caenol
+        amount: 8
   Distill_Tetrodotoxin:
-    name: Distill Pteridol
+    name: Distill Tetrodotoxin
+    production_time: 8
     inputs:
       Pufferfish:
         material: RAW_FISH
         durability: 3
-        amount: 16
+        amount: 128
       Liquid Calcium:
         material: GLASS_BOTTLE
         display_name: Liquid Calcium
-        amount: 1
+        lore: Buffer for Advanced Potions
+        amount: 8
     outputs:
       Tetrodotoxin:
         material: GLASS_BOTTLE
         display_name: Tetrodotoxin
-        amount: 1
-  Distill_Aminol:
-    name: Distill Aminol
+        amount: 8
+  Distill_Nonrenewable_Ethereol:
+    name: Distill Ethereol
+    production_time: 8
     inputs:
-      Pufferfish:
+      Soul sand:
         material: SOUL_SAND
-        amount: 64
+        amount: 128
       Liquid Calcium:
         material: GLASS_BOTTLE
         display_name: Liquid Calcium
-        amount: 1
+        lore: Buffer for Advanced Potions
+        amount: 8
     outputs:
-      Aminol:
+      Ethereol:
         material: GLASS_BOTTLE
-        display_name: Aminol
+        display_name: Ethereol
+        amount: 8
+  Distill_Renewable_Ethereol:
+    name: Distill Renewable Ethereol
+    production_time: 16
+    inputs:
+      Clownfish:
+        material: RAW_FISH
+        durability: 2
+        amount: 128
+      Liquid Calcium:
+        material: GLASS_BOTTLE
+        display_name: Liquid Calcium
+        lore: Buffer for Advanced Potions
+        amount: 8
+    outputs:
+      Ethereol:
+        material: GLASS_BOTTLE
+        display_name: Ethereol
+        amount: 8
+  Distill_Pteridol:
+    name: Distill Pteridol
+    production_time: 8
+    inputs:
+      Fern:
+        material: LONG_GRASS
+        durability: 2
+        amount: 512
+      Liquid Calcium:
+        material: GLASS_BOTTLE
+        display_name: Liquid Calcium
+        lore: Buffer for Advanced Potions
+        amount: 8
+    outputs:
+      Pteridol:
+        material: GLASS_BOTTLE
+        display_name: Pteridol
+        amount: 8
+  Distill_Lilium_Essence:
+    name: Distill Lilium Essence
+    production_time: 8
+    inputs:
+      Lily Pad:
+        material: WATER_LILY
+        amount: 32
+      Liquid Calcium:
+        material: GLASS_BOTTLE
+        display_name: Liquid Calcium
+        lore: Buffer for Advanced Potions
+        amount: 8
+    outputs:
+      Lilium Essence:
+        material: GLASS_BOTTLE
+        display_name: Lilium Essence
+        amount: 8
+  Brew_Fortissimus_Potion:
+    name: Brew Fortissimus Draught
+    production_time: 16
+    inputs:
+      Caenol:
+        material: GLASS_BOTTLE
+        display_name: Caenol
+        amount: 8
+      Tetrodotoxin:
+        material: GLASS_BOTTLE
+        display_name: Tetrodotoxin
+        amount: 8
+    outputs:
+      Fortissimus Draught:
+        material: POTION
+        durability: 59
+        display_name: Fortissimus Draught
+        amount: 8
+        potion_effects:
+          Strength:
+            type: INCREASE_DAMAGE
+            duration: 3600
+            amplifier: 2
+          Resistance:
+            type: DAMAGE_RESISTANCE
+            duration: 3600
+            amplifier: 1
+          Slowness:
+            type: SLOW
+            duration: 4800
+            amplifier: 2
+  Brew_Extended_Fortissimus_Potion:
+    name: Brew Extended Fortissimus Draught
+    production_time: 16
+    inputs:
+      Caenol:
+        material: GLASS_BOTTLE
+        display_name: Caenol
+        amount: 8
+      Tetrodotoxin:
+        material: GLASS_BOTTLE
+        display_name: Tetrodotoxin
+        amount: 8
+      Lilium Essence:
+        material: GLASS_BOTTLE
+        display_name: Lilium Essence
+        amount: 2
+    outputs:
+      Extended Fortissimus Draught:
+        material: POTION
+        durability: 59
+        display_name: Extended Fortissimus Draught
+        amount: 8
+        potion_effects:
+          Strength:
+            type: INCREASE_DAMAGE
+            duration: 7200
+            amplifier: 2
+          Resistance:
+            type: DAMAGE_RESISTANCE
+            duration: 7200
+            amplifier: 1
+          Slowness:
+            type: SLOW
+            duration: 9600
+            amplifier: 2
+  Brew_Elevative_Potion:
+    name: Brew Elevative Draught
+    production_time: 16
+    inputs:
+      Ethereol:
+        material: GLASS_BOTTLE
+        display_name: Ethereol
+        amount: 8
+      Pteridol:
+        material: GLASS_BOTTLE
+        display_name: Pteridol
+        amount: 8
+    outputs:
+      Elevative Draught:
+        material: POTION
+        durability: 47
+        display_name: Elevative Draught
+        amount: 8
+        potion_effects:
+          Strength:
+            type: SPEED
+            duration: 3600
+            amplifier: 2
+          Resistance:
+            type: JUMP
+            duration: 3600
+            amplifier: 1
+          Weakness:
+            type: WEAKNESS
+            duration: 4800
+            amplifier: 63
+  Brew_Extended_Elevative_Potion:
+    name: Brew Extended Elevative Draught
+    production_time: 16
+    inputs:
+      Ethereol:
+        material: GLASS_BOTTLE
+        display_name: Ethereol
+        amount: 8
+      Pteridol:
+        material: GLASS_BOTTLE
+        display_name: Pteridol
+        amount: 8
+      Lilium Essence:
+        material: GLASS_BOTTLE
+        display_name: Lilium Essence
+        amount: 2
+    outputs:
+      Extended Elevative Draught:
+        material: POTION
+        durability: 47
+        display_name: Extended Elevative Draught
+        amount: 8
+        potion_effects:
+          Strength:
+            type: SPEED
+            duration: 7200
+            amplifier: 2
+          Resistance:
+            type: JUMP
+            duration: 7200
+            amplifier: 1
+          Weakness:
+            type: WEAKNESS
+            duration: 9600
+            amplifier: 63
+  Brew_Haste_Potion:
+    name: Brew Haste Potion
+    production_time: 16
+    inputs:
+      Sugar:
+        material: SUGAR
+        amount: 64
+      Pteridol:
+        material: GLASS_BOTTLE
+        display_name: Pteridol
+        amount: 4
+      Tetrodotoxin:
+        material: GLASS_BOTTLE
+        display_name: Tetrodotoxin
         amount: 1
+      Lilium Essence:
+        material: GLASS_BOTTLE
+        display_name: Lilium Essence
+        amount: 3
+    outputs:
+      Potion of Haste:
+        material: POTION
+        durability: 27
+        display_name: Potion of Haste
+        amount: 8
+        potion_effects:
+          Haste:
+            type: FAST_DIGGING
+            duration: 7200
+            amplifier: 2
+          Hunger:
+            type: HUNGER
+            duration: 9600
+            amplifier: 3
