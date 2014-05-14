@@ -1891,6 +1891,10 @@ production_factories:
       Grass:
         material: GRASS
         amount: 512
+      Raw Salmon:
+        material: RAW_FISH
+        amount: 256
+        durability: 1
     recipes:
       - Mutate_Spruce_Saplings
       - Mutate_Birch_Saplings
@@ -1899,6 +1903,8 @@ production_factories:
       - Mutate_Dark_Oak_Saplings
       - Mutate_Podzol
       - Mutate_Grassless_Dirt 
+      - Mutate_Raw_Salmon
+      - Mutate_Clownfish
     repair_multiple: 10
     repair_inputs:
       Oak Saplings:
@@ -6906,6 +6912,30 @@ production_recipes:
         material: DIRT
         amount: 64
         durability: 2
+  Mutate_Raw_Salmon:
+    name: Mutate Raw Salmon
+    production_time: 16
+    inputs:
+      Raw Salmon:
+        material: RAW_FISH
+        amount: 64
+        durability: 1
+    outputs:
+      Raw Fish:
+        material: RAW_FISH
+        amount: 64
+  Mutate_Clownfish:
+    name: Mutate Clownfish
+    production_time: 16
+    inputs:
+      Clownfish:
+        material: RAW_FISH
+        amount: 64
+        durability: 2
+    outputs:
+      Raw Fish:
+        material: RAW_FISH
+        amount: 64
   Mutate_Pigmen:
     name: Mutate Pigmen
     production_time: 4
