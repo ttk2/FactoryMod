@@ -1,4 +1,5 @@
 #Example: production_general
+
 # update_cycle: 20 the period of ticks between which factories are updated
 # maintenance_cycle: 15 the period of ticks between which the maintenance of the factories are updated
 # maintenance_rate: 1 %Modifies the rate at which factories degrade, higher numbers degrade the factories faster
@@ -83,6 +84,19 @@ production_general:
   update_cycle: 20
   repair_period: 28
   disrepair_period: 14
+nether_general:
+  disable_portals: true
+  nether_scale: 8
+  world_name: world
+  nether_name: world_nether
+  teleport_platform_material_nether_factory: OBSIDIAN
+  marker_material_nether_factory: COAL_BLOCK
+  marker_max_distance: 64
+  allow_reinforcement_creation_above_teleport_platform: false
+  allow_block_placement_above_teleport_platform: true
+  teleport_platform_invunerable: false
+  regenerate_teleport_block_on_teleport: false
+  remove_blocks_above_teleport_platform_on_teleport: true
 printing_presses:
   fuel:
     Charcoal:
@@ -150,8 +164,41 @@ printing_presses:
            material: 'INK_SACK'
            durability: 2
            amount: 6
-     security_notes_per_lot: 128
+     security_notes_per_lot: 64
 
+nether_factory:
+  name: Nether Factory
+  fuel:
+    Charcoal:
+      material: COAL
+      durability: 1
+  costs:
+    construction:
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 8
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 8
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+      Aspect of END:
+        material: FLINT
+        amount: 8
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+    repair:
+       Diamond block:
+         material: DIAMOND_BLOCK
+         amount: 1
+    repair_multiple: 1    
+  fuel_time: 10
+  repair_time: 12
+  scaling_radius: 5000
+  cost_scaling_radius: 5000
+  use_fuel_on_teleport: false
 crafting:
   disable:
   enable:
@@ -194,6 +241,38 @@ crafting:
         Double Stone Slab:
           material: DOUBLE_STEP
 production_factories:
+  Aspect_Factory:
+    name: Arcane Elementizer
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Netherbrick:
+        material: NETHER_BRICK
+        amount: 1536
+      Redstone:
+        material: REDSTONE
+        amount: 1152
+      Netherquartz:
+        material: QUARTZ
+        amount: 576
+    recipes:
+      - Forge_Aspect_of_Terra
+      - Forge_Aspect_of_End
+      - Forge_Aspect_of_Nether
+      - Craft_Eye_of_Ender
+    repair_multiple: 26
+    repair_inputs:
+      Nether Brick:
+        material: NETHER_BRICK
+        amount: 6
+      Redstone:
+        material: REDSTONE
+        amount: 5
+      Netherquartz:
+        material: QUARTZ
+        amount: 2
   Bakery:
     name: Bakery
     fuel:
@@ -586,10 +665,6 @@ production_factories:
       - Diamond_XP_Bottle_1
       - Diamond_XP_Bottle_2
       - Diamond_XP_Bottle_3
-      - Diamond_XP_Bottle_4
-      - Diamond_XP_Bottle_5
-      - Diamond_XP_Bottle_6
-      - Diamond_XP_Bottle_7
     repair_multiple: 5
     repair_inputs:
       Diamond:
@@ -1164,10 +1239,6 @@ production_factories:
       - Iron_XP_Bottle_1
       - Iron_XP_Bottle_2
       - Iron_XP_Bottle_3
-      - Iron_XP_Bottle_4
-      - Iron_XP_Bottle_5
-      - Iron_XP_Bottle_6
-      - Iron_XP_Bottle_7
       - Bastion_Smaragdus_Polisher
     repair_multiple: 20
     repair_inputs:
@@ -4047,7 +4118,7 @@ production_recipes:
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 128 
+        amount: 128
   Diamond_XP_Bottle_3:
     name: Brew XP Bottles  - 4
     inputs:
@@ -7249,329 +7320,81 @@ production_recipes:
         material: SPONGE
         amount: 32
         display_name: Bastion
-  Iron_XP_Bottle_4:
-    name: Brew XP Bottles  - 5
+
+  Forge_Aspect_of_Terra:
+    name: Forge Aspect of Terra
+    production_time: 64
     inputs:
-      Crate of Carrots:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Carrots
-      Crate of Nether Warts:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Nether Warts
-      Crate of Potatos:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Potatos
+      Emerald Block:
+        material: EMERALD_BLOCK
+        amount: 24
+      Diamond Block:
+        material: DIAMOND_BLOCK
+        amount: 24
+      Gold Ore:
+        material: GOLD_ORE
+        amount: 8
+      Slime Ball:
+        material: SLIME_BALL
+        amount: 8
+      Anvil:
+        material: ANVIL
+        amount: 8
     outputs:
-      Exp Bottle:
-        material: EXP_BOTTLE
-        amount: 516
-  Iron_XP_Bottle_5:
-    name: Brew XP Bottles  - 6
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 1
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+  Forge_Aspect_of_End:
+    name: Forge Aspect of End
+    production_time: 64
     inputs:
-      Crate of Carrots:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Carrots
-      Crate of Cacti:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Cacti
-      Crate of Bread:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Bread
-    outputs:
-      Exp Bottle:
-        material: EXP_BOTTLE
-        amount: 884
-  Iron_XP_Bottle_6:
-    name: Brew XP Bottles  - 7
-    inputs:
-      Crate of Nether Warts:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Nether Warts
-      Crate of Melons:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Melons
-      Crate of Sugar:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Sugar
-      Crate of Cookies:
-        material: WOOD
-        durability: 0
+      Ender Pearl:
+        material: ENDER_PEARL
         amount: 256
-        display_name: Crate of Cookies
-      Crate of Potatos:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Potatos
-      Crate of Pork:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Pork
+      Ender Chest:
+        material: ENDER_CHEST
+        amount: 256
+      Endstone:
+        material: ENDER_STONE
+        amount: 1024
     outputs:
-      Exp Bottle:
-        material: EXP_BOTTLE
-        amount: 1546
-  Iron_XP_Bottle_7:
-    name: Brew XP Bottles  - 8
+      Aspect of End:
+        material: FLINT
+        amount: 1
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+  Forge_Aspect_of_Nether:
+    name: Forge Aspect of Nether
+    production_time: 64
     inputs:
-      Crate of Carrots:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Carrots
-      Crate of Cocoa:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Cocoa
-      Crate of Pumpkins:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Pumpkins
-      Crate of Cacti:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Cacti
-      Crate of Bread:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Bread
-      Crate of Steak:
-        material: WOOD
-        durability: 0
+      Ghast Tears:
+        material: GHAST_TEAR
         amount: 16
-        display_name: Crate of Steak
+      Quartz Ore:
+        material: QUARTZ_ORE
+        amount: 512
+      Glowstone:
+        material: GLOWSTONE
+        amount: 512
     outputs:
-      Exp Bottle:
-        material: EXP_BOTTLE
-        amount: 1546
-  Diamond_XP_Bottle_4:
-    name: Brew XP Bottles  - 5
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 1
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+  Craft_Eye_of_Ender:
+    name: Craft Eye of Ender
+    production_time: 1
     inputs:
-      Crate of Carrots:
-        material: WOOD
-        durability: 0
-        amount: 48
-        display_name: Crate of Carrots
-      Crate of Melons:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Melons
-      Crate of Cacti:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Cacti
-      Crate of Red Roses:
-        material: WOOD
-        durability: 0
-        amount: 4
-        display_name: Crate of Red Roses
-      Crate of Rotten Flesh:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Rotten Flesh
-      Crate of Red Mushrooms:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Red Mushrooms
-      Crate of Vines:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Vines
-      Crate of Bread:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Bread
-      Crate of Pork:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Pork
+       Blaze Powder:
+         material: BLAZE_POWDER
+         amount: 265
+       Ender Pearl:
+         material: ENDER_PEARL
+         amount: 265
     outputs:
-      Emerald Block:
-        material: EMERALD_BLOCK 
-        amount: 66
-  Diamond_XP_Bottle_5:
-    name: Brew XP Bottles  - 6
-    inputs:
-      Crate of Nether Warts:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Nether Warts
-      Crate of Melons:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Melons
-      Crate of Sugar:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Sugar
-      Crate of Yellow Flowers:
-        material: WOOD
-        durability: 0
-        amount: 8
-        display_name: Crate of Yellow Flowers
-      Crate of Rotten Flesh:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Rotten Flesh
-      Crate of Brown Mushrooms:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Brown Mushrooms
-      Crate of Vines:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Vines
-      Crate of Potatoes:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Potatoes
-      Crate of Chicken:
-        material: WOOD
-        durability: 0
-        amount: 8
-        display_name: Crate of Chicken
-    outputs:
-      Emerald Block:
-        material: EMERALD_BLOCK 
-        amount: 66
-  Diamond_XP_Bottle_6:
-    name: Brew XP Bottles  - 7
-    inputs:
-      Crate of Wheat:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Wheat
-      Crate of Cocoa:
-        material: WOOD
-        durability: 0
-        amount: 8
-        display_name: Crate of Cocoa
-      Crate of Pumpkins:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Pumpkins
-      Crate of Cacti:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Cacti
-      Crate of Red Roses:
-        material: WOOD
-        durability: 0
-        amount: 4
-        display_name: Crate of Red Roses
-      Crate of Spider Eyes:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Spider Eyes
-      Crate of Red Mushrooms:
-        material: WOOD
-        durability: 0
-        amount: 8
-        display_name: Crate of Red Mushrooms
-      Crate of Grass:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Grass
-      Crate of Fish:
-        material: WOOD
-        durability: 0
-        amount: 8
-        display_name: Crate of Fish
-    outputs:
-      Emerald Block:
-        material: EMERALD_BLOCK 
-        amount: 66
-  Diamond_XP_Bottle_7:
-    name: Brew XP Bottles  - 8
-    inputs:
-      Crate of Nether Warts:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Nether Warts
-      Crate of Pumpkins:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Pumpkins
-      Crate of Sugar:
-        material: WOOD
-        durability: 0
-        amount: 64
-        display_name: Crate of Sugar
-      Crate of Yellow Flowers:
-        material: WOOD
-        durability: 0
-        amount: 8
-        display_name: Crate of Yellow Flowers
-      Crate of Spider Eyes:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Spider Eyes
-      Crate of Brown Mushrooms:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Brown Mushrooms
-      Crate of Grass:
-        material: WOOD
-        durability: 0
-        amount: 32
-        display_name: Crate of Grass
-      Crate of Cookies:
-        material: WOOD
-        durability: 0
-        amount: 128
-        display_name: Crate of Cookies
-      Crate of Steak:
-        material: WOOD
-        durability: 0
-        amount: 16
-        display_name: Crate of Steak
-    outputs:
-      Emerald Block:
-        material: EMERALD_BLOCK 
-        amount: 66
+       Eye of Ender:
+         material: EYE_OF_ENDER
+         amount: 256
