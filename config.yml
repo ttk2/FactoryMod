@@ -1,4 +1,5 @@
 #Example: production_general
+
 # update_cycle: 20 the period of ticks between which factories are updated
 # maintenance_cycle: 15 the period of ticks between which the maintenance of the factories are updated
 # maintenance_rate: 1 %Modifies the rate at which factories degrade, higher numbers degrade the factories faster
@@ -101,6 +102,7 @@ printing_presses:
     Charcoal:
       material: 'COAL'
       durability: 1
+  fuel_time: 5
   costs:
      construction:
         "Iron block":
@@ -121,10 +123,11 @@ printing_presses:
      plates:
         "Iron ingot":
            material: 'IRON_INGOT'
-           amount: 4
+           amount: 1
         "Gold nugget":
            material: "GOLD_NUGGET"
            amount: 1
+     set_page_time: 5
      repair:
         "Iron block":
            material: 'IRON_BLOCK'
@@ -143,10 +146,11 @@ printing_presses:
            durability: 0
            amount: 1
      pages_per_lot: 32
+     page_lead: 6
      pamphlet_lot:
         Paper:
            material: 'PAPER'
-           amount: 8
+           amount: 4
         Ink:
            material: 'INK_SACK'
            durability: 0
@@ -195,7 +199,6 @@ nether_factory:
   scaling_radius: 5000
   cost_scaling_radius: 5000
   use_fuel_on_teleport: false
-	 
 crafting:
   disable:
   enable:
@@ -238,6 +241,38 @@ crafting:
         Double Stone Slab:
           material: DOUBLE_STEP
 production_factories:
+  Aspect_Factory:
+    name: Arcane Elementizer
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Netherbrick:
+        material: NETHER_BRICK
+        amount: 1536
+      Redstone:
+        material: REDSTONE
+        amount: 1152
+      Netherquartz:
+        material: QUARTZ
+        amount: 576
+    recipes:
+      - Forge_Aspect_of_Terra
+      - Forge_Aspect_of_End
+      - Forge_Aspect_of_Nether
+      - Craft_Eye_of_Ender
+    repair_multiple: 26
+    repair_inputs:
+      Nether Brick:
+        material: NETHER_BRICK
+        amount: 6
+      Redstone:
+        material: REDSTONE
+        amount: 5
+      Netherquartz:
+        material: QUARTZ
+        amount: 2
   Bakery:
     name: Bakery
     fuel:
@@ -2199,7 +2234,6 @@ production_factories:
         durability: 10
       Hardened Clay:
         material: HARD_CLAY
-        durability: 7
   Stained_Glass_Processing:
     name: Stained Glass Processing
     fuel:
@@ -2361,10 +2395,10 @@ production_factories:
       Lime Dye:
         material: INK_SACK
         durability: 10
-      Stained Glass:
+      Gray Stained Glass:
         material: STAINED_GLASS
         durability: 7
-      Stained Glass Pane:
+      Gray Stained Glass Pane:
         material: STAINED_GLASS_PANE
         durability: 7
   Crystallisation_Factory:
@@ -2621,14 +2655,14 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 24
+        amount: 8
       Wheat:
         material: WHEAT
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 24
+        amount: 8
   Baked_Potato:
     name: Bake Potato
     production_time: 24
@@ -2645,14 +2679,14 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 10
+        amount: 5
       Baked Potato:
         material: BAKED_POTATO
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 10
+        amount: 5
   Dye_Black_Wool_Cyan:
     name: Dye Black Wool Cyan
     inputs:
@@ -3167,27 +3201,27 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 14
+        amount: 6
       Carrot:
         material: CARROT_ITEM
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 14
+        amount: 6
   Wood_XP_Bottle_5:
     name: Brew XP Bottles  - 6
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 24
+        amount: 8
       Hay Bale:
         material: HAY_BLOCK
         amount: 143
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 24
+        amount: 8
   Dye_Light_Gray_Wool_Orange:
     name: Dye Light Gray Wool Orange
     inputs:
@@ -3825,14 +3859,14 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 8
+        amount: 4
       Cookie:
         material: COOKIE
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 8
+        amount: 4
   Iron_Chestplate:
     name: Forge Iron Chestplate.
     production_time: 40
@@ -4449,7 +4483,7 @@ production_recipes:
         amount: 64
     outputs:
       Flower Pots:
-        material: FLOWER_POT
+        material: FLOWER_POT_ITEM
         amount: 64
   Smelt_Sandstone:
     name: Smelt Sandstone
@@ -5196,14 +5230,14 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 10
+        amount: 4
       Nether Wart:
         material: NETHER_STALK
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 10
+        amount: 4
   Dye_Pink_Wool_Gray:
     name: Dye Pink Wool Gray
     inputs:
@@ -5381,7 +5415,7 @@ production_recipes:
     outputs:
       Cooked Fish:
         material: COOKED_FISH
-        amount: 128
+        amount: 256
   Dye_Pink_Wool_Black:
     name: Dye Pink Wool Black
     inputs:
@@ -7286,4 +7320,81 @@ production_recipes:
         material: SPONGE
         amount: 32
         display_name: Bastion
-        
+
+  Forge_Aspect_of_Terra:
+    name: Forge Aspect of Terra
+    production_time: 64
+    inputs:
+      Emerald Block:
+        material: EMERALD_BLOCK
+        amount: 24
+      Diamond Block:
+        material: DIAMOND_BLOCK
+        amount: 24
+      Gold Ore:
+        material: GOLD_ORE
+        amount: 8
+      Slime Ball:
+        material: SLIME_BALL
+        amount: 8
+      Anvil:
+        material: ANVIL
+        amount: 8
+    outputs:
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 1
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+  Forge_Aspect_of_End:
+    name: Forge Aspect of End
+    production_time: 64
+    inputs:
+      Ender Pearl:
+        material: ENDER_PEARL
+        amount: 256
+      Ender Chest:
+        material: ENDER_CHEST
+        amount: 256
+      Endstone:
+        material: ENDER_STONE
+        amount: 1024
+    outputs:
+      Aspect of End:
+        material: FLINT
+        amount: 1
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+  Forge_Aspect_of_Nether:
+    name: Forge Aspect of Nether
+    production_time: 64
+    inputs:
+      Ghast Tears:
+        material: GHAST_TEAR
+        amount: 16
+      Quartz Ore:
+        material: QUARTZ_ORE
+        amount: 512
+      Glowstone:
+        material: GLOWSTONE
+        amount: 512
+    outputs:
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 1
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+  Craft_Eye_of_Ender:
+    name: Craft Eye of Ender
+    production_time: 1
+    inputs:
+       Blaze Powder:
+         material: BLAZE_POWDER
+         amount: 265
+       Ender Pearl:
+         material: ENDER_PEARL
+         amount: 265
+    outputs:
+       Eye of Ender:
+         material: EYE_OF_ENDER
+         amount: 256
