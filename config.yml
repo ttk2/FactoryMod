@@ -1924,10 +1924,9 @@ production_factories:
         material: SPAWN_EGG
         durability: 100
         amount: 16
-      Silk touch shears:
-        material: SHEARS
+      Silk touch book:
+        material: ENCHANTED_BOOK
         amount: 1
-        repair_cost: 2
         enchantments:
           Silk Touch 1:
             type: SILK_TOUCH
