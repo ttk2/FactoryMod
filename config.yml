@@ -96,7 +96,6 @@ nether_general:
   teleport_platform_invunerable: false
   regenerate_teleport_block_on_teleport: false
   remove_blocks_above_teleport_platform_on_teleport: true
-
 printing_presses:
   fuel:
     Charcoal:
@@ -7443,3 +7442,4 @@ production_recipes:
        Eye of Ender:
          material: EYE_OF_ENDER
          amount: 256
+         
