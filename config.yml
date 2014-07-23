@@ -83,11 +83,26 @@ production_general:
   update_cycle: 20
   repair_period: 28
   disrepair_period: 14
+nether_general:
+  disable_portals: true
+  nether_scale: 8
+  world_name: world
+  nether_name: world_nether
+  teleport_platform_material_nether_factory: OBSIDIAN
+  marker_material_nether_factory: COAL_BLOCK
+  marker_max_distance: 64
+  allow_reinforcement_creation_above_teleport_platform: false
+  allow_block_placement_above_teleport_platform: true
+  teleport_platform_invunerable: false
+  regenerate_teleport_block_on_teleport: false
+  remove_blocks_above_teleport_platform_on_teleport: true
+
 printing_presses:
   fuel:
     Charcoal:
       material: 'COAL'
       durability: 1
+  fuel_time: 5
   costs:
      construction:
         "Iron block":
@@ -108,10 +123,11 @@ printing_presses:
      plates:
         "Iron ingot":
            material: 'IRON_INGOT'
-           amount: 4
+           amount: 1
         "Gold nugget":
            material: "GOLD_NUGGET"
            amount: 1
+     set_page_time: 5
      repair:
         "Iron block":
            material: 'IRON_BLOCK'
@@ -130,10 +146,11 @@ printing_presses:
            durability: 0
            amount: 1
      pages_per_lot: 32
+     page_lead: 6
      pamphlet_lot:
         Paper:
            material: 'PAPER'
-           amount: 8
+           amount: 4
         Ink:
            material: 'INK_SACK'
            durability: 0
@@ -147,7 +164,7 @@ printing_presses:
            material: 'INK_SACK'
            durability: 2
            amount: 6
-     security_notes_per_lot: 64
+     security_notes_per_lot: 128
 
 crafting:
   disable:
@@ -212,8 +229,8 @@ production_factories:
         amount: 192
     recipes:
       - Baked_Potato
-      - Cookie
-      - Bread
+      - Bake_Cookie
+      - Bake_Bread
       - Bake_Cake
       - Bake_Pumpkin_Pie
     repair_multiple: 26
@@ -530,6 +547,7 @@ production_factories:
       - Smelt_Jungle_Wood
       - Burn_Acacia_Wood
       - Burn_Dark_Oak_Wood
+      - Smelt_Coal
     repair_multiple: 60
     repair_inputs:
       Charcoal:
@@ -715,9 +733,9 @@ production_factories:
     recipes:
       - Smelt_Glass
       - Smelt_Sandstone
-      - Smelt_Glass_panes
+      - Smelt_Glass_Panes
       - Smelt_Bottles
-      - Smelt_Red_sand
+      - Smelt_Red_Sand
       - Smelt_Glass_From_Sandstone
     repair_multiple: 26
     repair_inputs:
@@ -1064,7 +1082,7 @@ production_factories:
         material: WOOL
         durability: 7
   Grill:
-    name: Bakery
+    name: Grill
     fuel:
       Charcoal:
         material: COAL
@@ -1092,6 +1110,7 @@ production_factories:
       - Grilled_Pork
       - Cooked_Beef
       - Cook_Salmon
+      - Bastion_Rations
     repair_multiple: 2
     repair_inputs:
       Cooked Chicken:
@@ -1155,6 +1174,7 @@ production_factories:
       - Iron_XP_Bottle_1
       - Iron_XP_Bottle_2
       - Iron_XP_Bottle_3
+      - Bastion_Smaragdus_Polisher
     repair_multiple: 20
     repair_inputs:
       Iron Ingot:
@@ -1579,7 +1599,7 @@ production_factories:
       - Produce_Powered_Rail
       - Produce_Detector_Rail
       - Produce_Activator_Rail
-      - Procuce_Minecarts
+      - Produce_Minecarts
     repair_multiple: 4
     repair_inputs:
       Iron Ingot:
@@ -1609,7 +1629,7 @@ production_factories:
      Golden Apple:
        material: GOLDEN_APPLE
        amount: 64
-     Slime_ball:
+     Slime ball:
        material: SLIME_BALL
        amount: 16
    recipes:
@@ -1682,7 +1702,7 @@ production_factories:
       Glowstone:
         material: GLOWSTONE
         amount: 256
-      Iron_Ingot:
+      Iron Ingot:
         material: IRON_INGOT
         amount: 576
       Slime ball:
@@ -1707,7 +1727,7 @@ production_factories:
       Glowstone:
         material: GLOWSTONE
         amount: 2
-      Iron_Ingot:
+      Iron Ingot:
         material: IRON_INGOT
         amount: 6
       Slime ball:
@@ -1735,8 +1755,9 @@ production_factories:
       - Craft_Signs
       - Craft_Ladders
       - Craft_Trap_Doors
-      - Craft_Item_frames
+      - Craft_Item_Frames
       - Craft_Bookshelfs
+      - Bastion_Framing
     repair_multiple: 10
     repair_inputs:
       Paper:
@@ -1769,6 +1790,7 @@ production_factories:
       - Smelt_Lapis_Lazuli_Ore
       - Smelt_Redstone_Ore
       - Smelt_Netherquartz_Ore
+      - Bastion_Walls
     repair_multiple: 26
     repair_inputs:
       Lapis Lazuli:
@@ -1805,6 +1827,7 @@ production_factories:
       - Smelt_Iron_Ore
       - Smelt_Gold_Ore
       - Smelt_Diamond_Ore
+      - Bastion_Base
     repair_multiple: 10
     repair_inputs:
       Coal:
@@ -1836,6 +1859,7 @@ production_factories:
       - Smelt_Cracked_Stone_Brick
       - Smelt_Mossy_Stone_Brick
       - Smelt_Chiseled_Stone_Brick
+      - Bastion_Flooring
     repair_multiple: 26
     repair_inputs:
       Stone Brick:
@@ -1889,6 +1913,68 @@ production_factories:
       Grass:
         material: GRASS
         amount: 5
+  Mad_Scientist_Lab:
+    name: Mad Scientist Lab
+    fuel:
+      Emeralds:
+        material: EMERALD
+    inputs:
+      Glass bottles:
+        material: GLASS_BOTTLE
+        amount: 512
+      Pig eggs:
+        material: MONSTER_EGG
+        durability: 90
+        amount: 16
+      Villager eggs:
+        material: MONSTER_EGG
+        durability: 120
+        amount: 16
+      Squid eggs:
+        material: MONSTER_EGG
+        durability: 94
+        amount: 16
+      Horse eggs:
+        material: MONSTER_EGG
+        durability: 100
+        amount: 16
+      Silk touch book:
+        material: ENCHANTED_BOOK
+        amount: 1
+        stored_enchantments:
+          Silk Touch 1:
+            type: SILK_TOUCH
+            level: 1
+    recipes:
+      - Mutate_Pigmen
+      - Infect_Zombies
+      - Mutate_Skeletons
+      - Mutate_Creepers
+      - Mutate_Witches
+      - Mutate_Spiders
+      - Mutate_Cave_Spiders
+      - Mutate_Ghasts
+    repair_multiple: 2
+    repair_inputs:
+      Glass_bottles:
+        material: GLASS_BOTTLE
+        amount: 32
+      Pig eggs:
+        material: MONSTER_EGG
+        durability: 90
+        amount: 1
+      Villager eggs:
+        material: MONSTER_EGG
+        durability: 120
+        amount: 1
+      Squid eggs:
+        material: MONSTER_EGG
+        durability: 94
+        amount: 1
+      Horse eggs:
+        material: MONSTER_EGG
+        durability: 100
+        amount: 1
   Explosives_Factory:
     name: Explosives Factory
     fuel:
@@ -1908,6 +1994,8 @@ production_factories:
     recipes:
       - Produce_TNT
       - Produce_Fire_Charges
+      - Produce_Eyes_of_Ender
+      - Bastion_Silicon_Tetranitratobihydrotrioxycarbon
     repair_multiple: 10
     repair_inputs:
       Sulphur:
@@ -1934,11 +2022,153 @@ production_factories:
       - Forge_Buckets
       - Forge_Iron_Doors
       - Forge_Flint_And_Steel
+      - Bastion_Gearbox
     repair_multiple: 10
     repair_inputs:
-      IRON_INGOT:
-        material: Iron Ingot
+      Iron Ingot:
+        material: IRON_INGOT
         amount: 12
+  Stained_Clay_Processing:
+    name: Stained Clay Processing
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Lapis Lazuli:
+        material: INK_SACK
+        amount: 20
+        durability: 4
+      Gray Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 8
+      Cocoa:
+        material: INK_SACK
+        amount: 20
+        durability: 3
+      Purple Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 5
+      Dandelion Yellow:
+        material: INK_SACK
+        amount: 20
+        durability: 11
+      Ink Sack:
+        material: INK_SACK
+        amount: 20
+      Magenta Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 13
+      Pink Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 9
+      Cyan Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 6
+      Orange Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 14
+      Cactus Green:
+        material: INK_SACK
+        amount: 20
+        durability: 2
+      Bone Meal:
+        material: INK_SACK
+        amount: 20
+        durability: 15
+      Light Gray Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 7
+      Light Blue Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 12
+      Rose Red:
+        material: INK_SACK
+        amount: 20
+        durability: 1
+      Lime Dye:
+        material: INK_SACK
+        amount: 20
+        durability: 10
+      Hardened Clay:
+        material: HARD_CLAY
+        amount: 20
+    recipes:
+      - Dye_Blue_Stained_Clay
+      - Dye_Brown_Stained_Clay
+      - Dye_Purple_Stained_Clay
+      - Dye_Yellow_Stained_Clay
+      - Dye_Black_Stained_Clay
+      - Dye_Magenta_Stained_Clay
+      - Dye_Pink_Stained_Clay
+      - Dye_Cyan_Stained_Clay
+      - Dye_Orange_Stained_Clay
+      - Dye_Gray_Stained_Clay
+      - Dye_Green_Stained_Clay
+      - Dye_White_Stained_Clay
+      - Dye_Light_Gray_Stained_Clay
+      - Dye_Light_Blue_Stained_Clay
+      - Dye_Red_Stained_Clay
+      - Dye_Lime_Stained_Clay
+    repair_multiple: 2
+    repair_inputs:
+      Lapis Lazuli:
+        material: INK_SACK
+        durability: 4
+      Gray Dye:
+        material: INK_SACK
+        durability: 8
+      Cocoa:
+        material: INK_SACK
+        durability: 3
+      Purple Dye:
+        material: INK_SACK
+        durability: 5
+      Dandelion Yellow:
+        material: INK_SACK
+        durability: 11
+      Ink Sack:
+        material: INK_SACK
+      Magenta Dye:
+        material: INK_SACK
+        durability: 13
+      Pink Dye:
+        material: INK_SACK
+        durability: 9
+      Cyan Dye:
+        material: INK_SACK
+        durability: 6
+      Orange Dye:
+        material: INK_SACK
+        durability: 14
+      Cactus Green:
+        material: INK_SACK
+        durability: 2
+      Bone Meal:
+        material: INK_SACK
+        durability: 15
+      Light Gray Dye:
+        material: INK_SACK
+        durability: 7
+      Light Blue Dye:
+        material: INK_SACK
+        durability: 12
+      Rose Red:
+        material: INK_SACK
+        durability: 1
+      Lime Dye:
+        material: INK_SACK
+        durability: 10
+      Hardened Clay:
+        material: HARD_CLAY
   Stained_Glass_Processing:
     name: Stained Glass Processing
     fuel:
@@ -2018,36 +2248,39 @@ production_factories:
         amount: 20
         durability: 7
     recipes:
-      - Dye_Stained_Glass_Blue
-      - Dye_Stained_Glass_Brown
-      - Dye_Stained_Glass_Purple
-      - Dye_Stained_Glass_Yellow
-      - Dye_Stained_Glass_Black
-      - Dye_Stained_Glass_Magenta
-      - Dye_Stained_Glass_Pink
-      - Dye_Stained_Glass_Cyan
-      - Dye_Stained_Glass_Orange
-      - Dye_Stained_Glass_Green
-      - Dye_Stained_Glass_White
-      - Dye_Stained_Glass_Light_Gray
-      - Dye_Stained_Glass_Light_Blue
-      - Dye_Stained_Glass_Red
-      - Dye_Stained_Glass_Lime
-      - Dye_Stained_Glass_Pane_Blue
-      - Dye_Stained_Glass_Pane_Brown
-      - Dye_Stained_Glass_Pane_Purple
-      - Dye_Stained_Glass_Pane_Yellow
-      - Dye_Stained_Glass_Pane_Black
-      - Dye_Stained_Glass_Pane_Magenta
-      - Dye_Stained_Glass_Pane_Pink
-      - Dye_Stained_Glass_Pane_Cyan
-      - Dye_Stained_Glass_Pane_Orange
-      - Dye_Stained_Glass_Pane_Green
-      - Dye_Stained_Glass_Pane_White
-      - Dye_Stained_Glass_Pane_Light_Gray
-      - Dye_Stained_Glass_Pane_Light_Blue
-      - Dye_Stained_Glass_Pane_Red
-      - Dye_Stained_Glass_Pane_Lime
+      - Dye_Blue_Stained_Glass
+      - Dye_Brown_Stained_Glass
+      - Dye_Purple_Stained_Glass
+      - Dye_Yellow_Stained_Glass
+      - Dye_Black_Stained_Glass
+      - Dye_Magenta_Stained_Glass
+      - Dye_Pink_Stained_Glass
+      - Dye_Cyan_Stained_Glass
+      - Dye_Orange_Stained_Glass
+      - Dye_Gray_Stained_Glass
+      - Dye_Green_Stained_Glass
+      - Dye_White_Stained_Glass
+      - Dye_Light_Gray_Stained_Glass
+      - Dye_Light_Blue_Stained_Glass
+      - Dye_Red_Stained_Glass
+      - Dye_Lime_Stained_Glass
+      - Dye_Blue_Stained_Glass_Pane
+      - Dye_Brown_Stained_Glass_Pane
+      - Dye_Purple_Stained_Glass_Pane
+      - Dye_Yellow_Stained_Glass_Pane
+      - Dye_Black_Stained_Glass_Pane
+      - Dye_Magenta_Stained_Glass_Pane
+      - Dye_Pink_Stained_Glass_Pane
+      - Dye_Cyan_Stained_Glass_Pane
+      - Dye_Orange_Stained_Glass_Pane
+      - Dye_Gray_Stained_Glass_Pane
+      - Dye_Green_Stained_Glass_Pane
+      - Dye_White_Stained_Glass_Pane
+      - Dye_Light_Gray_Stained_Glass_Pane
+      - Dye_Light_Blue_Stained_Glass_Pane
+      - Dye_Red_Stained_Glass_Pane
+      - Dye_Lime_Stained_Glass_Pane
+      - Bastion_Objet_Dart
     repair_multiple: 2
     repair_inputs:
       Lapis Lazuli:
@@ -2097,153 +2330,11 @@ production_factories:
       Lime Dye:
         material: INK_SACK
         durability: 10
-      Stained Glass:
+      Gray Stained Glass:
         material: STAINED_GLASS
         durability: 7
-      Stained Glass Pane:
+      Gray Stained Glass Pane:
         material: STAINED_GLASS_PANE
-        durability: 7
-  Hard_Clay_Processing:
-    name: Hardened Clay Processing
-    fuel:
-      Charcoal:
-        material: COAL
-        durability: 1
-    inputs:
-      Lapis Lazuli:
-        material: INK_SACK
-        amount: 20
-        durability: 4
-      Gray Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 8
-      Cocoa:
-        material: INK_SACK
-        amount: 20
-        durability: 3
-      Purple Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 5
-      Dandelion Yellow:
-        material: INK_SACK
-        amount: 20
-        durability: 11
-      Ink Sack:
-        material: INK_SACK
-        amount: 20
-      Magenta Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 13
-      Pink Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 9
-      Cyan Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 6
-      Orange Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 14
-      Cactus Green:
-        material: INK_SACK
-        amount: 20
-        durability: 2
-      Bone Meal:
-        material: INK_SACK
-        amount: 20
-        durability: 15
-      Light Gray Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 7
-      Light Blue Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 12
-      Rose Red:
-        material: INK_SACK
-        amount: 20
-        durability: 1
-      Lime Dye:
-        material: INK_SACK
-        amount: 20
-        durability: 10
-      Hardened Clay:
-        material: HARD_CLAY
-        amount: 20
-        durability: 7
-    recipes:
-      - Dye_Hard_Clay_Blue
-      - Dye_Hard_Clay_Brown
-      - Dye_Hard_Clay_Purple
-      - Dye_Hard_Clay_Yellow
-      - Dye_Hard_Clay_Black
-      - Dye_Hard_Clay_Magenta
-      - Dye_Hard_Clay_Pink
-      - Dye_Hard_Clay_Cyan
-      - Dye_Hard_Clay_Orange
-      - Dye_Hard_Clay_Green
-      - Dye_Hard_Clay_White
-      - Dye_Hard_Clay_Light_Gray
-      - Dye_Hard_Clay_Light_Blue
-      - Dye_Hard_Clay_Red
-      - Dye_Hard_Clay_Lime
-    repair_multiple: 2
-    repair_inputs:
-      Lapis Lazuli:
-        material: INK_SACK
-        durability: 4
-      Gray Dye:
-        material: INK_SACK
-        durability: 8
-      Cocoa:
-        material: INK_SACK
-        durability: 3
-      Purple Dye:
-        material: INK_SACK
-        durability: 5
-      Dandelion Yellow:
-        material: INK_SACK
-        durability: 11
-      Ink Sack:
-        material: INK_SACK
-      Magenta Dye:
-        material: INK_SACK
-        durability: 13
-      Pink Dye:
-        material: INK_SACK
-        durability: 9
-      Cyan Dye:
-        material: INK_SACK
-        durability: 6
-      Orange Dye:
-        material: INK_SACK
-        durability: 14
-      Cactus Green:
-        material: INK_SACK
-        durability: 2
-      Bone Meal:
-        material: INK_SACK
-        durability: 15
-      Light Gray Dye:
-        material: INK_SACK
-        durability: 7
-      Light Blue Dye:
-        material: INK_SACK
-        durability: 12
-      Rose Red:
-        material: INK_SACK
-        durability: 1
-      Lime Dye:
-        material: INK_SACK
-        durability: 10
-      Hardened Clay:
-        material: HARD_CLAY
         durability: 7
   Crystallisation_Factory:
     name: Crystallisation Factory
@@ -2261,6 +2352,7 @@ production_factories:
         durability: 1
     recipes:
       - Compact_Ice
+      - Bastion_Pure_Ice
     repair_multiple: 10
     repair_inputs:
       Ice:
@@ -2430,20 +2522,115 @@ production_factories:
     repair_inputs:
       Stick:
         material: STICK
+  Bastion_Factory:
+    name: Bastion Factory
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Silicon Tetranitratobihydrotrioxycarbon:
+        material: FIREWORK_CHARGE
+        amount: 64
+        display_name: Silicon Tetranitratobihydrotrioxycarbon
+        lore: An item used to create a Bastion Block
+      Smaragdus:
+        material: EMERALD
+        amount: 64
+        display_name: Smaragdus
+        lore: An item used to create a Bastion Block
+      Flooring:
+        material: CLAY_BRICK
+        amount: 8
+        display_name: Flooring
+        lore: An item used to create a Bastion Block
+      Framing:
+        material: STICK
+        amount: 8
+        display_name: Framing
+        lore: An item used to create a Bastion Block
+      Gearbox:
+        material: WATCH
+        amount: 8
+        display_name: Gearbox
+        lore: An item used to create a Bastion Block
+      Base:
+        material: IRON_INGOT
+        amount: 8
+        display_name: Base
+        lore: An item used to create a Bastion Block
+      Walls:
+        material: INK_SACK
+        amount: 32
+        durablity: 4
+        display_name: Walls
+        lore: An item used to create a Bastion Block
+    recipes:
+       - Bastion_Block
+    repair_multiple: 16
+    repair_inputs:
+      Pure Ice:
+        material: QUARTZ
+        amount: 1
+        display_name: Pure Ice
+        lore: An item used to repair the Bastion Factory
+      Silicon Tetranitratobihydrotrioxycarbon:
+        material: FIREWORK_CHARGE
+        amount: 1
+        display_name: Silicon Tetranitratobihydrotrioxycarbon
+        lore: An item used to create a Bastion Block
+      Smaragdus:
+        material: EMERALD
+        amount: 1
+        display_name: Smaragdus
+        lore: An item used to create a Bastion Block
+nether_factory:
+  name: Nether Factory
+  fuel:
+    Charcoal:
+      material: COAL
+      durability: 1
+  costs:
+    construction:
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 8
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 8
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+      Aspect of END:
+        material: FLINT
+        amount: 8
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+    repair:
+       Diamond block:
+         material: DIAMOND_BLOCK
+         amount: 1
+    repair_multiple: 1    
+  fuel_time: 10
+  repair_time: 12
+  scaling_radius: 5000
+  cost_scaling_radius: 5000
+  use_fuel_on_teleport: false
 production_recipes:
   Wood_XP_Bottle_0:
     name: Brew XP Bottles  - 1
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 24
+        amount: 8
       Wheat:
         material: WHEAT
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 24
+        amount: 8
   Baked_Potato:
     name: Bake Potato
     production_time: 24
@@ -2460,14 +2647,14 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 10
+        amount: 5
       Baked Potato:
         material: BAKED_POTATO
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 10
+        amount: 5
   Dye_Black_Wool_Cyan:
     name: Dye Black Wool Cyan
     inputs:
@@ -2982,27 +3169,27 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 14
+        amount: 6
       Carrot:
         material: CARROT_ITEM
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 14
+        amount: 6
   Wood_XP_Bottle_5:
     name: Brew XP Bottles  - 6
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 24
+        amount: 8
       Hay Bale:
         material: HAY_BLOCK
         amount: 143
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 24
+        amount: 8
   Dye_Light_Gray_Wool_Orange:
     name: Dye Light Gray Wool Orange
     inputs:
@@ -3618,8 +3805,22 @@ production_recipes:
         amount: 16
     outputs:
       Fire Charge:
-        material: FIRE_CHARGE
+        material: FIREBALL
         amount: 128
+  Produce_Eyes_of_Ender:
+    name: Produce Eyes of Ender
+    production_time: 8
+    inputs:
+      Ender pearls:
+        material: ENDER_PEARL
+        amount: 32
+      Blaze Powder:
+        material: BLAZE_POWDER
+        amount: 16
+    outputs:
+      Eyes of Ender:
+        material: EYE_OF_ENDER
+        amount: 32
   Dye_White_Wool_Green:
     name: Dye White Wool Green
     inputs:
@@ -3640,14 +3841,14 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 8
+        amount: 4
       Cookie:
         material: COOKIE
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 8
+        amount: 4
   Iron_Chestplate:
     name: Forge Iron Chestplate.
     production_time: 40
@@ -3899,7 +4100,7 @@ production_recipes:
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 128
+        amount: 128 
   Diamond_XP_Bottle_3:
     name: Brew XP Bottles  - 4
     inputs:
@@ -4069,6 +4270,7 @@ production_recipes:
         amount: 4
         durability: 6
     outputs:
+
       Cyan Wool:
         material: WOOL
         amount: 64
@@ -4187,6 +4389,13 @@ production_recipes:
       Milk Bucket:
         material: MILK_BUCKET
         amount: 18
+    outputs:
+      Cake:
+        material: CAKE
+        amount: 24
+      Bucket:
+        material: BUCKET
+        amount: 18
   Bake_Pumpkin_Pie:
     name: Bake Pumpkin Pie
     production_time: 24
@@ -4257,7 +4466,7 @@ production_recipes:
         amount: 64
     outputs:
       Flower Pots:
-        material: FLOWER_POT
+        material: FLOWER_POT_ITEM
         amount: 64
   Smelt_Sandstone:
     name: Smelt Sandstone
@@ -4274,12 +4483,12 @@ production_recipes:
     name: Smelt Glass Panes
     production_time: 32
     inputs:
-      Sand:
+      Glass:
         material: GLASS
         amount: 192
     outputs:
       Glass Pane:
-        material: GLASS_PANE
+        material: THIN_GLASS
         amount: 768
   Smelt_Bottles:
     name: Smelt Bottles
@@ -4315,6 +4524,9 @@ production_recipes:
       Glass:
         material: GLASS
         amount: 768
+    production_time: 6
+  Smelt_Lapis_Lazuli_Ore:
+    name: Smelt Lapis Lazuli Ore
     production_time: 6
     inputs:
       Lapis Ore:
@@ -5001,14 +5213,14 @@ production_recipes:
     inputs:
       Glass Bottle:
         material: GLASS_BOTTLE
-        amount: 10
+        amount: 4
       Nether Wart:
         material: NETHER_STALK
         amount: 1280
     outputs:
       Exp Bottle:
         material: EXP_BOTTLE
-        amount: 10
+        amount: 4
   Dye_Pink_Wool_Gray:
     name: Dye Pink Wool Gray
     inputs:
@@ -5186,7 +5398,7 @@ production_recipes:
     outputs:
       Cooked Fish:
         material: COOKED_FISH
-        amount: 128
+        amount: 256
   Dye_Pink_Wool_Black:
     name: Dye Pink Wool Black
     inputs:
@@ -5692,7 +5904,7 @@ production_recipes:
   Produce_Leads:
     name: Produce Leads
     inputs:
-      Slime_Ball:
+      Slime Ball:
         material: SLIME_BALL
         amount: 4
       String:
@@ -5769,7 +5981,7 @@ production_recipes:
         amount: 48
     outputs:
       Item Frames:
-        material: ITEM_FRAMES
+        material: ITEM_FRAME
         amount: 64
   Craft_Bookshelfs:
     name: Craft Bookshelfs
@@ -5782,7 +5994,7 @@ production_recipes:
         material: LEATHER
         amount: 48
       Paper:
-        material: STRING
+        material: PAPER
         amount: 192
     outputs:
       Bookshelf:
@@ -5868,8 +6080,8 @@ production_recipes:
   Dye_White_Stained_Glass:
     name: Dye White Stained Glass
     inputs:
-      White Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Bone Meal:
         material: INK_SACK
@@ -5883,8 +6095,8 @@ production_recipes:
   Dye_Orange_Stained_Glass:
     name: Dye Orange Stained Glass
     inputs:
-      Orange Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Orange Dye:
         material: INK_SACK
@@ -5898,8 +6110,8 @@ production_recipes:
   Dye_Magenta_Stained_Glass:
     name: Dye Magenta Stained Glass
     inputs:
-      Magenta Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Magenta Dye:
         material: INK_SACK
@@ -5913,8 +6125,8 @@ production_recipes:
   Dye_Light_Blue_Stained_Glass:
     name: Dye Light Blue Stained Glass
     inputs:
-      Light Blue Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Light Blue Dye:
         material: INK_SACK
@@ -5928,8 +6140,8 @@ production_recipes:
   Dye_Yellow_Stained_Glass:
     name: Dye Yellow Stained Glass
     inputs:
-      Yellow Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Dandelion Yellow:
         material: INK_SACK
@@ -5943,8 +6155,8 @@ production_recipes:
   Dye_Lime_Stained_Glass:
     name: Dye Lime Stained Glass
     inputs:
-      Lime Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Lime Dye:
         material: INK_SACK
@@ -5958,8 +6170,8 @@ production_recipes:
   Dye_Pink_Stained_Glass:
     name: Dye Pink Stained Glass
     inputs:
-      Pink Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Pink Dye:
         material: INK_SACK
@@ -5973,8 +6185,8 @@ production_recipes:
   Dye_Gray_Stained_Glass:
     name: Dye Gray Stained Glass
     inputs:
-      Gray Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Gray Dye:
         material: INK_SACK
@@ -5988,8 +6200,8 @@ production_recipes:
   Dye_Light_Gray_Stained_Glass:
     name: Dye Light Gray Stained Glass
     inputs:
-      Light Gray Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Light Gray Dye:
         material: INK_SACK
@@ -6003,8 +6215,8 @@ production_recipes:
   Dye_Cyan_Stained_Glass:
     name: Dye Cyan Stained Glass
     inputs:
-      Cyan Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Cyan Dye:
         material: INK_SACK
@@ -6018,8 +6230,8 @@ production_recipes:
   Dye_Purple_Stained_Glass:
     name: Dye Purple Stained Glass
     inputs:
-      Purple Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Purple Dye:
         material: INK_SACK
@@ -6033,8 +6245,8 @@ production_recipes:
   Dye_Blue_Stained_Glass:
     name: Dye Blue Stained Glass
     inputs:
-      Blue Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Lapis Lazuli:
         material: INK_SACK
@@ -6048,8 +6260,8 @@ production_recipes:
   Dye_Brown_Stained_Glass:
     name: Dye Brown Stained Glass
     inputs:
-      Brown Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Coco Beans:
         material: INK_SACK
@@ -6063,8 +6275,8 @@ production_recipes:
   Dye_Green_Stained_Glass:
     name: Dye Green Stained Glass
     inputs:
-      Green Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Cactus Green:
         material: INK_SACK
@@ -6078,8 +6290,8 @@ production_recipes:
   Dye_Red_Stained_Glass:
     name: Dye Red Stained Glass
     inputs:
-      Red Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Rose Red:
         material: INK_SACK
@@ -6093,8 +6305,8 @@ production_recipes:
   Dye_Black_Stained_Glass:
     name: Dye Black Stained Glass
     inputs:
-      Black Stained Glass:
-        material: STAINED_GLASS
+      Glass:
+        material: GLASS
         amount: 64
       Ink Sack:
         material: INK_SACK
@@ -6108,8 +6320,8 @@ production_recipes:
   Dye_White_Stained_Glass_Pane:
     name: Dye White Stained Glass Pane
     inputs:
-      White Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Bone Meal:
         material: INK_SACK
@@ -6123,8 +6335,8 @@ production_recipes:
   Dye_Orange_Stained_Glass_Pane:
     name: Dye Orange Stained Glass Pane
     inputs:
-      Orange Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Orange Dye:
         material: INK_SACK
@@ -6138,8 +6350,8 @@ production_recipes:
   Dye_Magenta_Stained_Glass_Pane:
     name: Dye Magenta Stained Glass Pane
     inputs:
-      Magenta Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Magenta Dye:
         material: INK_SACK
@@ -6153,8 +6365,8 @@ production_recipes:
   Dye_Light_Blue_Stained_Glass_Pane:
     name: Dye Light Blue Stained Glass Pane
     inputs:
-      Light Blue Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Light Blue Dye:
         material: INK_SACK
@@ -6168,8 +6380,8 @@ production_recipes:
   Dye_Yellow_Stained_Glass_Pane:
     name: Dye Yellow Stained Glass Pane
     inputs:
-      Yellow Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Dandelion Yellow:
         material: INK_SACK
@@ -6183,8 +6395,8 @@ production_recipes:
   Dye_Lime_Stained_Glass_Pane:
     name: Dye Lime Stained Glass Pane
     inputs:
-      Lime Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Lime Dye:
         material: INK_SACK
@@ -6198,8 +6410,8 @@ production_recipes:
   Dye_Pink_Stained_Glass_Pane:
     name: Dye Pink Stained Glass Pane
     inputs:
-      Pink Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Pink Dye:
         material: INK_SACK
@@ -6213,8 +6425,8 @@ production_recipes:
   Dye_Gray_Stained_Glass_Pane:
     name: Dye Gray Stained Glass Pane
     inputs:
-      Gray Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Gray Dye:
         material: INK_SACK
@@ -6228,8 +6440,8 @@ production_recipes:
   Dye_Light_Gray_Stained_Glass_Pane:
     name: Dye Light Gray Stained Glass Pane
     inputs:
-      Light Gray Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Light Gray Dye:
         material: INK_SACK
@@ -6243,8 +6455,8 @@ production_recipes:
   Dye_Cyan_Stained_Glass_Pane:
     name: Dye Cyan Stained Glass Pane
     inputs:
-      Cyan Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Cyan Dye:
         material: INK_SACK
@@ -6258,8 +6470,8 @@ production_recipes:
   Dye_Purple_Stained_Glass_Pane:
     name: Dye Purple Stained Glass Pane
     inputs:
-      Purple Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Purple Dye:
         material: INK_SACK
@@ -6273,8 +6485,8 @@ production_recipes:
   Dye_Blue_Stained_Glass_Pane:
     name: Dye Blue Stained Glass Pane
     inputs:
-      Blue Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Lapis Lazuli:
         material: INK_SACK
@@ -6288,8 +6500,8 @@ production_recipes:
   Dye_Brown_Stained_Glass_Pane:
     name: Dye Brown Stained Glass Pane
     inputs:
-      Brown Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Coco Beans:
         material: INK_SACK
@@ -6303,8 +6515,8 @@ production_recipes:
   Dye_Green_Stained_Glass_Pane:
     name: Dye Green Stained Glass Pane
     inputs:
-      Green Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Cactus Green:
         material: INK_SACK
@@ -6318,8 +6530,8 @@ production_recipes:
   Dye_Red_Stained_Glass_Pane:
     name: Dye Red Stained Glass Pane
     inputs:
-      Red Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Rose Red:
         material: INK_SACK
@@ -6333,8 +6545,8 @@ production_recipes:
   Dye_Black_Stained_Glass_Pane:
     name: Dye Black Stained Glass Pane
     inputs:
-      Black Stained Glass Pane:
-        material: STAINED_GLASS_PANE
+      Glass Pane:
+        material: THIN_GLASS
         amount: 64
       Ink Sack:
         material: INK_SACK
@@ -6344,10 +6556,11 @@ production_recipes:
       Black Stained Glass Pane:
         material: STAINED_GLASS_PANE
         amount: 64
+        durability: 15
   Dye_White_Stained_Clay:
     name: Dye White Stained Clay
     inputs:
-      White Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Bone Meal:
@@ -6356,13 +6569,13 @@ production_recipes:
         durability: 15
     outputs:
       White Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 0
   Dye_Orange_Stained_Clay:
     name: Dye Orange Stained Clay
     inputs:
-      Orange Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Orange Dye:
@@ -6371,13 +6584,13 @@ production_recipes:
         durability: 14
     outputs:
       Orange Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 1
   Dye_Magenta_Stained_Clay:
     name: Dye Magenta Stained Clay
     inputs:
-      Magenta Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Magenta Dye:
@@ -6385,14 +6598,14 @@ production_recipes:
         amount: 4
         durability: 13
     outputs:
-      Magenta Stained Clay:
-        material: HARD_CLAY
+      Hardened Clay:
+        material: STAINED_CLAY
         amount: 64
         durability: 2
   Dye_Light_Blue_Stained_Clay:
     name: Dye Light Blue Stained Clay
     inputs:
-      Light Blue Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Light Blue Dye:
@@ -6401,13 +6614,13 @@ production_recipes:
         durability: 12
     outputs:
       Light Blue Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 3
   Dye_Yellow_Stained_Clay:
     name: Dye Yellow Stained Clay
     inputs:
-      Yellow Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Dandelion Yellow:
@@ -6415,14 +6628,14 @@ production_recipes:
         amount: 4
         durability: 11
     outputs:
-      Yellow Stained Clay:
-        material: HARD_CLAY
+      Hardened Clay:
+        material: STAINED_CLAY
         amount: 64
         durability: 4
   Dye_Lime_Stained_Clay:
     name: Dye Lime Stained Clay
     inputs:
-      Lime Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Lime Dye:
@@ -6430,14 +6643,14 @@ production_recipes:
         amount: 4
         durability: 10
     outputs:
-      Lime Stained Clay:
-        material: HARD_CLAY
+      Hardened Clay:
+        material: STAINED_CLAY
         amount: 64
         durability: 5
   Dye_Pink_Stained_Clay:
     name: Dye Pink Stained Clay
     inputs:
-      Pink Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Pink Dye:
@@ -6446,13 +6659,13 @@ production_recipes:
         durability: 9
     outputs:
       Pink Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 6
   Dye_Gray_Stained_Clay:
     name: Dye Gray Stained Clay
     inputs:
-      Gray Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Gray Dye:
@@ -6461,13 +6674,13 @@ production_recipes:
         durability: 8
     outputs:
       Gray Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 7
   Dye_Light_Gray_Stained_Clay:
     name: Dye Light Gray Stained Clay
     inputs:
-      Light Gray Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Light Gray Dye:
@@ -6476,13 +6689,13 @@ production_recipes:
         durability: 7
     outputs:
       Light Gray Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 8
   Dye_Cyan_Stained_Clay:
     name: Dye Cyan Stained Clay
     inputs:
-      Cyan Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Cyan Dye:
@@ -6491,13 +6704,13 @@ production_recipes:
         durability: 6
     outputs:
       Cyan Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 9
   Dye_Purple_Stained_Clay:
     name: Dye Purple Stained Clay
     inputs:
-      Purple Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Purple Dye:
@@ -6506,13 +6719,13 @@ production_recipes:
         durability: 5
     outputs:
       Purple Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 10
   Dye_Blue_Stained_Clay:
     name: Dye Blue Stained Clay
     inputs:
-      Blue Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Lapis Lazuli:
@@ -6521,13 +6734,13 @@ production_recipes:
         durability: 4
     outputs:
       Blue Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 11
   Dye_Brown_Stained_Clay:
     name: Dye Brown Stained Clay
     inputs:
-      Brown Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Coco Beans:
@@ -6536,13 +6749,13 @@ production_recipes:
         durability: 3
     outputs:
       Brown Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 12
   Dye_Green_Stained_Clay:
     name: Dye Green Stained Clay
     inputs:
-      Green Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Cactus Green:
@@ -6551,13 +6764,13 @@ production_recipes:
         durability: 2
     outputs:
       Green Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 13
   Dye_Red_Stained_Clay:
     name: Dye Red Stained Clay
     inputs:
-      Red Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Rose Red:
@@ -6566,13 +6779,13 @@ production_recipes:
         durability: 1
     outputs:
       Red Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
         durability: 14
   Dye_Black_Stained_Clay:
     name: Dye Black Stained Clay
     inputs:
-      Black Stained Clay:
+      Hardened Clay:
         material: HARD_CLAY
         amount: 64
       Ink Sack:
@@ -6581,9 +6794,8 @@ production_recipes:
         durability: 0
     outputs:
       Black Stained Clay:
-        material: HARD_CLAY
+        material: STAINED_CLAY
         amount: 64
-        durability: 15
         durability: 15
   Mutate_Spruce_Saplings:
     name: Mutate Spruce Saplings
@@ -6605,7 +6817,7 @@ production_recipes:
         material: SAPLING
         amount: 64
     outputs:
-      Spruce Sapling:
+      Birch Sapling:
         material: SAPLING
         amount: 64
         durability: 2
@@ -6617,7 +6829,7 @@ production_recipes:
         material: SAPLING
         amount: 64
     outputs:
-      Spruce Sapling:
+      Jungle Sapling:
         material: SAPLING
         amount: 64
         durability: 3
@@ -6629,7 +6841,7 @@ production_recipes:
         material: SAPLING
         amount: 64
     outputs:
-      Spruce Sapling:
+      Acacia Sapling:
         material: SAPLING
         amount: 64
         durability: 4
@@ -6641,7 +6853,7 @@ production_recipes:
         material: SAPLING
         amount: 64
     outputs:
-      Spruce Sapling:
+      Dark Oak Sapling:
         material: SAPLING
         amount: 64
         durability: 5
@@ -6669,6 +6881,168 @@ production_recipes:
         material: DIRT
         amount: 64
         durability: 2
+  Mutate_Pigmen:
+    name: Mutate Pigmen
+    production_time: 4
+    inputs:
+      Pig eggs:
+        material: MONSTER_EGG
+        durability: 90
+        amount: 16
+      Villager eggs:
+        material: MONSTER_EGG
+        durability: 120
+        amount: 16
+    outputs:
+      Pigman eggs:
+        material: MONSTER_EGG
+        durability: 57
+        amount: 16
+  Infect_Zombies:
+    name: Infect Zombies
+    production_time: 4
+    inputs:
+      Villager eggs:
+        material: MONSTER_EGG
+        durability: 120
+        amount: 16
+      Rotten flesh:
+        material: ROTTEN_FLESH
+        amount: 512
+    outputs:
+      Zombie eggs:
+        material: MONSTER_EGG
+        durability: 54
+        amount: 8
+  Mutate_Skeletons:
+    name: Mutate Skeletons
+    production_time: 4
+    inputs:
+      Zombie eggs:
+        material: MONSTER_EGG
+        durability: 54
+        amount: 16
+      Bones:
+        material: BONE
+        amount: 256
+      Blaze powder:
+        material: BLAZE_POWDER
+        amount: 64
+    outputs:
+      Skeleton eggs:
+        material: MONSTER_EGG
+        durability: 51
+        amount: 8
+  Mutate_Creepers:
+    name: Mutate Creepers
+    production_time: 4
+    inputs:
+      Skeleton eggs:
+        material: MONSTER_EGG
+        durability: 51
+        amount: 16
+      Blaze powder:
+        material: BLAZE_POWDER
+        amount: 32
+      TNT:
+        material: TNT
+        amount: 16
+      Lime wool:
+        material: WOOL
+        durability: 5
+        amount: 32
+    outputs:
+      Creeper eggs:
+        material: MONSTER_EGG
+        durability: 50
+        amount: 8
+  Mutate_Witches:
+    name: Mutate Witches
+    production_time: 32
+    inputs:
+      Villager eggs:
+        material: MONSTER_EGG
+        durability: 120
+        amount: 16
+      Ghast tears:
+        material: GHAST_TEAR
+        amount: 16
+    outputs:
+      Witch eggs:
+        material: MONSTER_EGG
+        durability: 66
+        amount: 4
+  Mutate_Spiders:
+    name: Mutate Spiders
+    production_time: 16
+    inputs:
+      Squid eggs: # For the legs
+        material: MONSTER_EGG
+        durability: 94
+        amount: 16
+      Cow eggs: # For food
+        material: MONSTER_EGG
+        durability: 92
+        amount: 16
+      Spider eyes:
+        material: SPIDER_EYE
+        amount: 256
+    outputs:
+      Spider eggs:
+        material: MONSTER_EGG
+        durability: 52
+        amount: 4
+  Mutate_Cave_Spiders:
+    name: Mutate Cave Spiders
+    production_time: 16
+    inputs:
+      Spider eggs:
+        material: MONSTER_EGG
+        durability: 52
+        amount: 16
+      Poison potatoes:
+        material: POISONOUS_POTATO
+        amount: 128
+      Spider eyes:
+        material: SPIDER_EYE
+        amount: 256
+    outputs:
+      Cave spider eggs:
+        material: MONSTER_EGG
+        durability: 59
+        amount: 8
+  Mutate_Ghasts:
+    name: Mutate Ghasts
+    production_time: 32
+    inputs:
+      Ghast tears:
+        material: GHAST_TEAR
+        amount: 8
+      Fire charges: # Ammunition
+        material: FIREBALL
+        amount: 64
+      Dispensers: # Fire!
+        material: DISPENSER
+        amount: 4
+      White carpets: # To make a balloon
+        material: CARPET
+        amount: 256
+      Furnaces: # To heat air
+        material: FURNACE
+        amount: 4
+      Charcoal: # To fuel the furnace
+        material: COAL
+        durability: 1
+        amount: 256
+      Villager eggs: # Operator
+        material: MONSTER_EGG
+        durability: 120
+        amount: 4
+    outputs:
+      Ghast eggs:
+        material: MONSTER_EGG
+        durability: 56
+        amount: 4
   Compact_Ice:
     name: Compact Ice
     production_time: 32
@@ -6680,4 +7054,392 @@ production_recipes:
       Packed_Ice:
         material: PACKED_ICE
         amount: 576
-
+  Bastion_Walls:
+    name: Walls
+    production_time: 2
+    inputs:
+      Lapis Ore:
+        material: LAPIS_ORE 
+        amount: 8
+      Cracked Stone Brick:
+        material: SMOOTH_BRICK
+        amount: 32
+        durability: 2
+    outputs:
+      Walls:
+        material: INK_SACK
+        amount: 4
+        durablity: 4
+        display_name: Walls
+        lore: An item used to create a Bastion Block
+  Bastion_Base:
+    name: Base
+    production_time: 2
+    inputs:
+      Diamond Ore:
+        material: DIAMOND_ORE
+        amount: 16
+      Redstone Ore:
+        material: REDSTONE_ORE
+        amount: 32
+    outputs:
+      Base:
+        material: IRON_INGOT
+        amount: 1
+        display_name: Base
+        lore: An item used to create a Bastion Block
+  Bastion_Gearbox:
+    name: Gearbox
+    production_time: 2
+    inputs:
+      Iron Block:
+        material: IRON_BLOCK
+        amount: 4
+      Gold Ore:
+        material: GOLD_ORE
+        amount: 8
+    outputs:
+      Gearbox:
+        material: WATCH
+        amount: 1
+        display_name: Gearbox
+        lore: An item used to create a Bastion Block
+  Bastion_Objet_Dart:
+    name: Objet d'art
+    production_time: 2
+    inputs:      
+      Lapis Lazuli:
+        material: INK_SACK
+        amount: 16
+        durability: 4
+      Gray Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 8
+      Cocoa:
+        material: INK_SACK
+        amount: 16
+        durability: 3
+      Purple Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 5
+      Dandelion Yellow:
+        material: INK_SACK
+        amount: 16
+        durability: 11
+      Ink Sack:
+        material: INK_SACK
+        amount: 16
+        durability: 0
+      Magenta Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 13
+      Pink Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 9
+      Cyan Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 6
+      Orange Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 14
+      Cactus Green:
+        material: INK_SACK
+        amount: 16
+        durability: 2
+      Bone Meal:
+        material: INK_SACK
+        amount: 16
+        durability: 15
+      Light Gray Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 7
+      Light Blue Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 12
+      Rose Red:
+        material: INK_SACK
+        amount: 16
+        durability: 1
+      Lime Dye:
+        material: INK_SACK
+        amount: 16
+        durability: 10
+      Red Sand:
+        material: SAND
+        amount: 256
+        durability: 1
+    outputs:
+      Objet d'art:
+        material: FLINT
+        amount: 1
+        display_name: Objet d'art
+        lore: An item used to create a Bastion Block
+  Bastion_Framing:
+    name: Framing
+    inputs:
+      Chest:
+        material: CHEST
+        amount: 64
+      Iron Block:
+        material: IRON_BLOCK
+        amount: 4
+    outputs:
+      Framing:
+        material: STICK
+        amount: 1
+        display_name: Framing
+        lore: An item used to create a Bastion Block
+  Bastion_Flooring:
+    name: Flooring
+    inputs:
+      Clay Ball:
+        material: CLAY_BALL
+        amount: 32
+      Nether Brick:
+        material: NETHER_BRICK
+        amount: 64
+    outputs:
+      Flooring:
+        material: CLAY_BRICK
+        amount: 1
+        display_name: Flooring
+        lore: An item used to create a Bastion Block
+  Bastion_Rations:
+    name: Rations
+    inputs:
+      Wheat:
+        material: WHEAT
+        amount: 256
+      Bowl:
+        material: BOWL
+        amount: 32
+    outputs:
+      Rations:
+        material: MUSHROOM_SOUP
+        amount: 32
+        display_name: Rations
+        lore: An item used to create a Bastion Block
+  Bastion_Smaragdus_Polisher:
+    name: Smaragdus
+    production_time: 32
+    inputs:
+      Emerald Block:
+        material: EMERALD_BLOCK
+        amount: 16
+    outputs:
+      Smaragdus:
+        material: EMERALD
+        amount: 16
+        display_name: Smaragdus
+        lore: An item used to create a Bastion Block
+  Bastion_Silicon_Tetranitratobihydrotrioxycarbon:
+    name: Silicon_Tetranitratobihydrotrioxycarbon
+    inputs:
+      Sulphur:
+        material: SULPHUR
+        amount: 8
+      Quartz:
+        material: QUARTZ
+        amount: 32
+      Podzol:
+        material: DIRT
+        amount: 32
+        durability: 2
+      Coal Block:
+        material: COAL_BLOCK
+        amount: 8
+      Water Bucket:
+        material: WATER_BUCKET
+        amount: 2
+    outputs:
+      Silicon Tetranitratobihydrotrioxycarbon:
+        material: FIREWORK_CHARGE
+        amount: 8
+        display_name: Silicon Tetranitratobihydrotrioxycarbon
+        lore: An item used to create a Bastion Block
+  Bastion_Pure_Ice:
+    name: Pure Ice
+    inputs:
+      Compact Ice:
+        material: PACKED_ICE
+        amount: 512
+      Leather:
+        material: LEATHER
+        amount: 32
+    outputs:
+      Pure Ice:
+        material: QUARTZ
+        amount: 8
+        display_name: Pure Ice
+        lore: An item used to repair the Bastion Factory
+  Bastion_Block:
+    name: Craft Bastions
+    inputs:
+      Silicon Tetranitratobihydrotrioxycarbon:
+        material: FIREWORK_CHARGE
+        amount: 16
+        display_name: Silicon Tetranitratobihydrotrioxycarbon
+        lore: An item used to create a Bastion Block
+      Smaragdus:
+        material: EMERALD
+        amount: 2
+        display_name: Smaragdus
+        lore: An item used to create a Bastion Block
+      Rations:
+        material: MUSHROOM_SOUP
+        amount: 16
+        display_name: Rations
+        lore: An item used to create a Bastion Block
+      Flooring:
+        material: CLAY_BRICK
+        amount: 1
+        display_name: Flooring
+        lore: An item used to create a Bastion Block
+      Framing:
+        material: STICK
+        amount: 1
+        display_name: Framing
+        lore: An item used to create a Bastion Block
+      Objet d'art:
+        material: FLINT
+        amount: 1
+        display_name: Objet d'art
+        lore: An item used to create a Bastion Block
+      Gearbox:
+        material: WATCH
+        amount: 1
+        display_name: Gearbox
+        lore: An item used to create a Bastion Block
+      Base:
+        material: IRON_INGOT
+        amount: 1
+        display_name: Base
+        lore: An item used to create a Bastion Block
+      Walls:
+        material: INK_SACK
+        amount: 4
+        durability: 0
+        display_name: Walls
+        lore: An item used to create a Bastion Block
+    outputs:
+      Bastion:
+        material: SPONGE
+        amount: 32
+        display_name: Bastion
+  Aspect_Factory:
+    name: Arcane Elementizer
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Netherbrick:
+        material: NETHER_BRICK
+        amount: 1536
+      Redstone:
+        material: REDSTONE
+        amount: 1152
+      Netherquartz:
+        material: QUARTZ
+        amount: 576
+    recipes:
+      - Forge_Aspect_of_Terra
+      - Forge_Aspect_of_End
+      - Forge_Aspect_of_Nether
+      - Craft_Eye_of_Ender
+    repair_multiple: 26
+    repair_inputs:
+      Nether Brick:
+        material: NETHER_BRICK
+        amount: 6
+      Redstone:
+        material: REDSTONE
+        amount: 5
+      Netherquartz:
+        material: QUARTZ
+        amount: 2
+  Forge_Aspect_of_Terra:
+    name: Forge Aspect of Terra
+    production_time: 64
+    inputs:
+      Emerald Block:
+        material: EMERALD_BLOCK
+        amount: 24
+      Diamond Block:
+        material: DIAMOND_BLOCK
+        amount: 24
+      Gold Ore:
+        material: GOLD_ORE
+        amount: 8
+      Slime Ball:
+        material: SLIME_BALL
+        amount: 8
+      Anvil:
+        material: ANVIL
+        amount: 8
+    outputs:
+      Aspect of Terra:
+        material: DIAMOND
+        amount: 1
+        display_name: Aspect of Terra
+        lore: A concentrated essence of Terra
+  Forge_Aspect_of_End:
+    name: Forge Aspect of End
+    production_time: 64
+    inputs:
+      Ender Pearl:
+        material: ENDER_PEARL
+        amount: 256
+      Ender Chest:
+        material: ENDER_CHEST
+        amount: 256
+      Endstone:
+        material: ENDER_STONE
+        amount: 1024
+    outputs:
+      Aspect of End:
+        material: FLINT
+        amount: 1
+        display_name: Aspect of End
+        lore: A concentrated essence of the End
+  Forge_Aspect_of_Nether:
+    name: Forge Aspect of Nether
+    production_time: 64
+    inputs:
+      Ghast Tears:
+        material: GHAST_TEAR
+        amount: 16
+      Quartz Ore:
+        material: QUARTZ_ORE
+        amount: 512
+      Glowstone:
+        material: GLOWSTONE
+        amount: 512
+    outputs:
+      Aspect of Nether:
+        material: MAGMA_CREAM
+        amount: 1
+        display_name: Aspect of Nether
+        lore: A concentrated essence of the Nether
+  Craft_Eye_of_Ender:
+    name: Craft Eye of Ender
+    production_time: 1
+    inputs:
+       Blaze Powder:
+         material: BLAZE_POWDER
+         amount: 265
+       Ender Pearl:
+         material: ENDER_PEARL
+         amount: 265
+    outputs:
+       Eye of Ender:
+         material: EYE_OF_ENDER
+         amount: 256
