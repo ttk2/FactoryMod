@@ -7573,7 +7573,7 @@ production_recipes:
          durability: 0
          amount: 32
          display_name: Crate of Fish
- Nether_Craft_Red_Rose:
+  Nether_Craft_Red_Rose:
     name: Craft Crate of Red Rose
     inputs: 
        Fish:
@@ -7886,7 +7886,7 @@ production_recipes:
          durability: 0
          amount: 32
          display_name: Crate of Fish
- Nether_Decraft_Red_Rose:
+  Nether_Decraft_Red_Rose:
     name: Decraft Crate of Red Rose
     outputs: 
        Fish:
@@ -8006,7 +8006,7 @@ production_recipes:
          durability: 0
          amount: 32
          display_name: Crate of Glass Bottles
- Emerald_XP_Bottle_0:
+  Emerald_XP_Bottle_0:
     name: Brew XP Bottles  - 1
     inputs:
       Crate of Glass Bottles:
@@ -8076,12 +8076,12 @@ production_recipes:
         durability: 0
         display_name: Crate of Nether Warts
         amount: 32
-       Crate of Melons:
+      Crate of Melons:
         material: WOOD
         durability: 0
         display_name: Crate of Melons
         amount: 16
-       Crate of Sugar Cane:
+      Crate of Sugar Cane:
         material: WOOD
         durability: 0
         display_name: Crate of Sugar Cane
