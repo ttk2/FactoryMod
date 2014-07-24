@@ -2577,6 +2577,12 @@ production_factories:
         material: COAL
         durability: 1
     inputs:
+      Bastion:
+        material: SPONGE
+        amount: 4
+      Diamond:
+        material: DIAMOND
+        amount: 1
     recipes:
       - Nether_Craft_Glass_Bottles
       - Nether_Craft_Pork
@@ -2614,6 +2620,12 @@ production_factories:
         material: COAL
         durability: 1
     inputs:
+      Bastion:
+        material: SPONGE
+        amount: 4
+      Iron Block:
+        material: IRON_BLOCK
+        amount: 1
     recipes:
       - Nether_Decraft_Glass_Bottles
       - Nether_Decraft_Pork
@@ -2652,8 +2664,8 @@ production_factories:
         durability: 1
     inputs:
       Emerald:
-        material: EMERALD
-        amount: 50
+        material: EMERALD_BLOCK
+        amount: 128
     recipes:
       - Emerald_XP_Bottle_0
       - Emerald_XP_Bottle_1
