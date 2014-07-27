@@ -8034,7 +8034,7 @@ production_recipes:
   Nether_Decraft_Vine:
     name: Decraft Crate of Vine
     inputs: 
-       ine:
+       Vine:
          material: VINE
          amount: 2048
     outputs:
