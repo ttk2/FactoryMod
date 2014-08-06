@@ -2585,13 +2585,13 @@ production_factories:
     inputs:
       Redstone Block:
         material: REDSTONE_BLOCK
-        amount: 16
+        amount: 64
       Iron Block:
         material: IRON_BLOCK
-        amount: 24
+        amount: 96
       Chest:
         material: CHEST
-        amount: 64
+        amount: 512
     recipes:
       - Nether_Craft_Glass_Bottles
       - Nether_Craft_Pork
@@ -2631,13 +2631,13 @@ production_factories:
     inputs:
       Redstone Block:
         material: REDSTONE_BLOCK
-        amount: 24
+        amount: 96
       Iron Block:
         material: IRON_BLOCK
-        amount: 16
+        amount: 64
       Chest:
         material: CHEST
-        amount: 64
+        amount: 512
     recipes:
       - Nether_Decraft_Glass_Bottles
       - Nether_Decraft_Pork
