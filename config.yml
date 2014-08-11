@@ -2678,6 +2678,12 @@ production_factories:
       Emerald:
         material: EMERALD_BLOCK
         amount: 420
+      Redstone Ore:
+        material: REDSTONE_ORE 
+        amount: 64
+      Gold Ore:
+        material: GOLD_ORE
+        amount: 64
     recipes:
       - Emerald_XP_Bottle_0
       - Emerald_XP_Bottle_1
