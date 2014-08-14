@@ -11,12 +11,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.configuration.ConfigurationSection;
 
 import com.github.igotyou.FactoryMod.FactoryObject.FactoryType;
 import com.github.igotyou.FactoryMod.interfaces.Properties;
 import com.github.igotyou.FactoryMod.listeners.FactoryModListener;
+import com.github.igotyou.FactoryMod.listeners.NoteStackListener;
 import com.github.igotyou.FactoryMod.listeners.RedstoneListener;
 import com.github.igotyou.FactoryMod.managers.FactoryModManager;
 import com.github.igotyou.FactoryMod.properties.PrintingPressProperties;
@@ -80,6 +86,7 @@ public class FactoryModPlugin extends JavaPlugin
 		{
 			getServer().getPluginManager().registerEvents(new FactoryModListener(manager), this);
 			getServer().getPluginManager().registerEvents(new RedstoneListener(manager, manager.getProductionManager()), this);
+			getServer().getPluginManager().registerEvents(new NoteStackListener(this), this);
 		}
 		catch(Exception e)
 		{
@@ -276,6 +283,31 @@ public class FactoryModPlugin extends JavaPlugin
 		return enchantments;
 	}
 	
+	private List<PotionEffect> getPotionEffects(
+			ConfigurationSection configurationSection) {
+		List<PotionEffect> potionEffects = new ArrayList<PotionEffect>();
+		if(configurationSection!=null)
+		{
+			Iterator<String> names=configurationSection.getKeys(false).iterator();
+			while (names.hasNext())
+			{
+				String name=names.next();
+				ConfigurationSection configEffect=configurationSection.getConfigurationSection(name);
+				String type=configEffect.getString("type");
+				if (type!=null)
+				{
+					PotionEffectType effect = PotionEffectType.getByName(type);
+					if (effect != null) {
+						int duration=configEffect.getInt("duration",200);
+						int amplifier=configEffect.getInt("amplifier",0);
+						potionEffects.add(new PotionEffect(effect, duration, amplifier));
+					}
+				}
+			}
+		}
+		return potionEffects;
+	}
+	
 	public ItemList<NamedItemStack> getItems(ConfigurationSection configItems)
 	{
 		ItemList<NamedItemStack> items=new ItemList<NamedItemStack>();
@@ -288,37 +320,61 @@ public class FactoryModPlugin extends JavaPlugin
 				String materialName=configItem.getString("material");
 				Material material = Material.getMaterial(materialName);
 				//only proceeds if an acceptable material name was provided
-				if(material!=null)
+				if (material == null)
+				{
+					getLogger().severe(configItems.getCurrentPath() + " requires invalid material " + materialName);
+				}
+				else
 				{
 					int amount=configItem.getInt("amount",1);
 					short durability=(short)configItem.getInt("durability",0);
+					int repairCost=(short)configItem.getInt("repair_cost",0);
 					String displayName=configItem.getString("display_name");
 					String lore=configItem.getString("lore");
-					items.add(createItemStack(material,amount,durability,displayName,lore,commonName));
+					List<ProbabilisticEnchantment> compulsoryEnchantments = getEnchantments(configItem.getConfigurationSection("enchantments"));
+					List<ProbabilisticEnchantment> storedEnchantments = getEnchantments(configItem.getConfigurationSection("stored_enchantments"));
+					List<PotionEffect> potionEffects = getPotionEffects(configItem.getConfigurationSection("potion_effects"));
+					items.add(createItemStack(material,amount,durability,displayName,lore,commonName,repairCost,compulsoryEnchantments,storedEnchantments,potionEffects));
 				}
 			}
 		}
 		return items;
 	}
-	
-	private NamedItemStack createItemStack(Material material,int stackSize,short durability,String name,String loreString,String commonName)
+
+	private NamedItemStack createItemStack(Material material,int stackSize,short durability,String name,String loreString,String commonName,int repairCost,List<ProbabilisticEnchantment> compulsoryEnchants,List<ProbabilisticEnchantment> storedEnchants, List<PotionEffect> potionEffects)
 	{
 		NamedItemStack namedItemStack= new NamedItemStack(material, stackSize, durability,commonName);
-		if(name!=null||loreString!=null)
+		if(name!=null||loreString!=null||compulsoryEnchants.size()>0||storedEnchants.size()>0||potionEffects.size()>0||repairCost > 0)
 		{
 			ItemMeta meta=namedItemStack.getItemMeta();
 			if (name!=null)
 				meta.setDisplayName(name);
+			if (meta instanceof Repairable && repairCost > 0)
+				((Repairable) meta).setRepairCost(repairCost);
 			if (loreString!=null)
 			{
 				List<String> lore = new ArrayList<String>();
 				lore.add(loreString);
 				meta.setLore(lore);
 			}
+			for (ProbabilisticEnchantment enchant : compulsoryEnchants) {
+				meta.addEnchant(enchant.getEnchantment(), enchant.getLevel(), false);
+			}
+			if (meta instanceof EnchantmentStorageMeta) {
+				EnchantmentStorageMeta esm = (EnchantmentStorageMeta) meta;
+				for (ProbabilisticEnchantment enchant : storedEnchants) {
+					esm.addStoredEnchant(enchant.getEnchantment(), enchant.getLevel(), false);
+				}
+			}
+			if (meta instanceof PotionMeta) {
+				PotionMeta pm = (PotionMeta) meta;
+				for (PotionEffect effect : potionEffects) {
+					pm.addCustomEffect(effect, true);
+				}
+			}
 			namedItemStack.setItemMeta(meta);
 		}
 		return namedItemStack;
-			
 	}
 	
 	private void removeRecipe(Recipe removalRecipe)
