@@ -302,7 +302,7 @@ public class ProductionManager implements Manager
 		boolean returnValue = false;
 		if (getFactory(factoryLocation) != null)
 		{
-			returnValue = getFactory(factoryLocation).isWhole();
+			returnValue = getFactory(factoryLocation).isWhole(false);
 		}
 		return returnValue;
 	}

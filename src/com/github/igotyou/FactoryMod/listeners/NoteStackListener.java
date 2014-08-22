@@ -19,8 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import sun.misc.Regexp;
-
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
 
 public class NoteStackListener implements Listener {
