@@ -64,6 +64,7 @@ public class FactoryModManager
 		//if (FactoryModPlugin.PRODUCTION_ENEABLED)
 		//{
 			initializeProductionManager();
+			initializeNetherFactoryManager();
 			initializePrintingPressManager();
 		//}
 	}
@@ -86,6 +87,13 @@ public class FactoryModManager
 		PrintingPressManager printingMan = new PrintingPressManager(plugin);
 		
 		managers.add(printingMan);
+	}
+	
+	private void initializeNetherFactoryManager()
+	{
+		NetherFactoryManager netherMan = new NetherFactoryManager(plugin);
+
+		managers.add(netherMan);
 	}
 	
 	/**
