@@ -25,8 +25,8 @@ import com.github.igotyou.FactoryMod.FactoryModPlugin;
 
 public class NoteStackListener implements Listener {
 	private FactoryModPlugin plugin;
-	private static final Pattern stackableRegexp = Pattern.compile("^(§2.*?)( \\(x([1-9][0-9]*)\\))?$");
-	private static final Pattern nameRegexp = Pattern.compile("^(.*?)( §2x([1-9][0-9]*))?$");
+	private static final Pattern stackableRegexp = Pattern.compile("^(ยง2.*?)( \\(x([1-9][0-9]*)\\))?$");
+	private static final Pattern nameRegexp = Pattern.compile("^(.*?)( ยง2x([1-9][0-9]*))?$");
 	private static final int SCALE_FACTOR = 4;
 	private static final int MAX_SCALE = 64;
 
@@ -158,7 +158,7 @@ public class NoteStackListener implements Listener {
 					if (multiplier == 1) {
 						newName = matcher.group(1);
 					} else {
-						newName = matcher.group(1) + " §2x" + Integer.toString(multiplier);
+						newName = matcher.group(1) + " ยง2x" + Integer.toString(multiplier);
 					}
 					
 					ItemMeta newMeta = item.getItemMeta().clone();
