@@ -83,19 +83,6 @@ production_general:
   update_cycle: 20
   repair_period: 28
   disrepair_period: 14
-
-
-
-
-
-
-
-
-
-
-
-
-
 printing_presses:
   fuel:
     Charcoal:
