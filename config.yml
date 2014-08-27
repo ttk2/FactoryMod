@@ -7419,7 +7419,6 @@ production_recipes:
         material: DOUBLE_PLANT
         amount: 4
         durability: 5
-
   Aspect_Factory:
     name: Arcane Elementizer
     fuel:
