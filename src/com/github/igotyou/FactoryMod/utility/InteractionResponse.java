@@ -83,4 +83,5 @@ public class InteractionResponse
 	{
 		return interactionResult;
 	}
+
 }
