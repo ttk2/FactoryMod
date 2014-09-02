@@ -39,7 +39,7 @@
     <dependency>
       <groupId>com.untamedears</groupId>
       <artifactId>Citadel</artifactId>
-      <version>[2.5,)</version>
+      <version>2.6.6-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -48,6 +48,10 @@
     <repository>
       <id>bukkit-repo</id>
       <url>http://repo.bukkit.org/content/groups/public/</url>
+    </repository>
+    <repository>
+      <id>civcraft-repo</id>
+      <url>http://civcraft.org:8080/plugin/repository/project/Citadel-uuid/LastSuccessful/repository/</url>
     </repository>
   </repositories>
 </project>
