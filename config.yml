@@ -1910,6 +1910,8 @@ production_factories:
       - Sequencing_Large_Fern
       - Sequencing_Rose_Bush
       - Sequencing_Peony
+      - Sequencing_Poppy
+      - Sequencing_Dandelion
     repair_multiple: 10
     repair_inputs:
       Oak Saplings:
@@ -7419,6 +7421,30 @@ production_recipes:
         material: DOUBLE_PLANT
         amount: 4
         durability: 5
+  Sequencing_Poppy:
+    name: Sequencing Poppy
+    production_time: 32
+    inputs:
+      Bone Meal:
+        material: INK_SACK
+        amount: 96
+        durability: 15
+    outputs:
+      Poppy:
+        material: RED_ROSE
+        amount: 32
+  Sequencing_Dandelion:
+    name: Sequencing Dandelion
+    production_time: 32
+    inputs:
+      Bone Meal:
+        material: INK_SACK
+        amount: 96
+        durability: 15
+    outputs:
+      Dandelion:
+        material: YELLOW_FLOWER
+        amount: 32
   Aspect_Factory:
     name: Arcane Elementizer
     fuel:
