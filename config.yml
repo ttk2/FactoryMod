@@ -1749,6 +1749,7 @@ production_factories:
         material: LEATHER
         amount: 128
     recipes:
+      - Craft_Fence_Gate
       - Craft_Fences
       - Craft_Boats
       - Craft_Signs
@@ -7528,3 +7529,14 @@ production_recipes:
        Eye of Ender:
          material: EYE_OF_ENDER
          amount: 256
+  Craft_Fence_Gate
+    name: Fence Gate
+    production_time: 8
+    inputs:
+      Chests:
+        material: CHEST
+        amount: 6
+    outputs:
+      Fence Gate:
+        material: FENCE_GATE
+        amount: 128
