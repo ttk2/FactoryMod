@@ -1903,7 +1903,7 @@ production_factories:
       - Mutate_Acacia_Saplings
       - Mutate_Dark_Oak_Saplings
       - Mutate_Podzol
-      - Mutate_Grassless_Dirt 
+      - Mutate_Grassless_Dirt
       - Sequencing_Sunflower
       - Sequencing_Lilac
       - Sequencing_Double_Tallgrass
