@@ -7530,7 +7530,7 @@ production_recipes:
          material: EYE_OF_ENDER
          amount: 256
   Craft_Fence_Gate
-    name: Fence Gate
+    name: Craft Fence Gate
     production_time: 8
     inputs:
       Chests:
