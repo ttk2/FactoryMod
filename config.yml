@@ -7535,7 +7535,7 @@ production_recipes:
     inputs:
       Chests:
         material: CHEST
-        amount: 6
+        amount: 32
     outputs:
       Fence Gate:
         material: FENCE_GATE
