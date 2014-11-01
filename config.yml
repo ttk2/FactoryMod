@@ -151,7 +151,6 @@ printing_presses:
            durability: 2
            amount: 6
      security_notes_per_lot: 128
-
 crafting:
   disable:
   enable:
@@ -194,6 +193,117 @@ crafting:
         Double Stone Slab:
           material: DOUBLE_STEP
 production_factories:
+  Leather_Tanner:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Stone knife:
+        material: FLINT
+        amount: 12
+        lore: Stone knife
+    recipes:
+      - LEATHER_BOOTS_RANK_0
+      - LEATHER_BOOTS_RANK_1
+      - LEATHER_BOOTS_RANK_2
+      - LEATHER_BOOTS_RANK_3
+      - LEATHER_BOOTS_RANK_4
+      - LEATHER_CHESTPLATE_RANK_0
+      - LEATHER_CHESTPLATE_RANK_1
+      - LEATHER_CHESTPLATE_RANK_2
+      - LEATHER_CHESTPLATE_RANK_3
+      - LEATHER_CHESTPLATE_RANK_4
+      - LEATHER_HELMET_RANK_0
+      - LEATHER_HELMET_RANK_1
+      - LEATHER_HELMET_RANK_2
+      - LEATHER_HELMET_RANK_3
+      - LEATHER_HELMET_RANK_4
+      - LEATHER_LEGGINGS_RANK_0
+      - LEATHER_LEGGINGS_RANK_1
+      - LEATHER_LEGGINGS_RANK_2
+      - LEATHER_LEGGINGS_RANK_3
+      - LEATHER_LEGGINGS_RANK_4
+    repair_multiple: 26
+    repair_inputs:
+      Stone knife:
+        material: FLINT
+        amount: 2
+        lore: Stone knife
+  Iron_Refiner:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Blast furnace:
+        material: CLAY_BRICK
+        amount: 16
+        lore: Blast furnace
+    recipes:
+      - IRON_BOOTS_RANK_0
+      - IRON_BOOTS_RANK_1
+      - IRON_BOOTS_RANK_2
+      - IRON_BOOTS_RANK_3
+      - IRON_BOOTS_RANK_4
+      - IRON_CHESTPLATE_RANK_0
+      - IRON_CHESTPLATE_RANK_1
+      - IRON_CHESTPLATE_RANK_2
+      - IRON_CHESTPLATE_RANK_3
+      - IRON_CHESTPLATE_RANK_4
+      - IRON_HELMET_RANK_0
+      - IRON_HELMET_RANK_1
+      - IRON_HELMET_RANK_2
+      - IRON_HELMET_RANK_3
+      - IRON_HELMET_RANK_4
+      - IRON_LEGGINGS_RANK_0
+      - IRON_LEGGINGS_RANK_1
+      - IRON_LEGGINGS_RANK_2
+      - IRON_LEGGINGS_RANK_3
+      - IRON_LEGGINGS_RANK_4
+    repair_multiple: 26
+    repair_inputs:
+      Blast furnace:
+        material: CLAY_BRICK
+        amount: 4
+        lore: Blast furnace
+  Diamond_Cutter:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Faceting machine:
+        material: WATCH
+        amount: 32
+        lore: Faceting machine
+    recipes:
+      - DIAMOND_BOOTS_RANK_0
+      - DIAMOND_BOOTS_RANK_1
+      - DIAMOND_BOOTS_RANK_2
+      - DIAMOND_BOOTS_RANK_3
+      - DIAMOND_BOOTS_RANK_4
+      - DIAMOND_CHESTPLATE_RANK_0
+      - DIAMOND_CHESTPLATE_RANK_1
+      - DIAMOND_CHESTPLATE_RANK_2
+      - DIAMOND_CHESTPLATE_RANK_3
+      - DIAMOND_CHESTPLATE_RANK_4
+      - DIAMOND_HELMET_RANK_0
+      - DIAMOND_HELMET_RANK_1
+      - DIAMOND_HELMET_RANK_2
+      - DIAMOND_HELMET_RANK_3
+      - DIAMOND_HELMET_RANK_4
+      - DIAMOND_LEGGINGS_RANK_0
+      - DIAMOND_LEGGINGS_RANK_1
+      - DIAMOND_LEGGINGS_RANK_2
+      - DIAMOND_LEGGINGS_RANK_3
+      - DIAMOND_LEGGINGS_RANK_4
+    repair_multiple: 26
+    repair_inputs:
+      Faceting machine:
+        material: WATCH
+        amount: 8
+        lore: Faceting machine
   Aspect_Factory:
     name: Arcane Elementizer
     fuel:
@@ -227,6 +337,1306 @@ production_factories:
         material: QUARTZ
         amount: 2
 nether_factory:
+  LEATHER_BOOTS_RANK_0
+    name: Leather Boots Forger Rank 0
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+    outputs:
+        material: LEATHER_BOOTS
+        amount: 1
+        display_name: Leather Boots Rank 0
+        lore: Leather Boots Rank 0
+  LEATHER_BOOTS_RANK_1
+    name: Leather Boots Forger Rank 1
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Boots:
+         material: LEATHER_BOOTS
+         amount: 1
+         display_name: Leather Boots Rank 0
+         lore: Leather Boots Rank 0
+    outputs:
+        material: LEATHER_BOOTS
+        amount: 1
+        display_name: Leather Boots Rank 1
+        lore: Leather Boots Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  LEATHER_BOOTS_RANK_2
+    name: Leather Boots Forger Rank 2
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Boots:
+         material: LEATHER_BOOTS
+         amount: 1
+         display_name: Leather Boots Rank 1
+         lore: Leather Boots Rank 1
+    outputs:
+        material: LEATHER_BOOTS
+        amount: 1
+        display_name: Leather Boots Rank 2
+        lore: Leather Boots Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  LEATHER_BOOTS_RANK_3
+    name: Leather Boots Forger Rank 3
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Boots:
+         material: LEATHER_BOOTS
+         amount: 1
+         display_name: Leather Boots Rank 2
+         lore: Leather Boots Rank 2
+    outputs:
+        material: LEATHER_BOOTS
+        amount: 1
+        display_name: Leather Boots Rank 3
+        lore: Leather Boots Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  LEATHER_BOOTS_RANK_4
+    name: Leather Boots Forger Rank 4
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Boots:
+         material: LEATHER_BOOTS
+         amount: 1
+         display_name: Leather Boots Rank 3
+         lore: Leather Boots Rank 3
+    outputs:
+        material: LEATHER_BOOTS
+        amount: 1
+        display_name: Leather Boots Rank 4
+        lore: Leather Boots Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  LEATHER_CHESTPLATE_RANK_0
+    name: Leather Chestplate Forger Rank 0
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+    outputs:
+        material: LEATHER_CHESTPLATE
+        amount: 1
+        display_name: Leather Chestplate Rank 0
+        lore: Leather Chestplate Rank 0
+  LEATHER_CHESTPLATE_RANK_1
+    name: Leather Chestplate Forger Rank 1
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Chestplate:
+         material: LEATHER_CHESTPLATE
+         amount: 1
+         display_name: Leather Chestplate Rank 0
+         lore: Leather Chestplate Rank 0
+    outputs:
+        material: LEATHER_CHESTPLATE
+        amount: 1
+        display_name: Leather Chestplate Rank 1
+        lore: Leather Chestplate Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  LEATHER_CHESTPLATE_RANK_2
+    name: Leather Chestplate Forger Rank 2
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Chestplate:
+         material: LEATHER_CHESTPLATE
+         amount: 1
+         display_name: Leather Chestplate Rank 1
+         lore: Leather Chestplate Rank 1
+    outputs:
+        material: LEATHER_CHESTPLATE
+        amount: 1
+        display_name: Leather Chestplate Rank 2
+        lore: Leather Chestplate Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  LEATHER_CHESTPLATE_RANK_3
+    name: Leather Chestplate Forger Rank 3
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Chestplate:
+         material: LEATHER_CHESTPLATE
+         amount: 1
+         display_name: Leather Chestplate Rank 2
+         lore: Leather Chestplate Rank 2
+    outputs:
+        material: LEATHER_CHESTPLATE
+        amount: 1
+        display_name: Leather Chestplate Rank 3
+        lore: Leather Chestplate Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  LEATHER_CHESTPLATE_RANK_4
+    name: Leather Chestplate Forger Rank 4
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Chestplate:
+         material: LEATHER_CHESTPLATE
+         amount: 1
+         display_name: Leather Chestplate Rank 3
+         lore: Leather Chestplate Rank 3
+    outputs:
+        material: LEATHER_CHESTPLATE
+        amount: 1
+        display_name: Leather Chestplate Rank 4
+        lore: Leather Chestplate Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  LEATHER_HELMET_RANK_0
+    name: Leather Helmet Forger Rank 0
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+    outputs:
+        material: LEATHER_HELMET
+        amount: 1
+        display_name: Leather Helmet Rank 0
+        lore: Leather Helmet Rank 0
+  LEATHER_HELMET_RANK_1
+    name: Leather Helmet Forger Rank 1
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Helmet:
+         material: LEATHER_HELMET
+         amount: 1
+         display_name: Leather Helmet Rank 0
+         lore: Leather Helmet Rank 0
+    outputs:
+        material: LEATHER_HELMET
+        amount: 1
+        display_name: Leather Helmet Rank 1
+        lore: Leather Helmet Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  LEATHER_HELMET_RANK_2
+    name: Leather Helmet Forger Rank 2
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Helmet:
+         material: LEATHER_HELMET
+         amount: 1
+         display_name: Leather Helmet Rank 1
+         lore: Leather Helmet Rank 1
+    outputs:
+        material: LEATHER_HELMET
+        amount: 1
+        display_name: Leather Helmet Rank 2
+        lore: Leather Helmet Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  LEATHER_HELMET_RANK_3
+    name: Leather Helmet Forger Rank 3
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Helmet:
+         material: LEATHER_HELMET
+         amount: 1
+         display_name: Leather Helmet Rank 2
+         lore: Leather Helmet Rank 2
+    outputs:
+        material: LEATHER_HELMET
+        amount: 1
+        display_name: Leather Helmet Rank 3
+        lore: Leather Helmet Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  LEATHER_HELMET_RANK_4
+    name: Leather Helmet Forger Rank 4
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Helmet:
+         material: LEATHER_HELMET
+         amount: 1
+         display_name: Leather Helmet Rank 3
+         lore: Leather Helmet Rank 3
+    outputs:
+        material: LEATHER_HELMET
+        amount: 1
+        display_name: Leather Helmet Rank 4
+        lore: Leather Helmet Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  LEATHER_LEGGINGS_RANK_0
+    name: Leather Leggings Forger Rank 0
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+    outputs:
+        material: LEATHER_LEGGINGS
+        amount: 1
+        display_name: Leather Leggings Rank 0
+        lore: Leather Leggings Rank 0
+  LEATHER_LEGGINGS_RANK_1
+    name: Leather Leggings Forger Rank 1
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Leggings:
+         material: LEATHER_LEGGINGS
+         amount: 1
+         display_name: Leather Leggings Rank 0
+         lore: Leather Leggings Rank 0
+    outputs:
+        material: LEATHER_LEGGINGS
+        amount: 1
+        display_name: Leather Leggings Rank 1
+        lore: Leather Leggings Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  LEATHER_LEGGINGS_RANK_2
+    name: Leather Leggings Forger Rank 2
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Leggings:
+         material: LEATHER_LEGGINGS
+         amount: 1
+         display_name: Leather Leggings Rank 1
+         lore: Leather Leggings Rank 1
+    outputs:
+        material: LEATHER_LEGGINGS
+        amount: 1
+        display_name: Leather Leggings Rank 2
+        lore: Leather Leggings Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  LEATHER_LEGGINGS_RANK_3
+    name: Leather Leggings Forger Rank 3
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Leggings:
+         material: LEATHER_LEGGINGS
+         amount: 1
+         display_name: Leather Leggings Rank 2
+         lore: Leather Leggings Rank 2
+    outputs:
+        material: LEATHER_LEGGINGS
+        amount: 1
+        display_name: Leather Leggings Rank 3
+        lore: Leather Leggings Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  LEATHER_LEGGINGS_RANK_4
+    name: Leather Leggings Forger Rank 4
+    production_time: 360
+    inputs:
+      Leather:
+         material: LEATHER
+         amount: 32
+      Leather Leggings:
+         material: LEATHER_LEGGINGS
+         amount: 1
+         display_name: Leather Leggings Rank 3
+         lore: Leather Leggings Rank 3
+    outputs:
+        material: LEATHER_LEGGINGS
+        amount: 1
+        display_name: Leather Leggings Rank 4
+        lore: Leather Leggings Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  IRON_BOOTS_RANK_0
+    name: Iron Boots Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Leather Boots:
+         material: LEATHER_BOOTS
+         amount: 2
+         display_name: Leather Boots Rank 4
+         lore: Leather Boots Rank 4
+    outputs:
+        material: IRON_BOOTS
+        amount: 1
+        display_name: Iron Boots Rank 0
+        lore: Iron Boots Rank 0
+  IRON_BOOTS_RANK_1
+    name: Iron Boots Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Boots:
+         material: IRON_BOOTS
+         amount: 1
+         display_name: Iron Boots Rank 0
+         lore: Iron Boots Rank 0
+    outputs:
+        material: IRON_BOOTS
+        amount: 1
+        display_name: Iron Boots Rank 1
+        lore: Iron Boots Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  IRON_BOOTS_RANK_2
+    name: Iron Boots Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Boots:
+         material: IRON_BOOTS
+         amount: 1
+         display_name: Iron Boots Rank 1
+         lore: Iron Boots Rank 1
+    outputs:
+        material: IRON_BOOTS
+        amount: 1
+        display_name: Iron Boots Rank 2
+        lore: Iron Boots Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  IRON_BOOTS_RANK_3
+    name: Iron Boots Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Boots:
+         material: IRON_BOOTS
+         amount: 1
+         display_name: Iron Boots Rank 2
+         lore: Iron Boots Rank 2
+    outputs:
+        material: IRON_BOOTS
+        amount: 1
+        display_name: Iron Boots Rank 3
+        lore: Iron Boots Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  IRON_BOOTS_RANK_4
+    name: Iron Boots Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Boots:
+         material: IRON_BOOTS
+         amount: 1
+         display_name: Iron Boots Rank 3
+         lore: Iron Boots Rank 3
+    outputs:
+        material: IRON_BOOTS
+        amount: 1
+        display_name: Iron Boots Rank 4
+        lore: Iron Boots Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  IRON_CHESTPLATE_RANK_0
+    name: Iron Chestplate Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Leather Chestplate:
+         material: LEATHER_CHESTPLATE
+         amount: 2
+         display_name: Leather Chestplate Rank 4
+         lore: Leather Chestplate Rank 4
+    outputs:
+        material: IRON_CHESTPLATE
+        amount: 1
+        display_name: Iron Chestplate Rank 0
+        lore: Iron Chestplate Rank 0
+  IRON_CHESTPLATE_RANK_1
+    name: Iron Chestplate Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Chestplate:
+         material: IRON_CHESTPLATE
+         amount: 1
+         display_name: Iron Chestplate Rank 0
+         lore: Iron Chestplate Rank 0
+    outputs:
+        material: IRON_CHESTPLATE
+        amount: 1
+        display_name: Iron Chestplate Rank 1
+        lore: Iron Chestplate Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  IRON_CHESTPLATE_RANK_2
+    name: Iron Chestplate Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Chestplate:
+         material: IRON_CHESTPLATE
+         amount: 1
+         display_name: Iron Chestplate Rank 1
+         lore: Iron Chestplate Rank 1
+    outputs:
+        material: IRON_CHESTPLATE
+        amount: 1
+        display_name: Iron Chestplate Rank 2
+        lore: Iron Chestplate Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  IRON_CHESTPLATE_RANK_3
+    name: Iron Chestplate Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Chestplate:
+         material: IRON_CHESTPLATE
+         amount: 1
+         display_name: Iron Chestplate Rank 2
+         lore: Iron Chestplate Rank 2
+    outputs:
+        material: IRON_CHESTPLATE
+        amount: 1
+        display_name: Iron Chestplate Rank 3
+        lore: Iron Chestplate Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  IRON_CHESTPLATE_RANK_4
+    name: Iron Chestplate Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Chestplate:
+         material: IRON_CHESTPLATE
+         amount: 1
+         display_name: Iron Chestplate Rank 3
+         lore: Iron Chestplate Rank 3
+    outputs:
+        material: IRON_CHESTPLATE
+        amount: 1
+        display_name: Iron Chestplate Rank 4
+        lore: Iron Chestplate Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  IRON_HELMET_RANK_0
+    name: Iron Helmet Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Leather Helmet:
+         material: LEATHER_HELMET
+         amount: 2
+         display_name: Leather Helmet Rank 4
+         lore: Leather Helmet Rank 4
+    outputs:
+        material: IRON_HELMET
+        amount: 1
+        display_name: Iron Helmet Rank 0
+        lore: Iron Helmet Rank 0
+  IRON_HELMET_RANK_1
+    name: Iron Helmet Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Helmet:
+         material: IRON_HELMET
+         amount: 1
+         display_name: Iron Helmet Rank 0
+         lore: Iron Helmet Rank 0
+    outputs:
+        material: IRON_HELMET
+        amount: 1
+        display_name: Iron Helmet Rank 1
+        lore: Iron Helmet Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  IRON_HELMET_RANK_2
+    name: Iron Helmet Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Helmet:
+         material: IRON_HELMET
+         amount: 1
+         display_name: Iron Helmet Rank 1
+         lore: Iron Helmet Rank 1
+    outputs:
+        material: IRON_HELMET
+        amount: 1
+        display_name: Iron Helmet Rank 2
+        lore: Iron Helmet Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  IRON_HELMET_RANK_3
+    name: Iron Helmet Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Helmet:
+         material: IRON_HELMET
+         amount: 1
+         display_name: Iron Helmet Rank 2
+         lore: Iron Helmet Rank 2
+    outputs:
+        material: IRON_HELMET
+        amount: 1
+        display_name: Iron Helmet Rank 3
+        lore: Iron Helmet Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  IRON_HELMET_RANK_4
+    name: Iron Helmet Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Helmet:
+         material: IRON_HELMET
+         amount: 1
+         display_name: Iron Helmet Rank 3
+         lore: Iron Helmet Rank 3
+    outputs:
+        material: IRON_HELMET
+        amount: 1
+        display_name: Iron Helmet Rank 4
+        lore: Iron Helmet Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  IRON_LEGGINGS_RANK_0
+    name: Iron Leggings Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Leather Leggings:
+         material: LEATHER_LEGGINGS
+         amount: 2
+         display_name: Leather Leggings Rank 4
+         lore: Leather Leggings Rank 4
+    outputs:
+        material: IRON_LEGGINGS
+        amount: 1
+        display_name: Iron Leggings Rank 0
+        lore: Iron Leggings Rank 0
+  IRON_LEGGINGS_RANK_1
+    name: Iron Leggings Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Leggings:
+         material: IRON_LEGGINGS
+         amount: 1
+         display_name: Iron Leggings Rank 0
+         lore: Iron Leggings Rank 0
+    outputs:
+        material: IRON_LEGGINGS
+        amount: 1
+        display_name: Iron Leggings Rank 1
+        lore: Iron Leggings Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  IRON_LEGGINGS_RANK_2
+    name: Iron Leggings Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Leggings:
+         material: IRON_LEGGINGS
+         amount: 1
+         display_name: Iron Leggings Rank 1
+         lore: Iron Leggings Rank 1
+    outputs:
+        material: IRON_LEGGINGS
+        amount: 1
+        display_name: Iron Leggings Rank 2
+        lore: Iron Leggings Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  IRON_LEGGINGS_RANK_3
+    name: Iron Leggings Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Leggings:
+         material: IRON_LEGGINGS
+         amount: 1
+         display_name: Iron Leggings Rank 2
+         lore: Iron Leggings Rank 2
+    outputs:
+        material: IRON_LEGGINGS
+        amount: 1
+        display_name: Iron Leggings Rank 3
+        lore: Iron Leggings Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  IRON_LEGGINGS_RANK_4
+    name: Iron Leggings Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Leggings:
+         material: IRON_LEGGINGS
+         amount: 1
+         display_name: Iron Leggings Rank 3
+         lore: Iron Leggings Rank 3
+    outputs:
+        material: IRON_LEGGINGS
+        amount: 1
+        display_name: Iron Leggings Rank 4
+        lore: Iron Leggings Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  DIAMOND_BOOTS_RANK_0
+    name: Diamond Boots Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Boots:
+         material: IRON_BOOTS
+         amount: 2
+         display_name: Iron Boots Rank 4
+         lore: Iron Boots Rank 4
+    outputs:
+        material: DIAMOND_BOOTS
+        amount: 1
+        display_name: Diamond Boots Rank 0
+        lore: Diamond Boots Rank 0
+  DIAMOND_BOOTS_RANK_1
+    name: Diamond Boots Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Boots:
+         material: DIAMOND_BOOTS
+         amount: 1
+         display_name: Diamond Boots Rank 0
+         lore: Diamond Boots Rank 0
+    outputs:
+        material: DIAMOND_BOOTS
+        amount: 1
+        display_name: Diamond Boots Rank 1
+        lore: Diamond Boots Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  DIAMOND_BOOTS_RANK_2
+    name: Diamond Boots Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Boots:
+         material: DIAMOND_BOOTS
+         amount: 1
+         display_name: Diamond Boots Rank 1
+         lore: Diamond Boots Rank 1
+    outputs:
+        material: DIAMOND_BOOTS
+        amount: 1
+        display_name: Diamond Boots Rank 2
+        lore: Diamond Boots Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  DIAMOND_BOOTS_RANK_3
+    name: Diamond Boots Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Boots:
+         material: DIAMOND_BOOTS
+         amount: 1
+         display_name: Diamond Boots Rank 2
+         lore: Diamond Boots Rank 2
+    outputs:
+        material: DIAMOND_BOOTS
+        amount: 1
+        display_name: Diamond Boots Rank 3
+        lore: Diamond Boots Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  DIAMOND_BOOTS_RANK_4
+    name: Diamond Boots Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Boots:
+         material: DIAMOND_BOOTS
+         amount: 1
+         display_name: Diamond Boots Rank 3
+         lore: Diamond Boots Rank 3
+    outputs:
+        material: DIAMOND_BOOTS
+        amount: 1
+        display_name: Diamond Boots Rank 4
+        lore: Diamond Boots Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  DIAMOND_CHESTPLATE_RANK_0
+    name: Diamond Chestplate Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Chestplate:
+         material: IRON_CHESTPLATE
+         amount: 2
+         display_name: Iron Chestplate Rank 4
+         lore: Iron Chestplate Rank 4
+    outputs:
+        material: DIAMOND_CHESTPLATE
+        amount: 1
+        display_name: Diamond Chestplate Rank 0
+        lore: Diamond Chestplate Rank 0
+  DIAMOND_CHESTPLATE_RANK_1
+    name: Diamond Chestplate Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Chestplate:
+         material: DIAMOND_CHESTPLATE
+         amount: 1
+         display_name: Diamond Chestplate Rank 0
+         lore: Diamond Chestplate Rank 0
+    outputs:
+        material: DIAMOND_CHESTPLATE
+        amount: 1
+        display_name: Diamond Chestplate Rank 1
+        lore: Diamond Chestplate Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  DIAMOND_CHESTPLATE_RANK_2
+    name: Diamond Chestplate Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Chestplate:
+         material: DIAMOND_CHESTPLATE
+         amount: 1
+         display_name: Diamond Chestplate Rank 1
+         lore: Diamond Chestplate Rank 1
+    outputs:
+        material: DIAMOND_CHESTPLATE
+        amount: 1
+        display_name: Diamond Chestplate Rank 2
+        lore: Diamond Chestplate Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  DIAMOND_CHESTPLATE_RANK_3
+    name: Diamond Chestplate Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Chestplate:
+         material: DIAMOND_CHESTPLATE
+         amount: 1
+         display_name: Diamond Chestplate Rank 2
+         lore: Diamond Chestplate Rank 2
+    outputs:
+        material: DIAMOND_CHESTPLATE
+        amount: 1
+        display_name: Diamond Chestplate Rank 3
+        lore: Diamond Chestplate Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  DIAMOND_CHESTPLATE_RANK_4
+    name: Diamond Chestplate Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Chestplate:
+         material: DIAMOND_CHESTPLATE
+         amount: 1
+         display_name: Diamond Chestplate Rank 3
+         lore: Diamond Chestplate Rank 3
+    outputs:
+        material: DIAMOND_CHESTPLATE
+        amount: 1
+        display_name: Diamond Chestplate Rank 4
+        lore: Diamond Chestplate Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  DIAMOND_HELMET_RANK_0
+    name: Diamond Helmet Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Helmet:
+         material: IRON_HELMET
+         amount: 2
+         display_name: Iron Helmet Rank 4
+         lore: Iron Helmet Rank 4
+    outputs:
+        material: DIAMOND_HELMET
+        amount: 1
+        display_name: Diamond Helmet Rank 0
+        lore: Diamond Helmet Rank 0
+  DIAMOND_HELMET_RANK_1
+    name: Diamond Helmet Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Helmet:
+         material: DIAMOND_HELMET
+         amount: 1
+         display_name: Diamond Helmet Rank 0
+         lore: Diamond Helmet Rank 0
+    outputs:
+        material: DIAMOND_HELMET
+        amount: 1
+        display_name: Diamond Helmet Rank 1
+        lore: Diamond Helmet Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  DIAMOND_HELMET_RANK_2
+    name: Diamond Helmet Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Helmet:
+         material: DIAMOND_HELMET
+         amount: 1
+         display_name: Diamond Helmet Rank 1
+         lore: Diamond Helmet Rank 1
+    outputs:
+        material: DIAMOND_HELMET
+        amount: 1
+        display_name: Diamond Helmet Rank 2
+        lore: Diamond Helmet Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  DIAMOND_HELMET_RANK_3
+    name: Diamond Helmet Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Helmet:
+         material: DIAMOND_HELMET
+         amount: 1
+         display_name: Diamond Helmet Rank 2
+         lore: Diamond Helmet Rank 2
+    outputs:
+        material: DIAMOND_HELMET
+        amount: 1
+        display_name: Diamond Helmet Rank 3
+        lore: Diamond Helmet Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  DIAMOND_HELMET_RANK_4
+    name: Diamond Helmet Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Helmet:
+         material: DIAMOND_HELMET
+         amount: 1
+         display_name: Diamond Helmet Rank 3
+         lore: Diamond Helmet Rank 3
+    outputs:
+        material: DIAMOND_HELMET
+        amount: 1
+        display_name: Diamond Helmet Rank 4
+        lore: Diamond Helmet Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  DIAMOND_LEGGINGS_RANK_0
+    name: Diamond Leggings Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Leggings:
+         material: IRON_LEGGINGS
+         amount: 2
+         display_name: Iron Leggings Rank 4
+         lore: Iron Leggings Rank 4
+    outputs:
+        material: DIAMOND_LEGGINGS
+        amount: 1
+        display_name: Diamond Leggings Rank 0
+        lore: Diamond Leggings Rank 0
+  DIAMOND_LEGGINGS_RANK_1
+    name: Diamond Leggings Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Leggings:
+         material: DIAMOND_LEGGINGS
+         amount: 1
+         display_name: Diamond Leggings Rank 0
+         lore: Diamond Leggings Rank 0
+    outputs:
+        material: DIAMOND_LEGGINGS
+        amount: 1
+        display_name: Diamond Leggings Rank 1
+        lore: Diamond Leggings Rank 1
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+  DIAMOND_LEGGINGS_RANK_2
+    name: Diamond Leggings Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Leggings:
+         material: DIAMOND_LEGGINGS
+         amount: 1
+         display_name: Diamond Leggings Rank 1
+         lore: Diamond Leggings Rank 1
+    outputs:
+        material: DIAMOND_LEGGINGS
+        amount: 1
+        display_name: Diamond Leggings Rank 2
+        lore: Diamond Leggings Rank 2
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  DIAMOND_LEGGINGS_RANK_3
+    name: Diamond Leggings Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Leggings:
+         material: DIAMOND_LEGGINGS
+         amount: 1
+         display_name: Diamond Leggings Rank 2
+         lore: Diamond Leggings Rank 2
+    outputs:
+        material: DIAMOND_LEGGINGS
+        amount: 1
+        display_name: Diamond Leggings Rank 3
+        lore: Diamond Leggings Rank 3
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  DIAMOND_LEGGINGS_RANK_4
+    name: Diamond Leggings Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Leggings:
+         material: DIAMOND_LEGGINGS
+         amount: 1
+         display_name: Diamond Leggings Rank 3
+         lore: Diamond Leggings Rank 3
+    outputs:
+        material: DIAMOND_LEGGINGS
+        amount: 1
+        display_name: Diamond Leggings Rank 4
+        lore: Diamond Leggings Rank 4
+    enchantments:
+      Protection:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
   name: Nether Factory
   fuel:
     Charcoal:
