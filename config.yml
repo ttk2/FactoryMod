@@ -446,7 +446,7 @@ production_recipes:
       Netherquartz:
         material: QUARTZ
         amount: 2
-nether_factory:  LEATHER_BOOTS_RANK_0:
+LEATHER_BOOTS_RANK_0:
     name: Leather Boots Forger Rank 0
     production_time: 360
     inputs:
