@@ -304,6 +304,78 @@ production_factories:
         material: WATCH
         amount: 8
         lore: Faceting machine
+  Stone_Grinder:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Stone knife:
+        material: FLINT
+        lore: Stone knife
+        amount: 12
+    recipes:
+      - STONE_SWORD_RANK_0
+      - STONE_SWORD_RANK_1
+      - STONE_SWORD_RANK_2
+      - STONE_SWORD_RANK_3
+      - STONE_SWORD_RANK_4
+      - STONE_HAMMER
+    repair_multiple: 26
+    repair_inputs:
+      Stone knife:
+        material: FLINT
+        amount: 2
+        lore: Stone knife
+  Iron_Forger:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Blast furnace:
+        material: CLAY_BRICK
+        lore: Blast furnace
+        amount: 16
+    recipes:
+      - IRON_SWORD_RANK_0
+      - IRON_SWORD_RANK_1
+      - IRON_SWORD_RANK_2
+      - IRON_SWORD_RANK_3
+      - IRON_SWORD_RANK_4
+      - IRON_HAMMER
+    repair_multiple: 26
+    repair_inputs:
+      Blast furnace:
+        material: CLAY_BRICK
+        amount: 4
+        lore: Blast furnace
+  Diamond_Polisher:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Faceting machine:
+        material: WATCH
+        lore: Faceting machine
+        amount: 32
+      Iron hammer:
+        material: IRONE_HOE
+        lore: Iron hammer
+        amount: 6
+    recipes:
+      - DIAMOND_SWORD_RANK_0
+      - DIAMOND_SWORD_RANK_1
+      - DIAMOND_SWORD_RANK_2
+      - DIAMOND_SWORD_RANK_3
+      - DIAMOND_SWORD_RANK_4
+    repair_multiple: 26
+    repair_inputs:
+      Faceting machine:
+        material: WATCH
+        amount: 8
+        lore: Faceting machine
   Aspect_Factory:
   name: Nether Factory
   fuel:
@@ -1746,3 +1818,365 @@ LEATHER_BOOTS_RANK_0:
       Unbreaking:
         type: DURABILITY
         level: 3
+  STONE_SWORD_RANK_0:
+    name: Stone Sword Forger Rank 0
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+    outputs:
+        material: STONE_SWORD
+        amount: 1
+        display_name: Stone Sword Rank 0
+        lore: Stone Sword Rank 0
+  STONE_SWORD_RANK_1:
+    name: Stone Sword Forger Rank 1
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Sword:
+         material: STONE_SWORD
+         amount: 1
+         display_name: Stone Sword Rank 0
+         lore: Stone Sword Rank 0
+    outputs:
+        material: STONE_SWORD
+        amount: 1
+        display_name: Stone Sword Rank 1
+        lore: Stone Sword Rank 1
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 1
+  STONE_SWORD_RANK_2:
+    name: Stone Sword Forger Rank 2
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Sword:
+         material: STONE_SWORD
+         amount: 1
+         display_name: Stone Sword Rank 1
+         lore: Stone Sword Rank 1
+    outputs:
+        material: STONE_SWORD
+        amount: 1
+        display_name: Stone Sword Rank 2
+        lore: Stone Sword Rank 2
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 2
+  STONE_SWORD_RANK_3:
+    name: Stone Sword Forger Rank 3
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Sword:
+         material: STONE_SWORD
+         amount: 1
+         display_name: Stone Sword Rank 2
+         lore: Stone Sword Rank 2
+    outputs:
+        material: STONE_SWORD
+        amount: 1
+        display_name: Stone Sword Rank 3
+        lore: Stone Sword Rank 3
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 3
+  STONE_SWORD_RANK_4:
+    name: Stone Sword Forger Rank 4
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Sword:
+         material: STONE_SWORD
+         amount: 1
+         display_name: Stone Sword Rank 3
+         lore: Stone Sword Rank 3
+    outputs:
+        material: STONE_SWORD
+        amount: 1
+        display_name: Stone Sword Rank 4
+        lore: Stone Sword Rank 4
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 4
+  STONE_SWORD_RANK_5:
+    name: Stone Sword Forger Rank 5
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Sword:
+         material: STONE_SWORD
+         amount: 1
+         display_name: Stone Sword Rank 4
+         lore: Stone Sword Rank 4
+    outputs:
+        material: STONE_SWORD
+        amount: 1
+        display_name: Stone Sword Rank 5
+        lore: Stone Sword Rank 5
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 5
+  IRON_SWORD_RANK_0:
+    name: Iron Sword Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Stone Sword:
+         material: STONE_SWORD
+         amount: 2
+         display_name: Stone Sword Rank 4
+         lore: Stone Sword Rank 4
+    outputs:
+        material: IRON_SWORD
+        amount: 1
+        display_name: Iron Sword Rank 0
+        lore: Iron Sword Rank 0
+  IRON_SWORD_RANK_1:
+    name: Iron Sword Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Sword:
+         material: IRON_SWORD
+         amount: 1
+         display_name: Iron Sword Rank 0
+         lore: Iron Sword Rank 0
+    outputs:
+        material: IRON_SWORD
+        amount: 1
+        display_name: Iron Sword Rank 1
+        lore: Iron Sword Rank 1
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 1
+  IRON_SWORD_RANK_2:
+    name: Iron Sword Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Sword:
+         material: IRON_SWORD
+         amount: 1
+         display_name: Iron Sword Rank 1
+         lore: Iron Sword Rank 1
+    outputs:
+        material: IRON_SWORD
+        amount: 1
+        display_name: Iron Sword Rank 2
+        lore: Iron Sword Rank 2
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 2
+  IRON_SWORD_RANK_3:
+    name: Iron Sword Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Sword:
+         material: IRON_SWORD
+         amount: 1
+         display_name: Iron Sword Rank 2
+         lore: Iron Sword Rank 2
+    outputs:
+        material: IRON_SWORD
+        amount: 1
+        display_name: Iron Sword Rank 3
+        lore: Iron Sword Rank 3
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 3
+  IRON_SWORD_RANK_4:
+    name: Iron Sword Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Sword:
+         material: IRON_SWORD
+         amount: 1
+         display_name: Iron Sword Rank 3
+         lore: Iron Sword Rank 3
+    outputs:
+        material: IRON_SWORD
+        amount: 1
+        display_name: Iron Sword Rank 4
+        lore: Iron Sword Rank 4
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 4
+  IRON_SWORD_RANK_5:
+    name: Iron Sword Forger Rank 5
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Sword:
+         material: IRON_SWORD
+         amount: 1
+         display_name: Iron Sword Rank 4
+         lore: Iron Sword Rank 4
+    outputs:
+        material: IRON_SWORD
+        amount: 1
+        display_name: Iron Sword Rank 5
+        lore: Iron Sword Rank 5
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 5
+  DIAMOND_SWORD_RANK_0:
+    name: Diamond Sword Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Sword:
+         material: IRON_SWORD
+         amount: 2
+         display_name: Iron Sword Rank 4
+         lore: Iron Sword Rank 4
+    outputs:
+        material: DIAMOND_SWORD
+        amount: 1
+        display_name: Diamond Sword Rank 0
+        lore: Diamond Sword Rank 0
+  DIAMOND_SWORD_RANK_1:
+    name: Diamond Sword Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Sword:
+         material: DIAMOND_SWORD
+         amount: 1
+         display_name: Diamond Sword Rank 0
+         lore: Diamond Sword Rank 0
+    outputs:
+        material: DIAMOND_SWORD
+        amount: 1
+        display_name: Diamond Sword Rank 1
+        lore: Diamond Sword Rank 1
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 1
+  DIAMOND_SWORD_RANK_2:
+    name: Diamond Sword Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Sword:
+         material: DIAMOND_SWORD
+         amount: 1
+         display_name: Diamond Sword Rank 1
+         lore: Diamond Sword Rank 1
+    outputs:
+        material: DIAMOND_SWORD
+        amount: 1
+        display_name: Diamond Sword Rank 2
+        lore: Diamond Sword Rank 2
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 2
+  DIAMOND_SWORD_RANK_3:
+    name: Diamond Sword Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Sword:
+         material: DIAMOND_SWORD
+         amount: 1
+         display_name: Diamond Sword Rank 2
+         lore: Diamond Sword Rank 2
+    outputs:
+        material: DIAMOND_SWORD
+        amount: 1
+        display_name: Diamond Sword Rank 3
+        lore: Diamond Sword Rank 3
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 3
+  DIAMOND_SWORD_RANK_4:
+    name: Diamond Sword Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Sword:
+         material: DIAMOND_SWORD
+         amount: 1
+         display_name: Diamond Sword Rank 3
+         lore: Diamond Sword Rank 3
+    outputs:
+        material: DIAMOND_SWORD
+        amount: 1
+        display_name: Diamond Sword Rank 4
+        lore: Diamond Sword Rank 4
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 4
+  DIAMOND_SWORD_RANK_5:
+    name: Diamond Sword Forger Rank 5
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Sword:
+         material: DIAMOND_SWORD
+         amount: 1
+         display_name: Diamond Sword Rank 4
+         lore: Diamond Sword Rank 4
+    outputs:
+        material: DIAMOND_SWORD
+        amount: 1
+        display_name: Diamond Sword Rank 5
+        lore: Diamond Sword Rank 5
+    enchantments:
+      Sharpness:
+        type: DAMAGE_ALL
+        level: 5
+
