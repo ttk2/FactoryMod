@@ -593,6 +593,39 @@ production_recipes:
       Netherquartz:
         material: QUARTZ
         amount: 2
+  Smelt_Stone:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+       Cobblestone:
+         material: COBBLESTONE
+         amount: 256
+    outputs:
+        Stone:
+          material: Stone
+          amount: 512
+  Smelt_Iron:
+    name: Smelt Iron
+    production_time: 16
+    inputs:
+       Iron Ore:
+         material: IRON_ORE
+         amount: 64
+    outputs:
+        Iron:
+          material: IRON
+          amount: 128
+  Smelt_Diamond_Ore:
+    name: Smelt Diamond Ore
+    production_time: 16
+    inputs:
+       Diamond Ore:
+         material: DIAMOND_ORE
+         amount: 16
+    outputs:
+        Diamond:
+          material: DIAMOND
+          amount: 48
   LEATHER_BOOTS_RANK_0:
     name: Leather Boots Forger Rank 0
     production_time: 360
@@ -2332,4 +2365,4 @@ production_recipes:
       Sharpness:
         type: DAMAGE_ALL
         level: 5
-        
+
