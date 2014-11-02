@@ -2600,5 +2600,5 @@ production_recipes:
     outputs:
       Obsidian:
         material: OBSIDIAN
-        amount: 3200
+        amount: 12800
 
