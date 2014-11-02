@@ -214,9 +214,10 @@ production_factories:
          amount: 6
   Iron_Imbuer:
     fuel:
-      Charcoal:
+      Lump Charcoal:
         material: COAL
         durability: 1
+        lore: Lump Charcoal
     inputs:
        Iron:
           material: IRON
@@ -233,9 +234,10 @@ production_factories:
          amount: 6
   Diamond_Imbuer:
     fuel:
-      Charcoal:
+      Briquette:
         material: COAL
         durability: 1
+        lore: Briquette
     inputs:
        Diamond:
           material: DIAMOND
