@@ -204,7 +204,6 @@ production_factories:
           amount: 512
     recipes:
        - Smelt_Stone
-       - Burn_Lump_Charcoal
        - Stone_Knife
        - Blast_Furnace
        - Burn_Lump_Charcoal_Dark_Oak
@@ -230,7 +229,6 @@ production_factories:
           amount: 512
     recipes:
        - Smelt_Iron
-       - Burn_Briquette
        - Iron_hammer
        - Faceting machine
        - Burn_Briquette_Dark_Oak
@@ -256,9 +254,15 @@ production_factories:
           amount: 512
     recipes:
        - Smelt_Diamond_Ore
-       - Burn_White_Charcoal
        - Diamond_Drill_Heads
        - Faceting_Machine
+       - Burn_White_Charcoal_Dark_Oak
+       - Burn_White_Charcoal_Acacia
+       - Burn_White_Charcoal_Jungle
+       - Burn_White_Charcoal_Birch
+       - Burn_White_Charcoal_Spruce
+       - Burn_White_Charcoal_Oak
+       - OBSIDIAN_GENERATOR
     repair_multiple: 205
     repair_inputs:
        Diamond:
@@ -2586,4 +2590,15 @@ production_recipes:
       Sharpness:
         type: DAMAGE_ALL
         level: 5
-        
+  OBSIDIAN_GENERATOR:
+    name: Obsidian Generator
+    production_time: 300
+    inputs:
+      Diamond Pickaxe:
+        material: DIAMOND_PICKAXE
+        amount: 1
+    outputs:
+      Obsidian:
+        material: OBSIDIAN
+        amount: 3200
+
