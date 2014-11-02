@@ -207,6 +207,12 @@ production_factories:
        - Burn_Lump_Charcoal
        - Stone_Knife
        - Blast_Furnace
+       - Burn_Lump_Charcoal_Dark_Oak
+       - Burn_Lump_Charcoal_Acacia
+       - Burn_Lump_Charcoal_Jungle
+       - Burn_Lump_Charcoal_Birch
+       - Burn_Lump_Charcoal_Spruce
+       - Burn_Lump_Charcoal_Oak
     repair_multiple: 205
     repair_inputs:
        Cobblestone:
@@ -227,6 +233,12 @@ production_factories:
        - Burn_Briquette
        - Iron_hammer
        - Faceting machine
+       - Burn_Briquette_Dark_Oak
+       - Burn_Briquette_Acacia
+       - Burn_Briquette_Jungle
+       - Burn_Briquette_Birch
+       - Burn_Briquette_Spruce
+       - Burn_Briquette_Oak
     repair_multiple: 205
     repair_inputs:
        Iron:
@@ -452,6 +464,38 @@ production_factories:
         amount: 8
         lore: Faceting machine
   Aspect_Factory:
+    name: Arcane Elementizer
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Netherbrick:
+        material: NETHER_BRICK
+        amount: 1536
+      Redstone:
+        material: REDSTONE
+        amount: 1152
+      Netherquartz:
+        material: QUARTZ
+        amount: 576
+    recipes:
+      - Forge_Aspect_of_Terra
+      - Forge_Aspect_of_End
+      - Forge_Aspect_of_Nether
+      - Craft_Eye_of_Ender
+    repair_multiple: 26
+    repair_inputs:
+      Nether Brick:
+        material: NETHER_BRICK
+        amount: 6
+      Redstone:
+        material: REDSTONE
+        amount: 5
+      Netherquartz:
+        material: QUARTZ
+        amount: 2
+nether_factory:
   name: Nether Factory
   fuel:
     Charcoal:
@@ -529,70 +573,6 @@ production_recipes:
         amount: 1
         display_name: Aspect of End
         lore: A concentrated essence of the End
-  Forge_Aspect_of_Nether:
-    name: Forge Aspect of Nether
-    production_time: 64
-    inputs:
-      Ghast Tears:
-        material: GHAST_TEAR
-        amount: 16
-      Quartz Ore:
-        material: QUARTZ_ORE
-        amount: 512
-      Glowstone:
-        material: GLOWSTONE
-        amount: 512
-    outputs:
-      Aspect of Nether:
-        material: MAGMA_CREAM
-        amount: 1
-        display_name: Aspect of Nether
-        lore: A concentrated essence of the Nether
-  Craft_Eye_of_Ender:
-    name: Craft Eye of Ender
-    production_time: 1
-    inputs:
-       Blaze Powder:
-         material: BLAZE_POWDER
-         amount: 265
-       Ender Pearl:
-         material: ENDER_PEARL
-         amount: 265
-    outputs:
-       Eye of Ender:
-         material: EYE_OF_ENDER
-         amount: 256
-    name: Arcane Elementizer
-    fuel:
-      Charcoal:
-        material: COAL
-        durability: 1
-    inputs:
-      Netherbrick:
-        material: NETHER_BRICK
-        amount: 1536
-      Redstone:
-        material: REDSTONE
-        amount: 1152
-      Netherquartz:
-        material: QUARTZ
-        amount: 576
-    recipes:
-      - Forge_Aspect_of_Terra
-      - Forge_Aspect_of_End
-      - Forge_Aspect_of_Nether
-      - Craft_Eye_of_Ender
-    repair_multiple: 26
-    repair_inputs:
-      Nether Brick:
-        material: NETHER_BRICK
-        amount: 6
-      Redstone:
-        material: REDSTONE
-        amount: 5
-      Netherquartz:
-        material: QUARTZ
-        amount: 2
   Smelt_Stone:
     name: Smelt Stone
     production_time: 16
@@ -626,6 +606,247 @@ production_recipes:
         Diamond:
           material: DIAMOND
           amount: 48
+
+  Burn_Lump_Charcoal_Oak:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Oak Wood:
+        material: LOG
+        amount: 256
+    outputs:
+      Lump Charcoal:
+        material: COAL
+        durability: 1
+        lore: Lump Charcoal
+        amount: 512
+  Burn_Lump_Charcoal_Spruce:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Spruce Wood:
+        material: LOG
+        amount: 256
+        durability: 1
+    outputs:
+      Lump Charcoal:
+        material: COAL
+        durability: 1
+        lore: Lump Charcoal
+        amount: 512
+  Burn_Lump_Charcoal_Birch:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Birch Wood:
+        material: LOG
+        amount: 256
+        durability: 2
+    outputs:
+      Charcoal:
+        material: COAL
+        amount: 512
+        durability: 1
+  Burn_Lump_Charcoal_Jungle:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Jungle Wood:
+        material: LOG
+        amount: 256
+        durability: 3
+    outputs:
+      Lump Charcoal:
+        material: COAL
+        durability: 1
+        lore: Lump Charcoal
+        amount: 512
+  Burn_Lump_Charcoal_Acacia:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Acacia Wood:
+        material: LOG_2
+        amount: 256
+    outputs:
+      Charcoal:
+        material: COAL
+        amount: 512
+        durability: 1
+  Burn_Lump_Charcoal_Dark_Oak:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Dark Oak Wood:
+        material: LOG_2
+        amount: 256
+        durability: 1
+    outputs:
+      Lump Charcoal:
+        material: COAL
+        durability: 1
+        lore: Lump Charcoal
+        amount: 512
+  Burn_Briquette_Oak:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Oak Wood:
+        material: LOG
+        amount: 256
+    outputs:
+      Briquette:
+        material: COAL
+        durability: 1
+        lore: Briquette
+        amount: 512
+  Burn_Briquette_Spruce:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Spruce Wood:
+        material: LOG
+        amount: 256
+        durability: 1
+    outputs:
+      Briquette:
+        material: COAL
+        durability: 1
+        lore: Briquette
+        amount: 512
+  Burn_Briquette_Birch:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Birch Wood:
+        material: LOG
+        amount: 256
+        durability: 2
+    outputs:
+      Charcoal:
+        material: COAL
+        amount: 512
+        durability: 1
+  Burn_Briquette_Jungle:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Jungle Wood:
+        material: LOG
+        amount: 256
+        durability: 3
+    outputs:
+      Briquette:
+        material: COAL
+        durability: 1
+        lore: Briquette
+        amount: 512
+  Burn_Briquette_Acacia:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Acacia Wood:
+        material: LOG_2
+        amount: 256
+    outputs:
+      Charcoal:
+        material: COAL
+        amount: 512
+        durability: 1
+  Burn_Briquette_Dark_Oak:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Dark Oak Wood:
+        material: LOG_2
+        amount: 256
+        durability: 1
+    outputs:
+      Briquette:
+        material: COAL
+        durability: 1
+        lore: Briquette
+        amount: 512
+  Burn_White_Charcoal_Oak:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Oak Wood:
+        material: LOG
+        amount: 256
+    outputs:
+      White Charcoal:
+        material: COAL
+        durability: 1
+        lore: White Charcoal
+        amount: 512
+  Burn_White_Charcoal_Spruce:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Spruce Wood:
+        material: LOG
+        amount: 256
+        durability: 1
+    outputs:
+      White Charcoal:
+        material: COAL
+        durability: 1
+        lore: White Charcoal
+        amount: 512
+  Burn_White_Charcoal_Birch:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Birch Wood:
+        material: LOG
+        amount: 256
+        durability: 2
+    outputs:
+      Charcoal:
+        material: COAL
+        amount: 512
+        durability: 1
+  Burn_White_Charcoal_Jungle:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Jungle Wood:
+        material: LOG
+        amount: 256
+        durability: 3
+    outputs:
+      White Charcoal:
+        material: COAL
+        durability: 1
+        lore: White Charcoal
+        amount: 512
+  Burn_White_Charcoal_Acacia:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Acacia Wood:
+        material: LOG_2
+        amount: 256
+    outputs:
+      Charcoal:
+        material: COAL
+        amount: 512
+        durability: 1
+  Burn_White_Charcoal_Dark_Oak:
+    name: Smelt Stone
+    production_time: 16
+    inputs:
+      Dark Oak Wood:
+        material: LOG_2
+        amount: 256
+        durability: 1
+    outputs:
+      White Charcoal:
+        material: COAL
+        durability: 1
+        lore: White Charcoal
+        amount: 512
   LEATHER_BOOTS_RANK_0:
     name: Leather Boots Forger Rank 0
     production_time: 360
@@ -2365,4 +2586,4 @@ production_recipes:
       Sharpness:
         type: DAMAGE_ALL
         level: 5
-
+        
