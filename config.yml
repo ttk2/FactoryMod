@@ -193,11 +193,69 @@ crafting:
         Double Stone Slab:
           material: DOUBLE_STEP
 production_factories:
-  Leather_Tanner:
+  Stone_Imbuer:
     fuel:
       Charcoal:
         material: COAL
         durability: 1
+    inputs:
+       Cobblestone:
+          material: COBBLESTONE
+          amount: 512
+    recipes:
+       - Smelt_Stone
+       - Burn_Lump_Charcoal
+       - Stone_Knife
+       - Blast_Furnace
+    repair_multiple: 205
+    repair_inputs:
+       Cobblestone:
+         material: Cobblestone
+         amount: 6
+  Iron_Imbuer:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+       Iron:
+          material: IRON
+          amount: 512
+    recipes:
+       - Smelt_Iron
+       - Burn_Briquette
+       - Iron_hammer
+       - Faceting machine
+    repair_multiple: 205
+    repair_inputs:
+       Iron:
+         material: IRON
+         amount: 6
+  Diamond_Imbuer:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+       Diamond:
+          material: DIAMOND
+          amount: 512
+    recipes:
+       - Smelt_Diamond_Ore
+       - Burn_White_Charcoal
+       - Diamond_Drill_Heads
+       - Faceting_Machine
+    repair_multiple: 205
+    repair_inputs:
+       Diamond:
+         material: DIAMOND
+         amount: 6
+  Leather_Tanner:
+    fuel:
+      Lump Charcoal:
+        material: COAL
+        durability: 1
+        lore: Lump Charcoal
     inputs:
       Stone knife:
         material: FLINT
@@ -232,14 +290,19 @@ production_factories:
         lore: Stone knife
   Iron_Refiner:
     fuel:
-      Charcoal:
+      Briquette:
         material: COAL
         durability: 1
+        lore: Briquette
     inputs:
       Blast furnace:
         material: CLAY_BRICK
         amount: 16
         lore: Blast furnace
+      Iron hammer:
+        material: BONE
+        amount: 16
+        lore: Iron hammer
     recipes:
       - IRON_BOOTS_RANK_0
       - IRON_BOOTS_RANK_1
@@ -269,14 +332,19 @@ production_factories:
         lore: Blast furnace
   Diamond_Cutter:
     fuel:
-      Charcoal:
+      White Charcoal:
         material: COAL
         durability: 1
+        lore: White Charcoal
     inputs:
       Faceting machine:
         material: WATCH
         amount: 32
         lore: Faceting machine
+      Diamond drill heads:
+        material: DIAMOND
+        amount: 16
+        lore: Diamond drill heads
     recipes:
       - DIAMOND_BOOTS_RANK_0
       - DIAMOND_BOOTS_RANK_1
@@ -306,9 +374,10 @@ production_factories:
         lore: Faceting machine
   Stone_Grinder:
     fuel:
-      Charcoal:
+      Lump Charcoal:
         material: COAL
         durability: 1
+        lore: Limp Charcoal
     inputs:
       Stone knife:
         material: FLINT
@@ -320,7 +389,6 @@ production_factories:
       - STONE_SWORD_RANK_2
       - STONE_SWORD_RANK_3
       - STONE_SWORD_RANK_4
-      - STONE_HAMMER
     repair_multiple: 26
     repair_inputs:
       Stone knife:
@@ -329,21 +397,25 @@ production_factories:
         lore: Stone knife
   Iron_Forger:
     fuel:
-      Charcoal:
+      Briquette:
         material: COAL
         durability: 1
+        lore: Briquette
     inputs:
       Blast furnace:
         material: CLAY_BRICK
         lore: Blast furnace
         amount: 16
+      Iron hammer:
+        material: BONE
+        amount: 16
+        lore: Iron hammer
     recipes:
       - IRON_SWORD_RANK_0
       - IRON_SWORD_RANK_1
       - IRON_SWORD_RANK_2
       - IRON_SWORD_RANK_3
       - IRON_SWORD_RANK_4
-      - IRON_HAMMER
     repair_multiple: 26
     repair_inputs:
       Blast furnace:
@@ -352,18 +424,19 @@ production_factories:
         lore: Blast furnace
   Diamond_Polisher:
     fuel:
-      Charcoal:
+      White Charcoal:
         material: COAL
         durability: 1
+        lore: White Charcoal
     inputs:
       Faceting machine:
         material: WATCH
         lore: Faceting machine
         amount: 32
-      Iron hammer:
-        material: IRONE_HOE
-        lore: Iron hammer
-        amount: 6
+      Diamond drill heads:
+        material: DIAMOND
+        amount: 16
+        lore: Diamond drill heads
     recipes:
       - DIAMOND_SWORD_RANK_0
       - DIAMOND_SWORD_RANK_1
@@ -2179,4 +2252,3 @@ LEATHER_BOOTS_RANK_0:
       Sharpness:
         type: DAMAGE_ALL
         level: 5
-
