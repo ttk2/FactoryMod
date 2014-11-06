@@ -467,6 +467,121 @@ production_factories:
         material: WATCH
         amount: 8
         lore: Faceting machine
+  Stone_Anvil:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Stone knife:
+        material: FLINT
+        lore: Stone knife
+        amount: 12
+    recipes:
+      - STONE_PICKAXE_RANK_0
+      - STONE_PICKAXE_RANK_1
+      - STONE_PICKAXE_RANK_2
+      - STONE_PICKAXE_RANK_3
+      - STONE_PICKAXE_RANK_4
+      - STONE_AXE_RANK_0
+      - STONE_AXE_RANK_1
+      - STONE_AXE_RANK_2
+      - STONE_AXE_RANK_3
+      - STONE_AXE_RANK_4
+      - STONE_SHOVEL_RANK_0
+      - STONE_SHOVEL_RANK_1
+      - STONE_SHOVEL_RANK_2
+      - STONE_SHOVEL_RANK_3
+      - STONE_SHOVEL_RANK_4
+      - STONE_HOE_RANK_0
+      - STONE_HOE_RANK_1
+      - STONE_HOE_RANK_2
+      - STONE_HOE_RANK_3
+      - STONE_HOE_RANK_4
+    repair_multiple: 26
+    repair_inputs:
+      Stone knife:
+        material: FLINT
+        amount: 2
+        lore: Stone knife
+  Iron_Anvil:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Blast furnace:
+        material: CLAY_BRICK
+        lore: Blast furnace
+        amount: 16
+    recipes:
+      - IRON_PICKAXE_RANK_0
+      - IRON_PICKAXE_RANK_1
+      - IRON_PICKAXE_RANK_2
+      - IRON_PICKAXE_RANK_3
+      - IRON_PICKAXE_RANK_4
+      - IRON_AXE_RANK_0
+      - IRON_AXE_RANK_1
+      - IRON_AXE_RANK_2
+      - IRON_AXE_RANK_3
+      - IRON_AXE_RANK_4
+      - IRON_SHOVEL_RANK_0
+      - IRON_SHOVEL_RANK_1
+      - IRON_SHOVEL_RANK_2
+      - IRON_SHOVEL_RANK_3
+      - IRON_SHOVEL_RANK_4
+      - IRON_HOE_RANK_0
+      - IRON_HOE_RANK_1
+      - IRON_HOE_RANK_2
+      - IRON_HOE_RANK_3
+      - IRON_HOE_RANK_4
+    repair_multiple: 26
+    repair_inputs:
+      Blast furnace:
+        material: CLAY_BRICK
+        amount: 4
+        lore: Blast furnace
+  Diamond_Anvil:
+    fuel:
+      Charcoal:
+        material: COAL
+        durability: 1
+    inputs:
+      Faceting machine:
+        material: WATCH
+        lore: Faceting machine
+        amount: 32
+      Iron hammer:
+        material: IRONE_HOE
+        lore: Iron hammer
+        amount: 6
+    recipes:
+      - DIAMOND_PICKAXE_RANK_0
+      - DIAMOND_PICKAXE_RANK_1
+      - DIAMOND_PICKAXE_RANK_2
+      - DIAMOND_PICKAXE_RANK_3
+      - DIAMOND_PICKAXE_RANK_4
+      - DIAMOND_AXE_RANK_0
+      - DIAMOND_AXE_RANK_1
+      - DIAMOND_AXE_RANK_2
+      - DIAMOND_AXE_RANK_3
+      - DIAMOND_AXE_RANK_4
+      - DIAMOND_SHOVEL_RANK_0
+      - DIAMOND_SHOVEL_RANK_1
+      - DIAMOND_SHOVEL_RANK_2
+      - DIAMOND_SHOVEL_RANK_3
+      - DIAMOND_SHOVEL_RANK_4
+      - DIAMOND_HOE_RANK_0
+      - DIAMOND_HOE_RANK_1
+      - DIAMOND_HOE_RANK_2
+      - DIAMOND_HOE_RANK_3
+      - DIAMOND_HOE_RANK_4
+    repair_multiple: 26
+    repair_inputs:
+      Faceting machine:
+        material: WATCH
+        amount: 8
+        lore: Faceting machine
   Aspect_Factory:
     name: Arcane Elementizer
     fuel:
@@ -2601,4 +2716,1365 @@ production_recipes:
       Obsidian:
         material: OBSIDIAN
         amount: 3200
+  STONE_PICKAXE_RANK_0:
+    name: Stone Pickaxe Forger Rank 0
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+    outputs:
+      Stone Pickaxe:
+        material: STONE_PICKAXE
+        amount: 1
+        display_name: Stone Pickaxe Rank 0
+        lore: Stone Pickaxe Rank 0
+  STONE_PICKAXE_RANK_1:
+    name: Stone Pickaxe Forger Rank 1
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Pickaxe:
+         material: STONE_PICKAXE
+         amount: 1
+         display_name: Stone Pickaxe Rank 0
+         lore: Stone Pickaxe Rank 0
+    outputs:
+      Stone Pickaxe:
+        material: STONE_PICKAXE
+        amount: 1
+        display_name: Stone Pickaxe Rank 1
+        lore: Stone Pickaxe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  STONE_PICKAXE_RANK_2:
+    name: Stone Pickaxe Forger Rank 2
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Pickaxe:
+         material: STONE_PICKAXE
+         amount: 1
+         display_name: Stone Pickaxe Rank 1
+         lore: Stone Pickaxe Rank 1
+    outputs:
+      Stone Pickaxe:
+        material: STONE_PICKAXE
+        amount: 1
+        display_name: Stone Pickaxe Rank 2
+        lore: Stone Pickaxe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  STONE_PICKAXE_RANK_3:
+    name: Stone Pickaxe Forger Rank 3
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Pickaxe:
+         material: STONE_PICKAXE
+         amount: 1
+         display_name: Stone Pickaxe Rank 2
+         lore: Stone Pickaxe Rank 2
+    outputs:
+      Stone Pickaxe:
+        material: STONE_PICKAXE
+        amount: 1
+        display_name: Stone Pickaxe Rank 3
+        lore: Stone Pickaxe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  STONE_PICKAXE_RANK_4:
+    name: Stone Pickaxe Forger Rank 4
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Pickaxe:
+         material: STONE_PICKAXE
+         amount: 1
+         display_name: Stone Pickaxe Rank 3
+         lore: Stone Pickaxe Rank 3
+    outputs:
+      Stone Pickaxe:
+        material: STONE_PICKAXE
+        amount: 1
+        display_name: Stone Pickaxe Rank 4
+        lore: Stone Pickaxe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  STONE_AXE_RANK_0:
+    name: Stone Axe Forger Rank 0
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+    outputs:
+      Stone Axe:
+        material: STONE_AXE
+        amount: 1
+        display_name: Stone Axe Rank 0
+        lore: Stone Axe Rank 0
+  STONE_AXE_RANK_1:
+    name: Stone Axe Forger Rank 1
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Axe:
+         material: STONE_AXE
+         amount: 1
+         display_name: Stone Axe Rank 0
+         lore: Stone Axe Rank 0
+    outputs:
+      Stone Axe:
+        material: STONE_AXE
+        amount: 1
+        display_name: Stone Axe Rank 1
+        lore: Stone Axe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  STONE_AXE_RANK_2:
+    name: Stone Axe Forger Rank 2
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Axe:
+         material: STONE_AXE
+         amount: 1
+         display_name: Stone Axe Rank 1
+         lore: Stone Axe Rank 1
+    outputs:
+      Stone Axe:
+        material: STONE_AXE
+        amount: 1
+        display_name: Stone Axe Rank 2
+        lore: Stone Axe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  STONE_AXE_RANK_3:
+    name: Stone Axe Forger Rank 3
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Axe:
+         material: STONE_AXE
+         amount: 1
+         display_name: Stone Axe Rank 2
+         lore: Stone Axe Rank 2
+    outputs:
+      Stone Axe:
+        material: STONE_AXE
+        amount: 1
+        display_name: Stone Axe Rank 3
+        lore: Stone Axe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  STONE_AXE_RANK_4:
+    name: Stone Axe Forger Rank 4
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Axe:
+         material: STONE_AXE
+         amount: 1
+         display_name: Stone Axe Rank 3
+         lore: Stone Axe Rank 3
+    outputs:
+      Stone Axe:
+        material: STONE_AXE
+        amount: 1
+        display_name: Stone Axe Rank 4
+        lore: Stone Axe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  STONE_SHOVEL_RANK_0:
+    name: Stone Shovel Forger Rank 0
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+    outputs:
+      Stone Shovel:
+        material: STONE_SHOVEL
+        amount: 1
+        display_name: Stone Shovel Rank 0
+        lore: Stone Shovel Rank 0
+  STONE_SHOVEL_RANK_1:
+    name: Stone Shovel Forger Rank 1
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Shovel:
+         material: STONE_SHOVEL
+         amount: 1
+         display_name: Stone Shovel Rank 0
+         lore: Stone Shovel Rank 0
+    outputs:
+      Stone Shovel:
+        material: STONE_SHOVEL
+        amount: 1
+        display_name: Stone Shovel Rank 1
+        lore: Stone Shovel Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  STONE_SHOVEL_RANK_2:
+    name: Stone Shovel Forger Rank 2
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Shovel:
+         material: STONE_SHOVEL
+         amount: 1
+         display_name: Stone Shovel Rank 1
+         lore: Stone Shovel Rank 1
+    outputs:
+      Stone Shovel:
+        material: STONE_SHOVEL
+        amount: 1
+        display_name: Stone Shovel Rank 2
+        lore: Stone Shovel Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  STONE_SHOVEL_RANK_3:
+    name: Stone Shovel Forger Rank 3
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Shovel:
+         material: STONE_SHOVEL
+         amount: 1
+         display_name: Stone Shovel Rank 2
+         lore: Stone Shovel Rank 2
+    outputs:
+      Stone Shovel:
+        material: STONE_SHOVEL
+        amount: 1
+        display_name: Stone Shovel Rank 3
+        lore: Stone Shovel Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  STONE_SHOVEL_RANK_4:
+    name: Stone Shovel Forger Rank 4
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Shovel:
+         material: STONE_SHOVEL
+         amount: 1
+         display_name: Stone Shovel Rank 3
+         lore: Stone Shovel Rank 3
+    outputs:
+      Stone Shovel:
+        material: STONE_SHOVEL
+        amount: 1
+        display_name: Stone Shovel Rank 4
+        lore: Stone Shovel Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  STONE_HOE_RANK_0:
+    name: Stone Hoe Forger Rank 0
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+    outputs:
+      Stone Hoe:
+        material: STONE_HOE
+        amount: 1
+        display_name: Stone Hoe Rank 0
+        lore: Stone Hoe Rank 0
+  STONE_HOE_RANK_1:
+    name: Stone Hoe Forger Rank 1
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Hoe:
+         material: STONE_HOE
+         amount: 1
+         display_name: Stone Hoe Rank 0
+         lore: Stone Hoe Rank 0
+    outputs:
+      Stone Hoe:
+        material: STONE_HOE
+        amount: 1
+        display_name: Stone Hoe Rank 1
+        lore: Stone Hoe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  STONE_HOE_RANK_2:
+    name: Stone Hoe Forger Rank 2
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Hoe:
+         material: STONE_HOE
+         amount: 1
+         display_name: Stone Hoe Rank 1
+         lore: Stone Hoe Rank 1
+    outputs:
+      Stone Hoe:
+        material: STONE_HOE
+        amount: 1
+        display_name: Stone Hoe Rank 2
+        lore: Stone Hoe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  STONE_HOE_RANK_3:
+    name: Stone Hoe Forger Rank 3
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Hoe:
+         material: STONE_HOE
+         amount: 1
+         display_name: Stone Hoe Rank 2
+         lore: Stone Hoe Rank 2
+    outputs:
+      Stone Hoe:
+        material: STONE_HOE
+        amount: 1
+        display_name: Stone Hoe Rank 3
+        lore: Stone Hoe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  STONE_HOE_RANK_4:
+    name: Stone Hoe Forger Rank 4
+    production_time: 360
+    inputs:
+      Stone:
+         material: STONE
+         amount: 32
+      Stone Hoe:
+         material: STONE_HOE
+         amount: 1
+         display_name: Stone Hoe Rank 3
+         lore: Stone Hoe Rank 3
+    outputs:
+      Stone Hoe:
+        material: STONE_HOE
+        amount: 1
+        display_name: Stone Hoe Rank 4
+        lore: Stone Hoe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  IRON_PICKAXE_RANK_0:
+    name: Iron Pickaxe Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Stone Pickaxe:
+         material: STONE_PICKAXE
+         amount: 2
+         display_name: Stone Pickaxe Rank 4
+         lore: Stone Pickaxe Rank 4
+    outputs:
+      Iron Pickaxe:
+        material: IRON_PICKAXE
+        amount: 1
+        display_name: Iron Pickaxe Rank 0
+        lore: Iron Pickaxe Rank 0
+  IRON_PICKAXE_RANK_1:
+    name: Iron Pickaxe Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Pickaxe:
+         material: IRON_PICKAXE
+         amount: 1
+         display_name: Iron Pickaxe Rank 0
+         lore: Iron Pickaxe Rank 0
+    outputs:
+      Iron Pickaxe:
+        material: IRON_PICKAXE
+        amount: 1
+        display_name: Iron Pickaxe Rank 1
+        lore: Iron Pickaxe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  IRON_PICKAXE_RANK_2:
+    name: Iron Pickaxe Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Pickaxe:
+         material: IRON_PICKAXE
+         amount: 1
+         display_name: Iron Pickaxe Rank 1
+         lore: Iron Pickaxe Rank 1
+    outputs:
+      Iron Pickaxe:
+        material: IRON_PICKAXE
+        amount: 1
+        display_name: Iron Pickaxe Rank 2
+        lore: Iron Pickaxe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  IRON_PICKAXE_RANK_3:
+    name: Iron Pickaxe Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Pickaxe:
+         material: IRON_PICKAXE
+         amount: 1
+         display_name: Iron Pickaxe Rank 2
+         lore: Iron Pickaxe Rank 2
+    outputs:
+      Iron Pickaxe:
+        material: IRON_PICKAXE
+        amount: 1
+        display_name: Iron Pickaxe Rank 3
+        lore: Iron Pickaxe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  IRON_PICKAXE_RANK_4:
+    name: Iron Pickaxe Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Pickaxe:
+         material: IRON_PICKAXE
+         amount: 1
+         display_name: Iron Pickaxe Rank 3
+         lore: Iron Pickaxe Rank 3
+    outputs:
+      Iron Pickaxe:
+        material: IRON_PICKAXE
+        amount: 1
+        display_name: Iron Pickaxe Rank 4
+        lore: Iron Pickaxe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  IRON_AXE_RANK_0:
+    name: Iron Axe Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Stone Axe:
+         material: STONE_AXE
+         amount: 2
+         display_name: Stone Axe Rank 4
+         lore: Stone Axe Rank 4
+    outputs:
+      Iron Axe:
+        material: IRON_AXE
+        amount: 1
+        display_name: Iron Axe Rank 0
+        lore: Iron Axe Rank 0
+  IRON_AXE_RANK_1:
+    name: Iron Axe Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Axe:
+         material: IRON_AXE
+         amount: 1
+         display_name: Iron Axe Rank 0
+         lore: Iron Axe Rank 0
+    outputs:
+      Iron Axe:
+        material: IRON_AXE
+        amount: 1
+        display_name: Iron Axe Rank 1
+        lore: Iron Axe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  IRON_AXE_RANK_2:
+    name: Iron Axe Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Axe:
+         material: IRON_AXE
+         amount: 1
+         display_name: Iron Axe Rank 1
+         lore: Iron Axe Rank 1
+    outputs:
+      Iron Axe:
+        material: IRON_AXE
+        amount: 1
+        display_name: Iron Axe Rank 2
+        lore: Iron Axe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  IRON_AXE_RANK_3:
+    name: Iron Axe Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Axe:
+         material: IRON_AXE
+         amount: 1
+         display_name: Iron Axe Rank 2
+         lore: Iron Axe Rank 2
+    outputs:
+      Iron Axe:
+        material: IRON_AXE
+        amount: 1
+        display_name: Iron Axe Rank 3
+        lore: Iron Axe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  IRON_AXE_RANK_4:
+    name: Iron Axe Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Axe:
+         material: IRON_AXE
+         amount: 1
+         display_name: Iron Axe Rank 3
+         lore: Iron Axe Rank 3
+    outputs:
+      Iron Axe:
+        material: IRON_AXE
+        amount: 1
+        display_name: Iron Axe Rank 4
+        lore: Iron Axe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  IRON_SHOVEL_RANK_0:
+    name: Iron Shovel Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Stone Shovel:
+         material: STONE_SHOVEL
+         amount: 2
+         display_name: Stone Shovel Rank 4
+         lore: Stone Shovel Rank 4
+    outputs:
+      Iron Shovel:
+        material: IRON_SHOVEL
+        amount: 1
+        display_name: Iron Shovel Rank 0
+        lore: Iron Shovel Rank 0
+  IRON_SHOVEL_RANK_1:
+    name: Iron Shovel Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Shovel:
+         material: IRON_SHOVEL
+         amount: 1
+         display_name: Iron Shovel Rank 0
+         lore: Iron Shovel Rank 0
+    outputs:
+      Iron Shovel:
+        material: IRON_SHOVEL
+        amount: 1
+        display_name: Iron Shovel Rank 1
+        lore: Iron Shovel Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  IRON_SHOVEL_RANK_2:
+    name: Iron Shovel Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Shovel:
+         material: IRON_SHOVEL
+         amount: 1
+         display_name: Iron Shovel Rank 1
+         lore: Iron Shovel Rank 1
+    outputs:
+      Iron Shovel:
+        material: IRON_SHOVEL
+        amount: 1
+        display_name: Iron Shovel Rank 2
+        lore: Iron Shovel Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  IRON_SHOVEL_RANK_3:
+    name: Iron Shovel Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Shovel:
+         material: IRON_SHOVEL
+         amount: 1
+         display_name: Iron Shovel Rank 2
+         lore: Iron Shovel Rank 2
+    outputs:
+      Iron Shovel:
+        material: IRON_SHOVEL
+        amount: 1
+        display_name: Iron Shovel Rank 3
+        lore: Iron Shovel Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  IRON_SHOVEL_RANK_4:
+    name: Iron Shovel Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Shovel:
+         material: IRON_SHOVEL
+         amount: 1
+         display_name: Iron Shovel Rank 3
+         lore: Iron Shovel Rank 3
+    outputs:
+      Iron Shovel:
+        material: IRON_SHOVEL
+        amount: 1
+        display_name: Iron Shovel Rank 4
+        lore: Iron Shovel Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  IRON_HOE_RANK_0:
+    name: Iron Hoe Forger Rank 0
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Stone Hoe:
+         material: STONE_HOE
+         amount: 2
+         display_name: Stone Hoe Rank 4
+         lore: Stone Hoe Rank 4
+    outputs:
+      Iron Hoe:
+        material: IRON_HOE
+        amount: 1
+        display_name: Iron Hoe Rank 0
+        lore: Iron Hoe Rank 0
+  IRON_HOE_RANK_1:
+    name: Iron Hoe Forger Rank 1
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Hoe:
+         material: IRON_HOE
+         amount: 1
+         display_name: Iron Hoe Rank 0
+         lore: Iron Hoe Rank 0
+    outputs:
+      Iron Hoe:
+        material: IRON_HOE
+        amount: 1
+        display_name: Iron Hoe Rank 1
+        lore: Iron Hoe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  IRON_HOE_RANK_2:
+    name: Iron Hoe Forger Rank 2
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Hoe:
+         material: IRON_HOE
+         amount: 1
+         display_name: Iron Hoe Rank 1
+         lore: Iron Hoe Rank 1
+    outputs:
+      Iron Hoe:
+        material: IRON_HOE
+        amount: 1
+        display_name: Iron Hoe Rank 2
+        lore: Iron Hoe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  IRON_HOE_RANK_3:
+    name: Iron Hoe Forger Rank 3
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Hoe:
+         material: IRON_HOE
+         amount: 1
+         display_name: Iron Hoe Rank 2
+         lore: Iron Hoe Rank 2
+    outputs:
+      Iron Hoe:
+        material: IRON_HOE
+        amount: 1
+        display_name: Iron Hoe Rank 3
+        lore: Iron Hoe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  IRON_HOE_RANK_4:
+    name: Iron Hoe Forger Rank 4
+    production_time: 360
+    inputs:
+      Iron:
+         material: IRON
+         amount: 32
+      Iron Hoe:
+         material: IRON_HOE
+         amount: 1
+         display_name: Iron Hoe Rank 3
+         lore: Iron Hoe Rank 3
+    outputs:
+      Iron Hoe:
+        material: IRON_HOE
+        amount: 1
+        display_name: Iron Hoe Rank 4
+        lore: Iron Hoe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  DIAMOND_PICKAXE_RANK_0:
+    name: Diamond Pickaxe Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Pickaxe:
+         material: IRON_PICKAXE
+         amount: 2
+         display_name: Iron Pickaxe Rank 4
+         lore: Iron Pickaxe Rank 4
+    outputs:
+      Diamond Pickaxe:
+        material: DIAMOND_PICKAXE
+        amount: 1
+        display_name: Diamond Pickaxe Rank 0
+        lore: Diamond Pickaxe Rank 0
+  DIAMOND_PICKAXE_RANK_1:
+    name: Diamond Pickaxe Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Pickaxe:
+         material: DIAMOND_PICKAXE
+         amount: 1
+         display_name: Diamond Pickaxe Rank 0
+         lore: Diamond Pickaxe Rank 0
+    outputs:
+      Diamond Pickaxe:
+        material: DIAMOND_PICKAXE
+        amount: 1
+        display_name: Diamond Pickaxe Rank 1
+        lore: Diamond Pickaxe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  DIAMOND_PICKAXE_RANK_2:
+    name: Diamond Pickaxe Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Pickaxe:
+         material: DIAMOND_PICKAXE
+         amount: 1
+         display_name: Diamond Pickaxe Rank 1
+         lore: Diamond Pickaxe Rank 1
+    outputs:
+      Diamond Pickaxe:
+        material: DIAMOND_PICKAXE
+        amount: 1
+        display_name: Diamond Pickaxe Rank 2
+        lore: Diamond Pickaxe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  DIAMOND_PICKAXE_RANK_3:
+    name: Diamond Pickaxe Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Pickaxe:
+         material: DIAMOND_PICKAXE
+         amount: 1
+         display_name: Diamond Pickaxe Rank 2
+         lore: Diamond Pickaxe Rank 2
+    outputs:
+      Diamond Pickaxe:
+        material: DIAMOND_PICKAXE
+        amount: 1
+        display_name: Diamond Pickaxe Rank 3
+        lore: Diamond Pickaxe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  DIAMOND_PICKAXE_RANK_4:
+    name: Diamond Pickaxe Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Pickaxe:
+         material: DIAMOND_PICKAXE
+         amount: 1
+         display_name: Diamond Pickaxe Rank 3
+         lore: Diamond Pickaxe Rank 3
+    outputs:
+      Diamond Pickaxe:
+        material: DIAMOND_PICKAXE
+        amount: 1
+        display_name: Diamond Pickaxe Rank 4
+        lore: Diamond Pickaxe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  DIAMOND_AXE_RANK_0:
+    name: Diamond Axe Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Axe:
+         material: IRON_AXE
+         amount: 2
+         display_name: Iron Axe Rank 4
+         lore: Iron Axe Rank 4
+    outputs:
+      Diamond Axe:
+        material: DIAMOND_AXE
+        amount: 1
+        display_name: Diamond Axe Rank 0
+        lore: Diamond Axe Rank 0
+  DIAMOND_AXE_RANK_1:
+    name: Diamond Axe Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Axe:
+         material: DIAMOND_AXE
+         amount: 1
+         display_name: Diamond Axe Rank 0
+         lore: Diamond Axe Rank 0
+    outputs:
+      Diamond Axe:
+        material: DIAMOND_AXE
+        amount: 1
+        display_name: Diamond Axe Rank 1
+        lore: Diamond Axe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  DIAMOND_AXE_RANK_2:
+    name: Diamond Axe Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Axe:
+         material: DIAMOND_AXE
+         amount: 1
+         display_name: Diamond Axe Rank 1
+         lore: Diamond Axe Rank 1
+    outputs:
+      Diamond Axe:
+        material: DIAMOND_AXE
+        amount: 1
+        display_name: Diamond Axe Rank 2
+        lore: Diamond Axe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  DIAMOND_AXE_RANK_3:
+    name: Diamond Axe Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Axe:
+         material: DIAMOND_AXE
+         amount: 1
+         display_name: Diamond Axe Rank 2
+         lore: Diamond Axe Rank 2
+    outputs:
+      Diamond Axe:
+        material: DIAMOND_AXE
+        amount: 1
+        display_name: Diamond Axe Rank 3
+        lore: Diamond Axe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  DIAMOND_AXE_RANK_4:
+    name: Diamond Axe Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Axe:
+         material: DIAMOND_AXE
+         amount: 1
+         display_name: Diamond Axe Rank 3
+         lore: Diamond Axe Rank 3
+    outputs:
+      Diamond Axe:
+        material: DIAMOND_AXE
+        amount: 1
+        display_name: Diamond Axe Rank 4
+        lore: Diamond Axe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  DIAMOND_SHOVEL_RANK_0:
+    name: Diamond Shovel Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Shovel:
+         material: IRON_SHOVEL
+         amount: 2
+         display_name: Iron Shovel Rank 4
+         lore: Iron Shovel Rank 4
+    outputs:
+      Diamond Shovel:
+        material: DIAMOND_SHOVEL
+        amount: 1
+        display_name: Diamond Shovel Rank 0
+        lore: Diamond Shovel Rank 0
+  DIAMOND_SHOVEL_RANK_1:
+    name: Diamond Shovel Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Shovel:
+         material: DIAMOND_SHOVEL
+         amount: 1
+         display_name: Diamond Shovel Rank 0
+         lore: Diamond Shovel Rank 0
+    outputs:
+      Diamond Shovel:
+        material: DIAMOND_SHOVEL
+        amount: 1
+        display_name: Diamond Shovel Rank 1
+        lore: Diamond Shovel Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  DIAMOND_SHOVEL_RANK_2:
+    name: Diamond Shovel Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Shovel:
+         material: DIAMOND_SHOVEL
+         amount: 1
+         display_name: Diamond Shovel Rank 1
+         lore: Diamond Shovel Rank 1
+    outputs:
+      Diamond Shovel:
+        material: DIAMOND_SHOVEL
+        amount: 1
+        display_name: Diamond Shovel Rank 2
+        lore: Diamond Shovel Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  DIAMOND_SHOVEL_RANK_3:
+    name: Diamond Shovel Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Shovel:
+         material: DIAMOND_SHOVEL
+         amount: 1
+         display_name: Diamond Shovel Rank 2
+         lore: Diamond Shovel Rank 2
+    outputs:
+      Diamond Shovel:
+        material: DIAMOND_SHOVEL
+        amount: 1
+        display_name: Diamond Shovel Rank 3
+        lore: Diamond Shovel Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  DIAMOND_SHOVEL_RANK_4:
+    name: Diamond Shovel Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Shovel:
+         material: DIAMOND_SHOVEL
+         amount: 1
+         display_name: Diamond Shovel Rank 3
+         lore: Diamond Shovel Rank 3
+    outputs:
+      Diamond Shovel:
+        material: DIAMOND_SHOVEL
+        amount: 1
+        display_name: Diamond Shovel Rank 4
+        lore: Diamond Shovel Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+  DIAMOND_HOE_RANK_0:
+    name: Diamond Hoe Forger Rank 0
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Iron Hoe:
+         material: IRON_HOE
+         amount: 2
+         display_name: Iron Hoe Rank 4
+         lore: Iron Hoe Rank 4
+    outputs:
+      Diamond Hoe:
+        material: DIAMOND_HOE
+        amount: 1
+        display_name: Diamond Hoe Rank 0
+        lore: Diamond Hoe Rank 0
+  DIAMOND_HOE_RANK_1:
+    name: Diamond Hoe Forger Rank 1
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Hoe:
+         material: DIAMOND_HOE
+         amount: 1
+         display_name: Diamond Hoe Rank 0
+         lore: Diamond Hoe Rank 0
+    outputs:
+      Diamond Hoe:
+        material: DIAMOND_HOE
+        amount: 1
+        display_name: Diamond Hoe Rank 1
+        lore: Diamond Hoe Rank 1
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 1
+  DIAMOND_HOE_RANK_2:
+    name: Diamond Hoe Forger Rank 2
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Hoe:
+         material: DIAMOND_HOE
+         amount: 1
+         display_name: Diamond Hoe Rank 1
+         lore: Diamond Hoe Rank 1
+    outputs:
+      Diamond Hoe:
+        material: DIAMOND_HOE
+        amount: 1
+        display_name: Diamond Hoe Rank 2
+        lore: Diamond Hoe Rank 2
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 2
+      Unbreaking:
+        type: DURABILITY
+        level: 1
+  DIAMOND_HOE_RANK_3:
+    name: Diamond Hoe Forger Rank 3
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Hoe:
+         material: DIAMOND_HOE
+         amount: 1
+         display_name: Diamond Hoe Rank 2
+         lore: Diamond Hoe Rank 2
+    outputs:
+      Diamond Hoe:
+        material: DIAMOND_HOE
+        amount: 1
+        display_name: Diamond Hoe Rank 3
+        lore: Diamond Hoe Rank 3
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 3
+      Unbreaking:
+        type: DURABILITY
+        level: 2
+  DIAMOND_HOE_RANK_4:
+    name: Diamond Hoe Forger Rank 4
+    production_time: 360
+    inputs:
+      Diamond:
+         material: DIAMOND
+         amount: 32
+      Diamond Hoe:
+         material: DIAMOND_HOE
+         amount: 1
+         display_name: Diamond Hoe Rank 3
+         lore: Diamond Hoe Rank 3
+    outputs:
+      Diamond Hoe:
+        material: DIAMOND_HOE
+        amount: 1
+        display_name: Diamond Hoe Rank 4
+        lore: Diamond Hoe Rank 4
+    enchantments:
+      Efficiency:
+        type: DIG_SPEED
+        level: 4
+      Unbreaking:
+        type: DURABILITY
+        level: 3
+
 
