@@ -379,8 +379,21 @@ public class NetherFactoryManager implements Manager
 	
 	public double getScalingFactor(Location location)
 	{
-		double scalingFactor = 1;
+		
 		NetherFactoryProperties properties = plugin.getNetherFactoryProperties();
+		// scale distance to kilometers
+        double newFacX = location.getBlockX()/1000;
+        double newFacZ = location.getBlockZ()/1000;
+        
+        // Summation variable
+        double totalInverseDist = 0.0D;
+        
+        // Scaling factor for the curve - 0.25 value configured to not modify default cost if ~5,000 blocks from all factories
+        double scalingFactor = properties.getCostScaling();
+        
+        // Accuracy of the cost multiplier before defaulting it to 1.0
+        double epsilon = properties.getCostEpsilon();
+        
 		for (NetherFactory factory : netherFactorys)
 		{
 			Location factoryLoc = factory.getCenterLocation();
@@ -388,20 +401,19 @@ public class NetherFactoryManager implements Manager
 			{
 				continue;
 			}
-			//the distance function uses square root, which is quite expensive, let's check if it's even realistic that it's within range first.
-			if ((location.getBlockX()-factoryLoc.getBlockX()) < properties.getScalingRadius() || (location.getBlockX()-factoryLoc.getBlockX()) > -(properties.getScalingRadius()))
-			{
-				if ((location.getBlockZ()-factoryLoc.getBlockZ()) < properties.getScalingRadius() || (location.getBlockZ()-factoryLoc.getBlockZ()) > -(properties.getScalingRadius()))
-				{
-					double distance = location.distance(factoryLoc);
-					if (distance <= properties.getScalingRadius())
-					{
-						scalingFactor = scalingFactor * Math.exp(1/(distance/properties.getCostScalingRadius()));
-					}
-				}
-			}
+			double delX = newFacX - factoryLoc.getBlockX()/1000;
+            double delZ = newFacZ - factoryLoc.getBlockZ()/1000;
+
+            totalInverseDist += 1.0D/(Math.sqrt(Math.pow(delX, 2) + Math.pow(delZ, 2)));
 		}
-		return scalingFactor;
+		double multiplier = Math.pow(Math.exp(totalInverseDist), scalingFactor);
+		 
+        // multiplier guaranteed >= 1
+        if (multiplier - 1 < epsilon) {
+                multiplier = 1.0D;
+        }
+ 
+        return multiplier;
 	}		
 
 }

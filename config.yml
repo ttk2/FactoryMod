@@ -2621,9 +2621,9 @@ nether_factory:
     repair_multiple: 1    
   fuel_time: 10
   repair_time: 12
-  scaling_radius: 5000
-  cost_scaling_radius: 5000
   use_fuel_on_teleport: false
+  cost_scaling: 0.25
+  cost_epsilon: 0.05
 production_recipes:
   Wood_XP_Bottle_0:
     name: Brew XP Bottles  - 1
