@@ -4,20 +4,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.Repairable;
-import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.github.igotyou.FactoryMod.FactoryObject.FactoryType;
 import com.github.igotyou.FactoryMod.interfaces.Properties;
@@ -28,13 +31,11 @@ import com.github.igotyou.FactoryMod.managers.FactoryModManager;
 import com.github.igotyou.FactoryMod.properties.NetherFactoryProperties;
 import com.github.igotyou.FactoryMod.properties.PrintingPressProperties;
 import com.github.igotyou.FactoryMod.properties.ProductionProperties;
-import com.github.igotyou.FactoryMod.recipes.ProductionRecipe;
+import com.github.igotyou.FactoryMod.properties.RepairFactoryProperties;
 import com.github.igotyou.FactoryMod.recipes.ProbabilisticEnchantment;
+import com.github.igotyou.FactoryMod.recipes.ProductionRecipe;
 import com.github.igotyou.FactoryMod.utility.ItemList;
 import com.github.igotyou.FactoryMod.utility.NamedItemStack;
-
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
 
 
 public class FactoryModPlugin extends JavaPlugin
@@ -45,6 +46,7 @@ public class FactoryModPlugin extends JavaPlugin
 	public static HashMap<String,ProductionRecipe> productionRecipes;
 	public PrintingPressProperties printingPressProperties;
 	public NetherFactoryProperties netherFactoryProperties;
+	public RepairFactoryProperties repairFactoryProperties;
 	
 	public static final String VERSION = "v1.0"; //Current version of plugin
 	public static final String PLUGIN_NAME = "FactoryMod"; //Name of plugin
@@ -54,6 +56,7 @@ public class FactoryModPlugin extends JavaPlugin
 	public static final String PRINTING_PRESSES_SAVE_FILE = "pressSaves";
 	
 	public static final String NETHER_FACTORY_SAVE_FILE = "netherSaves";
+	public static final String REPAIR_FACTORY_SAVE_FILE = "repairSaves";
 	public static boolean DISABLE_PORTALS;
 	public static int NETHER_SCALE;
 	public static boolean ALLOW_REINFORCEMENT_CREATION_ABOVE_TELEPORT_PLATFORM;
@@ -80,9 +83,12 @@ public class FactoryModPlugin extends JavaPlugin
 	public static long REPAIR_PERIOD;
 	public static boolean REDSTONE_START_ENABLED;
 	public static boolean LEVER_OUTPUT_ENABLED;
+	public static boolean SHOULD_SET_ANVIL_COST;
+	public static int GET_SET_ANVIL_COST;
 	
 	public void onEnable()
 	{
+		plugin = this;
 		//load the config.yml
 		initConfig();
 		//create the main manager
@@ -113,6 +119,7 @@ public class FactoryModPlugin extends JavaPlugin
 	
 	public void initConfig()
 	{
+		sendConsoleMessage("Initiaiting FactoryMod Config.");
 		productionProperties = new HashMap<String, ProductionProperties>();
 		productionRecipes = new HashMap<String,ProductionRecipe>();
 		FileConfiguration config = getConfig();
@@ -172,18 +179,26 @@ public class FactoryModPlugin extends JavaPlugin
 				LEVER_OUTPUT_ENABLED = config.getBoolean("general.lever_output_enabled",true);
 				//Do we allow factories to be started with redstone?
 				REDSTONE_START_ENABLED = config.getBoolean("general.redstone_start_enabled",true);
+				//Set anvil repair cost
+				SHOULD_SET_ANVIL_COST = config.getBoolean("general.should_default_anvil_cost", false);
+				GET_SET_ANVIL_COST = config.getInt("general.set_default_anvil_cost", 37);
 		int g = 0;
-		Iterator<String> disabledRecipes=config.getStringList("crafting.disable").iterator();
-		while(disabledRecipes.hasNext())
+		Set<String> disabledRecipes=config.getConfigurationSection("crafting.disable").getKeys(false);
+		Iterator<String> ir = disabledRecipes.iterator();
+		while(ir.hasNext())
 		{
-			ItemStack recipeItemStack = new ItemStack(Material.getMaterial(disabledRecipes.next()));
+			String con = ir.next();
+			String mat = config.getString("crafting.disable." + con + ".material");
+			ItemStack recipeItemStack = new ItemStack(Material.getMaterial(mat));
+			int dur = config.getInt("crafting.disable." + con + ".durability", 0);
+			short s = (short) dur;
+			recipeItemStack.setDurability(s);
 			List<Recipe> tempList = getServer().getRecipesFor(recipeItemStack);
 			for (int itterator = 0; itterator < tempList.size(); itterator ++)
 			{
 				removeRecipe(tempList.get(itterator));
 				g++;
 			}
-
 		}
 		//Enable the following recipes
 		ConfigurationSection configCraftingEnable=config.getConfigurationSection("crafting.enable");
@@ -299,8 +314,11 @@ public class FactoryModPlugin extends JavaPlugin
 		
 		ConfigurationSection configPrintingPresses=config.getConfigurationSection("printing_presses");
 		ConfigurationSection configNetherFactory=config.getConfigurationSection("nether_factory");
+		ConfigurationSection configRepairFactory=config.getConfigurationSection("repair_factory");
 		printingPressProperties = PrintingPressProperties.fromConfig(this, configPrintingPresses);
 		netherFactoryProperties = NetherFactoryProperties.fromConfig(this, configNetherFactory);
+		repairFactoryProperties = RepairFactoryProperties.fromConfig(this, configRepairFactory);
+		sendConsoleMessage("Finished initializing FactoryMod Config.");
 	}
 	
 	private List<ProbabilisticEnchantment> getEnchantments(ConfigurationSection configEnchantments)
@@ -426,7 +444,7 @@ public class FactoryModPlugin extends JavaPlugin
 		while (itterator.hasNext())
 		{
 			Recipe recipe = itterator.next();
-			if (recipe.getResult().getType() == removalRecipe.getResult().getType())
+			if (recipe.getResult().equals(removalRecipe.getResult()))
 			{
 				itterator.remove();
 			}
@@ -461,5 +479,14 @@ public class FactoryModPlugin extends JavaPlugin
 	
 	public NetherFactoryProperties getNetherFactoryProperties() {
 		return netherFactoryProperties;
+	}
+	
+	public RepairFactoryProperties getRepairFactoryProperties() {
+		return repairFactoryProperties;
+	}
+	
+	private static FactoryModPlugin plugin;
+	public static FactoryModPlugin getPlugin(){
+		return plugin;
 	}
 }

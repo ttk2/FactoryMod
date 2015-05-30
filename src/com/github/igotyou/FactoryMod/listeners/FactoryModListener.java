@@ -1,8 +1,5 @@
 package com.github.igotyou.FactoryMod.listeners;
 
-import static com.untamedears.citadel.Utility.isReinforced;
-import static com.untamedears.citadel.Utility.getReinforcement;
-
 import java.util.List;
 
 import org.bukkit.Location;
@@ -10,31 +7,33 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import vg.civcraft.mc.citadel.Citadel;
+import vg.civcraft.mc.citadel.ReinforcementManager;
+import vg.civcraft.mc.citadel.reinforcement.PlayerReinforcement;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.Factorys.NetherFactory;
-import com.github.igotyou.FactoryMod.Factorys.PrintingPress;
-import com.github.igotyou.FactoryMod.Factorys.ProductionFactory;
 import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.managers.FactoryModManager;
-import com.github.igotyou.FactoryMod.managers.PrintingPressManager;
-import com.github.igotyou.FactoryMod.managers.ProductionManager;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
+import com.github.igotyou.FactoryMod.utility.StringUtils;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
-import com.untamedears.citadel.entity.PlayerReinforcement;
-
-import org.bukkit.event.entity.ExpBottleEvent;
-import org.bukkit.event.player.PlayerExpChangeEvent;
 
 public class FactoryModListener implements Listener
 {
 	private FactoryModManager factoryMan;
+	private ReinforcementManager rm = Citadel.getReinforcementManager();
 	
 	/**
 	 * Constructor
@@ -63,8 +62,25 @@ public class FactoryModListener implements Listener
 			if (factoryMan.factoryExistsAt(block.getLocation()))
 			{
 				//if the blocks is not reinforced destroy it
-				if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
+				if ((FactoryModPlugin.CITADEL_ENABLED && !rm.isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
 				{
+					if(e.getPlayer() == null) {
+						FactoryModPlugin.sendConsoleMessage(new StringBuilder("Factory block broken: ")
+							.append(e.getBlock().getType())
+							.append(" at ")
+							.append(StringUtils.formatCoords(block.getLocation()))
+							.toString());
+					} 
+					else
+					{
+						FactoryModPlugin.sendConsoleMessage(new StringBuilder("Factory block broken: ")
+							.append(e.getBlock().getType())
+							.append(" by ")
+							.append(e.getPlayer().getUniqueId())
+							.append(" at ")
+							.append(StringUtils.formatCoords(block.getLocation()))
+							.toString());
+					}
 					destroyFactoryAt(block);
 				}
 			}
@@ -98,9 +114,15 @@ public class FactoryModListener implements Listener
 			{
 				if (factoryMan.factoryExistsAt(block.getLocation()))
 				{
-					Factory factory = factoryMan.getFactory(block.getLocation());
-					if ((FactoryModPlugin.CITADEL_ENABLED && !isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
+					if ((FactoryModPlugin.CITADEL_ENABLED && !rm.isReinforced(block)) || !FactoryModPlugin.CITADEL_ENABLED)
 					{
+						FactoryModPlugin.sendConsoleMessage(new StringBuilder("Factory block exploded: ")
+							.append(block.getType())
+							.append(" by ")
+							.append(e.getEntityType())
+							.append(" at ")
+							.append(StringUtils.formatCoords(block.getLocation()))
+							.toString());
 						destroyFactoryAt(block);
 					}
 				}
@@ -120,6 +142,11 @@ public class FactoryModListener implements Listener
 		{
 			if (factoryMan.factoryExistsAt(block.getLocation()))
 			{
+				FactoryModPlugin.sendConsoleMessage(new StringBuilder("Factory block burned: ")
+					.append(block.getType())
+					.append(" at ")
+					.append(StringUtils.formatCoords(block.getLocation()))
+					.toString());
 				destroyFactoryAt(block);
 			}
 		}
@@ -151,8 +178,8 @@ public class FactoryModListener implements Listener
 						if(factoryMan.factoryWholeAt(clicked.getLocation()))
 						{
 							//if the player is allowed to interact with that block.
-							if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !isReinforced(clicked)) || 
-									(((PlayerReinforcement) getReinforcement(clicked)).isAccessible(player)))
+							if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !rm.isReinforced(clicked)) || 
+									(((PlayerReinforcement) rm.getReinforcement(clicked)).isAccessible(player)))
 							{
 								//if there is a production Factory at the clicked location
 								if (factoryMan.factoryExistsAt(clicked.getLocation()))
@@ -178,8 +205,8 @@ public class FactoryModListener implements Listener
 					else
 					{
 						//if the player is allowed to interact with that block.
-						if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !isReinforced(clicked)) || 
-								(((PlayerReinforcement) getReinforcement(clicked)).isAccessible(player)))
+						if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !rm.isReinforced(clicked)) || 
+								(((PlayerReinforcement) rm.getReinforcement(clicked)).isAccessible(player)))
 						{
 							InteractionResponse.messagePlayerResult(player, createFactory(clicked.getLocation(), player));
 						}
@@ -200,8 +227,8 @@ public class FactoryModListener implements Listener
 						if(factoryMan.factoryWholeAt(clicked.getLocation()))
 						{
 							//if the player is allowed to interact with that block.
-							if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !isReinforced(clicked)) || 
-									(((PlayerReinforcement) getReinforcement(clicked)).isAccessible(player)))
+							if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !rm.isReinforced(clicked)) || 
+									(((PlayerReinforcement) rm.getReinforcement(clicked)).isAccessible(player)))
 							{
 								InteractionResponse.messagePlayerResults(player,(factoryMan.getFactory(clicked.getLocation())).togglePower());
 							}
@@ -227,8 +254,8 @@ public class FactoryModListener implements Listener
 						if(factoryMan.factoryWholeAt(clicked.getLocation()))
 						{
 							//if the player is allowed to interact with that block?
-							if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !isReinforced(clicked)) || 
-									(((PlayerReinforcement) getReinforcement(clicked)).isAccessible(player)))
+							if ((!FactoryModPlugin.CITADEL_ENABLED || FactoryModPlugin.CITADEL_ENABLED && !rm.isReinforced(clicked)) || 
+									(((PlayerReinforcement) rm.getReinforcement(clicked)).isAccessible(player)))
 							{
 								if (factoryMan.factoryExistsAt(clicked.getLocation()))
 								{
@@ -380,13 +407,13 @@ public class FactoryModListener implements Listener
 		InteractionResponse response=new InteractionResponse(InteractionResult.FAILURE, "Blocks are not arranged correctly for a factory.");
 		if(! factoryMan.factoryExistsAt(westLocation) && ! factoryMan.factoryExistsAt(eastLocation))
 		{
-			if((westType.getId()== 61 || westType.getId() == 62) && eastType.getId()== 54)
+			if((westType == Material.FURNACE || westType == Material.BURNING_FURNACE) && eastType == Material.CHEST)
 			{
-				return factoryMan.createFactory(loc, eastLocation, westLocation);
+				return createFactory(player, loc, eastLocation, westLocation);
 			}
-			else if ((eastType.getId()== 61 || eastType.getId()== 62) && westType.getId()== 54)
+			else if ((eastType == Material.FURNACE || eastType == Material.BURNING_FURNACE) && westType == Material.CHEST)
 			{
-				return factoryMan.createFactory(loc, westLocation, eastLocation);
+				return createFactory(player, loc, westLocation, eastLocation);
 			}
 		}
 		else
@@ -395,13 +422,14 @@ public class FactoryModListener implements Listener
 		}
 		if(! factoryMan.factoryExistsAt(southLocation) && !factoryMan.factoryExistsAt(northLocation))
 		{
-			if((northType.getId()== 61 || northType.getId()== 62) && southType.getId()== 54)
+			
+			if((northType == Material.FURNACE || northType == Material.BURNING_FURNACE) && southType == Material.CHEST)
 			{
-				return factoryMan.createFactory(loc, southLocation, northLocation);
+				return createFactory(player, loc, southLocation, northLocation);
 			}
-			else if((southType.getId()== 61 || southType.getId()== 62) && northType.getId()== 54)
+			else if((southType == Material.FURNACE || southType == Material.BURNING_FURNACE) && northType == Material.CHEST)
 			{
-				return factoryMan.createFactory(loc, northLocation, southLocation);
+				return createFactory(player, loc, northLocation, southLocation);
 			}
 		}
 		else
@@ -411,4 +439,54 @@ public class FactoryModListener implements Listener
 		return response;
 	 }
 	
+	private InteractionResponse createFactory(Player player, Location center, Location inventory, Location power) {
+
+		if(rm.isReinforced(center)) {
+			FactoryModPlugin.sendConsoleMessage(new StringBuilder("Factory creation attempted: ")
+				.append(player.getUniqueId())
+				.append(" with group ")
+				.append(((PlayerReinforcement)rm.getReinforcement(center)).getGroup().getName())
+				.append(" at ")
+				.append(StringUtils.formatCoords(center))
+				.toString());
+		} else {
+			FactoryModPlugin.sendConsoleMessage(new StringBuilder("Factory creation attempted: ")
+				.append(player.getUniqueId())
+				.append(" at ")
+				.append(StringUtils.formatCoords(center))
+				.toString());
+		}
+		return factoryMan.createFactory(center, inventory, power);
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void handlePortalTelportEvent(PlayerPortalEvent e) {
+		if (e.isCancelled()) {
+			return;
+		}
+		
+		// Disable normal nether portal teleportation
+		if (e.getCause() == TeleportCause.NETHER_PORTAL && FactoryModPlugin.DISABLE_PORTALS) {
+			e.setCancelled(true);
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void playerTeleportEvent(PlayerTeleportEvent e) {
+		if (e.isCancelled() || e.getCause() != TeleportCause.NETHER_PORTAL) {
+			return;
+		}
+		
+		// Disable normal nether portal teleportation
+		if (FactoryModPlugin.DISABLE_PORTALS) {
+			e.setCancelled(true);
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void entityTeleportEvent(EntityPortalEvent event){
+		if (FactoryModPlugin.DISABLE_PORTALS) {
+			event.setCancelled(true);
+		}
+	}
 }

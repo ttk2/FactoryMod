@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,14 +25,13 @@ import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.Factorys.ProductionFactory;
 import com.github.igotyou.FactoryMod.interfaces.Factory;
 import com.github.igotyou.FactoryMod.interfaces.Manager;
-import com.github.igotyou.FactoryMod.interfaces.Recipe;
 import com.github.igotyou.FactoryMod.properties.ProductionProperties;
+import com.github.igotyou.FactoryMod.recipes.ProductionRecipe;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
-import com.github.igotyou.FactoryMod.recipes.ProductionRecipe;
 import com.github.igotyou.FactoryMod.utility.ItemList;
 import com.github.igotyou.FactoryMod.utility.NamedItemStack;
-import java.util.Iterator;
+import com.github.igotyou.FactoryMod.utility.StringUtils;
 
 //original file:
 /**
@@ -55,6 +54,7 @@ public class ProductionManager implements Manager
 	private FactoryModPlugin plugin;
 	private List<ProductionFactory> producers;
 	private long repairTime;
+	private boolean isLogging = true;
 	
 	public ProductionManager(FactoryModPlugin plugin)
 	{
@@ -134,7 +134,8 @@ public class ProductionManager implements Manager
 
 	public void load(File file) throws IOException 
 	{
-		repairTime=System.currentTimeMillis();
+		isLogging = false;
+		repairTime = System.currentTimeMillis();
 		FileInputStream fileInputStream = new FileInputStream(file);
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
 		String line;
@@ -176,6 +177,7 @@ public class ProductionManager implements Manager
 			}
 		}
 		fileInputStream.close();
+		isLogging = true;
 	}
 
 	public void updateFactorys() 
@@ -197,7 +199,7 @@ public class ProductionManager implements Manager
 	{
 		if (!factoryExistsAt(factoryLocation))
 		{
-			HashMap<String, ProductionProperties> properties = plugin.productionProperties;
+			Map<String, ProductionProperties> properties = FactoryModPlugin.productionProperties;
 			Block inventoryBlock = inventoryLocation.getBlock();
 			Chest chest = (Chest) inventoryBlock.getState();
 			Inventory chestInventory = chest.getInventory();
@@ -229,7 +231,7 @@ public class ProductionManager implements Manager
 	{
 		if (!factoryExistsAt(factoryLocation))
 		{
-			HashMap<String, ProductionProperties> properties = plugin.productionProperties;
+			Map<String, ProductionProperties> properties = FactoryModPlugin.productionProperties;
 			Block inventoryBlock = inventoryLocation.getBlock();
 			Chest chest = (Chest) inventoryBlock.getState();
 			Inventory chestInventory = chest.getInventory();
@@ -268,10 +270,12 @@ public class ProductionManager implements Manager
 				|| !factoryExistsAt(production.getInventoryLocation()) || !factoryExistsAt(production.getPowerSourceLocation()))
 		{
 			producers.add(production);
+			if(isLogging) { FactoryModPlugin.sendConsoleMessage("Production factory created: " + production.getProductionFactoryProperties().getName()); }
 			return new InteractionResponse(InteractionResult.SUCCESS, "");
 		}
 		else
 		{
+			FactoryModPlugin.sendConsoleMessage("Production factory failed to create: " + production.getProductionFactoryProperties().getName());
 			return new InteractionResponse(InteractionResult.FAILURE, "");
 		}
 	}
@@ -309,23 +313,42 @@ public class ProductionManager implements Manager
 
 	public void removeFactory(Factory factory) 
 	{
-		producers.remove((ProductionFactory)factory);
+		if(!(factory instanceof ProductionFactory)) {
+			FactoryModPlugin.sendConsoleMessage("Could not remove unexpected factory type: " + factory.getClass().getName());
+			return;
+		}
+		
+		ProductionFactory producer = (ProductionFactory)factory;
+		
+		FactoryModPlugin.sendConsoleMessage(new StringBuilder("Production factory removed: ")
+				.append(producer.getProductionFactoryProperties().getName())
+				.append(" at ")
+				.append(StringUtils.formatCoords(producer.getCenterLocation()))
+				.toString());
+		
+		producers.remove(producer);
 	}
 	
 	public void updateRepair(long time)
 	{
-		for (ProductionFactory production: producers)
+		for (ProductionFactory production : producers)
 		{
-			production.updateRepair(time/((double)FactoryModPlugin.REPAIR_PERIOD));
+			production.updateRepair(time / ((double)FactoryModPlugin.REPAIR_PERIOD));
 		}
-		long currentTime=System.currentTimeMillis();
-		Iterator<ProductionFactory> itr=producers.iterator();
+		long currentTime = System.currentTimeMillis();
+		Iterator<ProductionFactory> itr = producers.iterator();
 		while(itr.hasNext())
 		{
-			ProductionFactory producer=itr.next();
-			if(currentTime>(producer.getTimeDisrepair()+FactoryModPlugin.DISREPAIR_PERIOD))
+			ProductionFactory producer = itr.next();
+			if(currentTime > (producer.getTimeDisrepair() + FactoryModPlugin.DISREPAIR_PERIOD))
 			{
-				itr.remove();
+				FactoryModPlugin.sendConsoleMessage(new StringBuilder("Production factory removed due to disrepair: ")
+					.append(producer.getProductionFactoryProperties().getName())
+					.append(" at ")
+					.append(StringUtils.formatCoords(producer.getCenterLocation()))
+					.toString());
+				
+				itr.remove();				
 			}
 		}
 	}

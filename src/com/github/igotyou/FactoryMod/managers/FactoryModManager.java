@@ -45,12 +45,14 @@ public class FactoryModManager
 	 */
 	public FactoryModManager(FactoryModPlugin plugin)
 	{
+		FactoryModPlugin.sendConsoleMessage("Initiating FactoryMod Managers.");
 		this.plugin = plugin;
 		FactoryModManager.factoryMan = this;
 		
 		initializeManagers();
 		loadManagers();
 		periodicSaving();
+		FactoryModPlugin.sendConsoleMessage("Finished initializing FactoryMod Managers.");
 	}
 	
 	/**
@@ -64,8 +66,9 @@ public class FactoryModManager
 		//if (FactoryModPlugin.PRODUCTION_ENEABLED)
 		//{
 			initializeProductionManager();
-			initializeNetherFactoryManager();
 			initializePrintingPressManager();
+			initializeRepairFactoryManager();
+			initializeNetherFactoryManager();
 		//}
 	}
 	
@@ -97,6 +100,15 @@ public class FactoryModManager
 		NetherFactoryManager netherMan = new NetherFactoryManager(plugin);
 		
 		managers.add(netherMan);
+	}
+	
+	/**
+	 * Initializes the RepairFactory manager
+	 */
+	private void initializeRepairFactoryManager(){
+		RepairFactoryManager repairMan = new RepairFactoryManager(plugin);
+		
+		managers.add(repairMan);
 	}
 	
 	/**
@@ -179,6 +191,7 @@ public class FactoryModManager
 	 */
 	private static void save(Manager manager, File file) 
 	{	
+		
 		try
 		{
 			File newFile = new File(file.getAbsolutePath() + ".new");
@@ -321,6 +334,8 @@ public class FactoryModManager
 				return response;
 			}
 		}
+		
+		FactoryModPlugin.sendConsoleMessage("The factory could not be created: " + response.getInteractionMessage());
 		return response;
 	}
 }

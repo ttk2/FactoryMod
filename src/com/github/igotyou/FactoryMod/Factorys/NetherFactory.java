@@ -1,12 +1,18 @@
 package com.github.igotyou.FactoryMod.Factorys;
 
-import static com.untamedears.citadel.Utility.getReinforcement;
-import static com.untamedears.citadel.Utility.isReinforced;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import vg.civcraft.mc.citadel.Citadel;
+import vg.civcraft.mc.citadel.ReinforcementManager;
+import vg.civcraft.mc.citadel.reinforcement.PlayerReinforcement;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.managers.NetherFactoryManager;
@@ -15,14 +21,11 @@ import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
 import com.github.igotyou.FactoryMod.utility.ItemList;
 import com.github.igotyou.FactoryMod.utility.NamedItemStack;
-import com.untamedears.citadel.entity.PlayerReinforcement;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NetherFactory extends BaseFactory
 {
 
+	private ReinforcementManager rm = Citadel.getReinforcementManager();
 	private NetherFactoryProperties netherFactoryProperties;//the properties of the production factory
 	private Location netherTeleportPlatform;
 	private Location overworldTeleportPlatform;
@@ -156,17 +159,17 @@ public class NetherFactory extends BaseFactory
 		}
 	}
 	
-	public List<InteractionResponse> getTeleportationBlockResponse(Player player, Location clickedBlock)
+	public List<InteractionResponse> getTeleportationBlockResponse(final Player player, Location clickedBlock)
 	{
 		List<InteractionResponse> responses=new ArrayList<InteractionResponse>();
-		//does the player have acsess to the nether factory via ciatdel?
-		if ((!FactoryModPlugin.CITADEL_ENABLED || (FactoryModPlugin.CITADEL_ENABLED && !isReinforced(factoryLocation))) || 
-				(((PlayerReinforcement) getReinforcement(factoryLocation)).isAccessible(player)))
+		//does the player have access to the nether factory via Citadel?
+		if (!FactoryModPlugin.CITADEL_ENABLED || rm.getReinforcement(factoryLocation) == null || (((PlayerReinforcement) rm.getReinforcement(factoryLocation)).isAccessible(player)))
 		{
 			if (mode == NetherOperationMode.TELEPORT)
 			{
 				if (active)
 				{
+					if (!isBroken()||isRepairing()){
 					if (isFuelAvailable() || !netherFactoryProperties.getUseFuelOnTeleport())
 					{
 						Location playerLocation = player.getLocation();
@@ -182,8 +185,19 @@ public class NetherFactory extends BaseFactory
 									removeBlocksAboveTeleportPlatform(netherTeleportPlatform);
 								}
 								Location destination = new Location(netherTeleportPlatform.getWorld(), netherTeleportPlatform.getX(), netherTeleportPlatform.getY(), netherTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
-								destination.add(0.5, 1.5, 0.5);								
+								destination.add(0.5, 1.5, 0.5);
+								final Entity ent = player.getVehicle();
 								player.teleport(destination);
+								if (ent != null){
+									ent.teleport(destination);
+									Bukkit.getScheduler().runTask(FactoryModPlugin.getPlugin(), new Runnable(){
+
+										@Override
+										public void run() {
+											ent.setPassenger(player);
+										}
+									});
+								}
 								if (netherFactoryProperties.getUseFuelOnTeleport())
 								{
 									getFuel().removeFrom(getPowerSourceInventory());
@@ -197,7 +211,18 @@ public class NetherFactory extends BaseFactory
 								}
 								Location destination = new Location(overworldTeleportPlatform.getWorld(), overworldTeleportPlatform.getX(), overworldTeleportPlatform.getY(), overworldTeleportPlatform.getZ(), playerLocation.getYaw(), playerLocation.getPitch());
 								destination.add(0.5, 1.5, 0.5);
+								final Entity ent = player.getVehicle();
 								player.teleport(destination);
+								if (ent != null){
+									ent.teleport(destination);
+									Bukkit.getScheduler().runTask(FactoryModPlugin.getPlugin(), new Runnable(){
+
+										@Override
+										public void run() {
+											ent.setPassenger(player);
+										}
+									});
+								}
 								if (netherFactoryProperties.getUseFuelOnTeleport())
 								{
 									getFuel().removeFrom(getPowerSourceInventory());
@@ -213,6 +238,9 @@ public class NetherFactory extends BaseFactory
 					{
 						responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is missing fuel! ("+getFuel().getMultiple(1).toString()+")"));
 					}
+					}else{
+						responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is in disrepair."));
+					}
 				}
 				else
 				{
@@ -227,7 +255,7 @@ public class NetherFactory extends BaseFactory
 		}
 		else
 		{
-			//is the player potentialy holding a security note/ticket?
+			//is the player potentially holding a security note/ticket?
 			ItemStack itemInHand = player.getItemInHand();
 			if (itemInHand.getType() == Material.PAPER)
 			{
@@ -240,6 +268,7 @@ public class NetherFactory extends BaseFactory
 						{
 							if (active)
 							{
+								if (!isBroken()||isRepairing()){
 								if (isFuelAvailable())
 								{
 									Location playerLocation = player.getLocation();
@@ -293,6 +322,9 @@ public class NetherFactory extends BaseFactory
 								else
 								{
 									responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is missing fuel! ("+getFuel().getMultiple(1).toString()+")"));
+								}
+								}else{
+									responses.add(new InteractionResponse(InteractionResult.FAILURE, "Can't teleport, factory is in disrepair."));
 								}
 							}
 							else

@@ -1,7 +1,5 @@
 package com.github.igotyou.FactoryMod.managers;
 
-import static com.untamedears.citadel.Utility.isReinforced;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -18,6 +17,9 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
+
+import vg.civcraft.mc.citadel.Citadel;
+import vg.civcraft.mc.citadel.ReinforcementManager;
 
 import com.github.igotyou.FactoryMod.FactoryModPlugin;
 import com.github.igotyou.FactoryMod.Factorys.NetherFactory;
@@ -29,8 +31,7 @@ import com.github.igotyou.FactoryMod.utility.InteractionResponse;
 import com.github.igotyou.FactoryMod.utility.InteractionResponse.InteractionResult;
 import com.github.igotyou.FactoryMod.utility.ItemList;
 import com.github.igotyou.FactoryMod.utility.NamedItemStack;
-
-import java.util.Iterator;
+import com.github.igotyou.FactoryMod.utility.StringUtils;
 
 //original file:
 /**
@@ -50,9 +51,11 @@ import java.util.Iterator;
 
 public class NetherFactoryManager implements Manager
 {
+	private ReinforcementManager rm = Citadel.getReinforcementManager();
 	private FactoryModPlugin plugin;
 	private List<NetherFactory> netherFactorys;
 	private long repairTime;
+	private boolean isLogging = true;
 	
 	public NetherFactoryManager(FactoryModPlugin plugin)
 	{
@@ -115,6 +118,7 @@ public class NetherFactoryManager implements Manager
 
 	public void load(File file) throws IOException 
 	{
+		isLogging = false;
 		try {
 			repairTime=System.currentTimeMillis();
 			FileInputStream fileInputStream = new FileInputStream(file);
@@ -153,6 +157,7 @@ public class NetherFactoryManager implements Manager
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		isLogging = true;
 	}
 
 	public void updateFactorys() 
@@ -186,7 +191,7 @@ public class NetherFactoryManager implements Manager
 					if (!factoryExistsAt(factoryLocation))
 					{
 						double scalingFactor = getScalingFactor(factoryLocation);
-						if (scalingFactor < 10000)
+						if (scalingFactor < 500)
 						{
 							constructionMaterials = constructionMaterials.getMultiple(scalingFactor);
 							boolean hasMaterials = constructionMaterials.allIn(chestInventory);
@@ -195,7 +200,7 @@ public class NetherFactoryManager implements Manager
 								boolean markerFound = false;
 								Location markerLocation = factoryLocation.clone();
 								int blockY = markerLocation.getBlockY();
-								for (int centerY = blockY-plugin.NETHER_MARKER_MAX_DISTANCE; centerY <= blockY+plugin.NETHER_MARKER_MAX_DISTANCE && !markerFound; centerY++)
+								for (int centerY = blockY - FactoryModPlugin.NETHER_MARKER_MAX_DISTANCE; centerY <= blockY + FactoryModPlugin.NETHER_MARKER_MAX_DISTANCE && !markerFound; centerY++)
 								{
 									markerLocation.setY(centerY);
 									Location oneUp = markerLocation.clone();
@@ -216,7 +221,7 @@ public class NetherFactoryManager implements Manager
 									Location netherLocation1 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+1,startZ);
 									Location netherLocation2 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+2,startZ);
 									Location netherLocation3 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), startX,startY+3,startZ);				
-									if (FactoryModPlugin.CITADEL_ENABLED && (isReinforced(netherLocation) || isReinforced(netherLocation1) || isReinforced(netherLocation2) || isReinforced(netherLocation3)))
+									if (FactoryModPlugin.CITADEL_ENABLED && (rm.isReinforced(netherLocation) || rm.isReinforced(netherLocation1) || rm.isReinforced(netherLocation2) || rm.isReinforced(netherLocation3)))
 									{
 										for(int scanX = startX-1; scanX <= startX+1 && !locationOk; scanX++)
 										{
@@ -229,7 +234,7 @@ public class NetherFactoryManager implements Manager
 													netherLocation1 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+1,scanZ);
 													netherLocation2 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+2,scanZ);
 													netherLocation3 = new Location(Bukkit.getWorld(FactoryModPlugin.NETHER_NAME), scanX,scanY+3,scanZ);
-													if(!isReinforced(netherLocation) && !isReinforced(netherLocation1) && !isReinforced(netherLocation2) && !isReinforced(netherLocation3))
+													if(!rm.isReinforced(netherLocation) && !rm.isReinforced(netherLocation1) && !rm.isReinforced(netherLocation2) && !rm.isReinforced(netherLocation3))
 													{
 														locationOk = true;
 														
@@ -307,10 +312,12 @@ public class NetherFactoryManager implements Manager
 				|| !factoryExistsAt(netherFactory.getOverworldTeleportPlatform()) ))
 		{
 			netherFactorys.add(netherFactory);
+			if (isLogging) { FactoryModPlugin.sendConsoleMessage("Nether factory created: " + netherFactory.getProperties().getName()); }
 			return new InteractionResponse(InteractionResult.SUCCESS, "");
 		}
 		else
 		{
+			FactoryModPlugin.sendConsoleMessage("Nether factory failed to create: " + netherFactory.getProperties().getName());
 			return new InteractionResponse(InteractionResult.FAILURE, "");
 		}
 	}
@@ -351,23 +358,44 @@ public class NetherFactoryManager implements Manager
 
 	public void removeFactory(Factory factory) 
 	{
-		netherFactorys.remove((NetherFactory)factory);
+		if(!(factory instanceof NetherFactory)) {
+			FactoryModPlugin.sendConsoleMessage("Could not remove unexpected factory type: " + factory.getClass().getName());
+			return;
+		}
+		
+		NetherFactory netherFactory = (NetherFactory)factory;
+		
+		FactoryModPlugin.sendConsoleMessage(new StringBuilder("Nether factory removed: ")
+			.append(netherFactory.getProperties().getName())
+			.append(" at ")
+			.append(StringUtils.formatCoords(netherFactory.getCenterLocation()))
+			.toString());
+		
+		netherFactorys.remove(netherFactory);
+		
 	}
 	
 	public void updateRepair(long time)
 	{
-		for (NetherFactory factory: netherFactorys)
+		for (NetherFactory factory : netherFactorys)
 		{
-			factory.updateRepair(time/((double)FactoryModPlugin.REPAIR_PERIOD));
+			factory.updateRepair(time / ((double)FactoryModPlugin.REPAIR_PERIOD));
 		}
-		long currentTime=System.currentTimeMillis();
-		Iterator<NetherFactory> itr=netherFactorys.iterator();
+		long currentTime = System.currentTimeMillis();
+		Iterator<NetherFactory> itr = netherFactorys.iterator();
 		while(itr.hasNext())
 		{
-			NetherFactory factory=itr.next();
-			if(currentTime>(factory.getTimeDisrepair()+FactoryModPlugin.DISREPAIR_PERIOD))
+			NetherFactory factory = itr.next();
+			if(currentTime > (factory.getTimeDisrepair() + FactoryModPlugin.DISREPAIR_PERIOD))
 			{
+				FactoryModPlugin.sendConsoleMessage(new StringBuilder("Nether factory removed due to disrepair: ")
+					.append(factory.getProperties().getName())
+					.append(" at ")
+					.append(StringUtils.formatCoords(factory.getCenterLocation()))
+					.toString());
+				
 				itr.remove();
+				
 			}
 		}
 	}
@@ -396,7 +424,7 @@ public class NetherFactoryManager implements Manager
 					double distance = location.distance(factoryLoc);
 					if (distance <= properties.getScalingRadius())
 					{
-						scalingFactor = scalingFactor * Math.exp(1/(distance/properties.getCostScalingRadius()));
+						scalingFactor = scalingFactor * ( Math.exp(1/(distance/properties.getCostScalingRadius())) - Math.exp(1.0) + 1.0 );
 					}
 				}
 			}
